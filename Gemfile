@@ -68,3 +68,4 @@ end
 # RSK added below here
 
 gem 'riiif'
+gem 'iiif_manifest'

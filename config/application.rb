@@ -15,7 +15,7 @@ module MedspaceDev
       # using tinymce-rails-imageupload, so revert to the :copy method
       # https://github.com/spohlenz/tinymce-rails/issues/183
     config.tinymce.install = :copy
-    config.active_job.queue_adapter = :inline
+    # config.active_job.queue_adapter = :inline
     config.generators do |g|
       g.test_framework :rspec, :spec => true
     end
