@@ -15,7 +15,7 @@ en:
           based_near_tesim: Location
           contributor_tesim: Contributor
           creator_tesim: Creator
-          date_created_tesim: Date Created
+          date_created_tesim: Date
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
           description_tesim: Description
@@ -30,7 +30,7 @@ en:
           based_near_tesim: Location
           contributor_tesim: Contributor
           creator_tesim: Creator
-          date_created_tesim: Date Created
+          date_created_tesim: Date
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
           description_tesim: Description
@@ -44,6 +44,11 @@ en:
           title_tesim: Title
   hyrax:
     product_name:           "Hyrax"
+    base:
+      relationships:
+        header: "Parent Collection"
+      relationships_parent_row:
+        label: "%{type}"
     product_twitter_handle: "@HydraSphere"
     institution_name:       "Institution"
     institution_name_full:  "The Institution Name"
@@ -53,3 +58,8 @@ en:
     footer:
       copyright_html: "<strong>Copyright &copy; 2017 Project Hydra</strong> Licensed under the Apache License, Version 2.0"
       service_html: A service of <a href="http://projecthydra.org/" class="navbar-link" target="_blank">Project Hydra</a>.
+  simple_form:
+    labels:
+      defaults:
+        description:	"Description"
+        date_create:  "Date"

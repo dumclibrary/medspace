@@ -1,0 +1,42 @@
+2017-06-01 12:05:23 - ERROR - ToolBase:271 - Caught exception running tool: Jhove
+edu.harvard.hul.ois.fits.exceptions.FitsToolException: Jhove: Error converting output using /opt/fits/xml/jhove/jhove_image_to_fits.xslt (A sequence of more than one item is not allowed as the first operand of 'div')
+	at edu.harvard.hul.ois.fits.tools.ToolBase.transform(ToolBase.java:133)
+	at edu.harvard.hul.ois.fits.tools.jhove.Jhove.extractInfo(Jhove.java:145)
+	at edu.harvard.hul.ois.fits.tools.ToolBase.run(ToolBase.java:268)
+	at java.lang.Thread.run(Thread.java:748)
+2017-06-01 12:11:42 - ERROR - ToolBase:271 - Caught exception running tool: Jhove
+edu.harvard.hul.ois.fits.exceptions.FitsToolException: Jhove: Error converting output using /opt/fits/xml/jhove/jhove_image_to_fits.xslt (A sequence of more than one item is not allowed as the first operand of 'div')
+	at edu.harvard.hul.ois.fits.tools.ToolBase.transform(ToolBase.java:133)
+	at edu.harvard.hul.ois.fits.tools.jhove.Jhove.extractInfo(Jhove.java:145)
+	at edu.harvard.hul.ois.fits.tools.ToolBase.run(ToolBase.java:268)
+	at java.lang.Thread.run(Thread.java:748)
+2017-06-01 12:12:16 - ERROR - ToolBase:271 - Caught exception running tool: Jhove
+edu.harvard.hul.ois.fits.exceptions.FitsToolException: Jhove: Error converting output using /opt/fits/xml/jhove/jhove_image_to_fits.xslt (A sequence of more than one item is not allowed as the first operand of 'div')
+	at edu.harvard.hul.ois.fits.tools.ToolBase.transform(ToolBase.java:133)
+	at edu.harvard.hul.ois.fits.tools.jhove.Jhove.extractInfo(Jhove.java:145)
+	at edu.harvard.hul.ois.fits.tools.ToolBase.run(ToolBase.java:268)
+	at java.lang.Thread.run(Thread.java:748)
+2017-06-01 12:16:43 - ERROR - ToolBase:271 - Caught exception running tool: Jhove
+edu.harvard.hul.ois.fits.exceptions.FitsToolException: Jhove: Error converting output using /opt/fits/xml/jhove/jhove_image_to_fits.xslt (A sequence of more than one item is not allowed as the first operand of 'div')
+	at edu.harvard.hul.ois.fits.tools.ToolBase.transform(ToolBase.java:133)
+	at edu.harvard.hul.ois.fits.tools.jhove.Jhove.extractInfo(Jhove.java:145)
+	at edu.harvard.hul.ois.fits.tools.ToolBase.run(ToolBase.java:268)
+	at java.lang.Thread.run(Thread.java:748)
+2017-06-01 12:16:43 - ERROR - ToolBase:271 - Caught exception running tool: Jhove
+edu.harvard.hul.ois.fits.exceptions.FitsToolException: Jhove: Error converting output using /opt/fits/xml/jhove/jhove_image_to_fits.xslt (A sequence of more than one item is not allowed as the first operand of 'div')
+	at edu.harvard.hul.ois.fits.tools.ToolBase.transform(ToolBase.java:133)
+	at edu.harvard.hul.ois.fits.tools.jhove.Jhove.extractInfo(Jhove.java:145)
+	at edu.harvard.hul.ois.fits.tools.ToolBase.run(ToolBase.java:268)
+	at java.lang.Thread.run(Thread.java:748)
+2017-06-01 12:16:50 - ERROR - ToolBase:271 - Caught exception running tool: Jhove
+edu.harvard.hul.ois.fits.exceptions.FitsToolException: Jhove: Error converting output using /opt/fits/xml/jhove/jhove_image_to_fits.xslt (A sequence of more than one item is not allowed as the first operand of 'div')
+	at edu.harvard.hul.ois.fits.tools.ToolBase.transform(ToolBase.java:133)
+	at edu.harvard.hul.ois.fits.tools.jhove.Jhove.extractInfo(Jhove.java:145)
+	at edu.harvard.hul.ois.fits.tools.ToolBase.run(ToolBase.java:268)
+	at java.lang.Thread.run(Thread.java:748)
+2017-06-12 12:34:03 - ERROR - ToolBase:271 - Caught exception running tool: Jhove
+edu.harvard.hul.ois.fits.exceptions.FitsToolException: Jhove: Error converting output using /opt/fits/xml/jhove/jhove_image_to_fits.xslt (A sequence of more than one item is not allowed as the first operand of 'div')
+	at edu.harvard.hul.ois.fits.tools.ToolBase.transform(ToolBase.java:133)
+	at edu.harvard.hul.ois.fits.tools.jhove.Jhove.extractInfo(Jhove.java:145)
+	at edu.harvard.hul.ois.fits.tools.ToolBase.run(ToolBase.java:268)
+	at java.lang.Thread.run(Thread.java:748)
