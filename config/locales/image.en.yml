@@ -6,3 +6,6 @@ en:
       image:
         name:               "Image"
         description:        "Image works"
+    images:
+      relationships_parent_row:
+        label: "%{type}"
