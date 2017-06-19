@@ -7,21 +7,10 @@ module Hyrax
     include Hyrax::WorksControllerBehavior
     include Hyrax::BreadcrumbsForWorks
     self.curation_concern_type = ::Image
-    self.show_presenter = ImagePresenter
 
-        skip_load_and_authorize_resource only: :manifest
 
-        def manifest
-          headers['Access-Control-Allow-Origin'] = '*'
-          respond_to do |format|
-            format.json { render json: manifest_builder.to_h }
-          end
-        end
+    include Hyku::IIIFManifest
 
-        private
 
-          def manifest_builder
-            IIIFManifest::ManifestFactory.new(presenter)
-          end
       end
     end

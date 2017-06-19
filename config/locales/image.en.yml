@@ -9,3 +9,12 @@ en:
     images:
       relationships_parent_row:
         label: "%{type}"
+  simple_form:
+    hints:
+      defaults:
+        source: "Location of the original object (Duke Medical Center Library & Archives, David M. Rubenstein Rare Book & Manuscript Library, etc.)"
+    labels:
+      defaults:
+        description:	"Description"
+        date_created:  "Date"
+        resource_type: "Object Type"

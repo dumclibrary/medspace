@@ -67,5 +67,7 @@ end
 
 # RSK added below here
 
-gem 'riiif'
-gem 'iiif_manifest'
+gem 'mods', '~> 2.1'
+gem 'riiif', '~> 1.1'
+
+gem 'iiif_manifest', '~> 0.2.0'
