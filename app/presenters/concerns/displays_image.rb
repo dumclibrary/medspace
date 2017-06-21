@@ -1,4 +1,8 @@
-class FileSetPresenter < Hyrax::FileSetPresenter
+# This gets mixed into FileSetPresenter in order to create
+# a canvas on a IIIF manifest
+module DisplaysImage
+  extend ActiveSupport::Concern
+
   def display_image
     return nil unless FileSet.exists?(id)
     # TODO: this is slow, find a better way (perhaps index iiif url):
