@@ -3,6 +3,8 @@ terms:
     term: Image
   - id: Article
     term: Article
+  - id: Artifact
+    term: Artifact
   - id: Book
     term: Book
   - id: Journal
