@@ -71,3 +71,4 @@ gem 'mods', '~> 2.1'
 gem 'riiif', '~> 1.1'
 
 gem 'iiif_manifest', '~> 0.2.0'
+gem 'pdfjs_viewer-rails'
