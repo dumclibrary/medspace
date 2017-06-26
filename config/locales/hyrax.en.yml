@@ -49,6 +49,10 @@ en:
         header: "Parent Collection"
       relationships_parent_row:
         label: "%{type}"
+    file_set:
+      show:
+        downloadable_content:
+          pdf_viewer: "View Obect in PDF reader"
     product_twitter_handle: "@HydraSphere"
     institution_name:       "Institution"
     institution_name_full:  "The Institution Name"

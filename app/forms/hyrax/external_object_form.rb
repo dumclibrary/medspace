@@ -1,8 +1,8 @@
 # Generated via
-#  `rails generate hyrax:work Publication`
+#  `rails generate hyrax:work ExternalObject`
 module Hyrax
-  class PublicationForm < Hyrax::Forms::WorkForm
-    self.model_class = ::Publication
+  class ExternalObjectForm < Hyrax::Forms::WorkForm
+    self.model_class = ::ExternalObject
     self.terms += [:resource_type]
     self.required_fields -=[:creator, :keyword, :rights]
     self.required_fields +=[:description, :subject]

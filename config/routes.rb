@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   mount Riiif::Engine => '/images', as: 'riiif'
   mount Blacklight::Engine => '/'
+  mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
 
     concern :searchable, Blacklight::Routes::Searchable.new
 

@@ -1,0 +1,9 @@
+<% presenter.presenter_types.each do |type| %>
+   <% if presenter.grouped_presenters(filtered_by: type).blank? %>
+     <%= render 'relationships_parent_row_empty', type: type, presenter: presenter %>
+   <% else %>
+     <% presenter.grouped_presenters(filtered_by: type).each_pair do |model_name, items| %>
+       <%= render 'relationships_parent_row', type: type, items: items, presenter: presenter %>
+     <% end %>
+   <% end %>
+ <% end %>
