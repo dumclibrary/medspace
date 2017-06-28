@@ -1,0 +1,36 @@
+image: docker:latest
+
+stages:
+  - build
+  - publish
+  - deploy
+
+variables:
+  DOCKER_DRIVER: overlay
+  CONTAINER_IMAGE: $CI_REGISTRY/mclibrary/medspace
+
+services:
+  - docker:dind
+
+before_script:
+  - docker info
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+
+develop-image:
+  stage: build
+  only:
+    - develop
+  script:
+    - docker build -t $CONTAINER_IMAGE:develop .
+    - docker build -t $CONTAINER_IMAGE:stage -f Dockerfile.prod .
+    - docker push $CONTAINER_IMAGE:develop
+    - docker push $CONTAINER_IMAGE:stage
+
+release-image:
+  stage: publish
+  only:
+    - master
+  script:
+    - docker pull $CONTAINER_IMAGE:develop
+    - docker build -t CONTAINER_IMAGE -f Dockerfile.prod
+    - docker push $CONTAINER_IMAGE
