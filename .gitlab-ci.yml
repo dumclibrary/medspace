@@ -17,8 +17,9 @@ before_script:
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
 
 github-mirror:
-  allow_failure: true
+  stage: mirror
   image: alpine
+  allow_failure: true
   script:
     - apk --no-cache add git
     - cd /tmp
