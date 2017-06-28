@@ -1,3 +1,0 @@
-FROM gitlab-registry.oit.duke.edu/mclibrary/medspace:develop
-
-USER rails
