@@ -42,6 +42,8 @@ RUN apk --no-cache add $BUILD_PACKAGES \
     && su rails -c "bundle install --gemfile=/srv/rails/hyrax/Gemfile" \
     && su rails -c "cd /srv/rails/hyrax && bin/rails db:migrate RAILS_ENV=development"
 
+USER rails
+
 EXPOSE 3000
 
 WORKDIR /srv/rails/hyrax
