@@ -1,12 +1,12 @@
-image: docker:latest
+image: docker:git
 
 stages:
+  - mirror
   - build
   - publish
   - deploy
 
 variables:
-  DOCKER_DRIVER: overlay
   CONTAINER_IMAGE: $CI_REGISTRY/mclibrary/medspace
 
 services:
@@ -15,6 +15,15 @@ services:
 before_script:
   - docker info
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+
+github-mirror:
+  stage: mirror
+  allow_failure: true
+  script:
+    - cd /tmp
+    - git clone --bare $CI_REPOSITORY_URL
+    - cd medspace.git
+    - git push --mirror https://$GITHUB_TOKEN@github.com/dumclibrary/medspace.git
 
 develop-image:
   stage: build
@@ -32,5 +41,5 @@ release-image:
     - master
   script:
     - docker pull $CONTAINER_IMAGE:develop
-    - docker build -t CONTAINER_IMAGE -f Dockerfile.prod
+    - docker build -t $CONTAINER_IMAGE -f Dockerfile.prod
     - docker push $CONTAINER_IMAGE
