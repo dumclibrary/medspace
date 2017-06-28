@@ -31,8 +31,15 @@ develop-image:
     - develop
   script:
     - docker build -t $CONTAINER_IMAGE:develop .
-    - docker build -t $CONTAINER_IMAGE:stage -f Dockerfile.prod .
     - docker push $CONTAINER_IMAGE:develop
+    
+stage-image:
+  stage: publish
+  only:
+    - develop
+  script:
+    - docker pull $CONTAINER_IMAGE:develop
+    - docker tag $CONTAINER_IMAGE:develop $CONTAINER_IMAGE:stage
     - docker push $CONTAINER_IMAGE:stage
 
 release-image:
@@ -40,6 +47,6 @@ release-image:
   only:
     - master
   script:
-    - docker pull $CONTAINER_IMAGE:develop
-    - docker build -t $CONTAINER_IMAGE -f Dockerfile.prod
+    - docker pull $CONTAINER_IMAGE:stage
+    - docker tag $CONTAINER_IMAGE:stage $CONTAINER_IMAGE
     - docker push $CONTAINER_IMAGE
