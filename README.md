@@ -1,24 +1,9 @@
-# README
+[![build status](https://gitlab.oit.duke.edu/mclibrary/medspace/badges/master/build.svg)](https://gitlab.oit.duke.edu/mclibrary/medspace/commits/master)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Medspace
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+`docker run -p 3000:3000 gitlab-registry.oit.duke.edu/mclibrary/medspace:develop`
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+And navigate to [http://localhost:3000](http://localhost:3000)
