@@ -1,4 +1,4 @@
-image: docker:latest
+image: docker:git
 
 stages:
   - mirror
@@ -18,10 +18,8 @@ before_script:
 
 github-mirror:
   stage: mirror
-  image: alpine
   allow_failure: true
   script:
-    - apk --no-cache add git
     - cd /tmp
     - git clone --mirror $CI_REPOSITORY_URL
     - cd medspace.git
