@@ -32,5 +32,5 @@ release-image:
     - master
   script:
     - docker pull $CONTAINER_IMAGE:develop
-    - docker build -t CONTAINER_IMAGE -f Dockerfile.prod
+    - docker build -t $CONTAINER_IMAGE -f Dockerfile.prod
     - docker push $CONTAINER_IMAGE
