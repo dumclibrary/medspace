@@ -21,7 +21,7 @@ github-mirror:
   allow_failure: true
   script:
     - cd /tmp
-    - git clone --mirror $CI_REPOSITORY_URL
+    - git clone --bare $CI_REPOSITORY_URL
     - cd medspace.git
     - git push --mirror https://$GITHUB_TOKEN@github.com/dumclibrary/medspace.git
 
