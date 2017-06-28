@@ -1,3 +1,5 @@
 Dockerfile
 
 tmp/*
+
+docker-fcrepo
