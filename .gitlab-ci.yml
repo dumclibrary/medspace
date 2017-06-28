@@ -8,6 +8,7 @@ stages:
 
 variables:
   CONTAINER_IMAGE: $CI_REGISTRY/mclibrary/medspace
+  FCREPO_IMAGE: $CI_REGISTRY/mclibrary/medspace/fcrepo
 
 services:
   - docker:dind
@@ -32,6 +33,14 @@ develop-image:
   script:
     - docker build -t $CONTAINER_IMAGE:develop .
     - docker push $CONTAINER_IMAGE:develop
+
+fcrepo-develop-image:
+  stage: build
+  only:
+    - develop
+  script:
+    - docker build -t $FCREPO_IMAGE:develop docker-fcrepo
+    - docker push $FCREPO_IMAGE:develop
     
 stage-image:
   stage: publish
@@ -42,6 +51,15 @@ stage-image:
     - docker tag $CONTAINER_IMAGE:develop $CONTAINER_IMAGE:stage
     - docker push $CONTAINER_IMAGE:stage
 
+fcrepo-stage-image:
+  stage: publish
+  only:
+    - develop
+  script:
+    - docker pull $FCREPO_IMAGE:develop
+    - docker tag $FCREPO_IMAGE:develop $FCREPO_IMAGE:stage
+    - docker push $FCREPO_IMAGE:stage
+
 release-image:
   stage: publish
   only:
@@ -50,3 +68,12 @@ release-image:
     - docker pull $CONTAINER_IMAGE:stage
     - docker tag $CONTAINER_IMAGE:stage $CONTAINER_IMAGE
     - docker push $CONTAINER_IMAGE
+
+fcrepo-release-image:
+  stage: publish
+  only:
+    - master
+  script:
+    - docker pull $FCREPO_IMAGE:stage
+    - docker tag $FCREPO_IMAGE:stage $FCREPO_IMAGE
+    - docker push $FCREPO_IMAGE
