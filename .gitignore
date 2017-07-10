@@ -21,3 +21,5 @@
 .byebug_history
 
 data
+
+docker-compose.override.yml
