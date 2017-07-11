@@ -27,7 +27,7 @@ services:
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
-      - hyrax
+      - medspace
       - /config
     volumes:
       - ./solr/config:/config
