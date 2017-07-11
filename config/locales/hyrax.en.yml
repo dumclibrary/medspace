@@ -43,7 +43,7 @@ en:
           subject_tesim: Subject
           title_tesim: Title
   hyrax:
-    product_name:           "Hyrax"
+    product_name:           "MEDSpace"
     base:
       relationships:
         header: "Parent Collection"
@@ -53,12 +53,12 @@ en:
       show:
         downloadable_content:
           pdf_viewer: "View Obect in PDF reader"
-    product_twitter_handle: "@HydraSphere"
-    institution_name:       "Institution"
-    institution_name_full:  "The Institution Name"
-    account_name:           "My Institution Account Id"
+    product_twitter_handle: ""
+    institution_name:       "Duke Medical Center Archives"
+    institution_name_full:  "Duke Medical Center Library & Archives"
+    account_name:           ""
     directory:
-      suffix:               "@example.org"
+      suffix:               "@duke.edu"
     footer:
       copyright_html: "<strong>Copyright &copy; 2017 Project Hydra</strong> Licensed under the Apache License, Version 2.0"
       service_html: A service of <a href="http://projecthydra.org/" class="navbar-link" target="_blank">Project Hydra</a>.
