@@ -21,10 +21,5 @@ test:
   database: db/test.sqlite3
 
 production:
-  encoding: utf8
-  adapter: <%= ENV['DB_DRIVER'] || "mysql2" %>
-  database: <%= ENV['DB_NAME'] || "medspace" %>
-  host: <%= ENV['DB_HOST'] || "localhost" %>
-  username: <%= ENV['DB_USER'] || "root" %>
-  password: <%= ENV['DB_PASSWORD'] || "" %>
-  pool: 5
+  <<: *default
+  database: db/production.sqlite3
