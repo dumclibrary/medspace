@@ -4,6 +4,6 @@
 
 ## Getting Started
 
-`docker run -p 3000:3000 gitlab-registry.oit.duke.edu/mclibrary/medspace:develop`
+`docker run -p 3000:3000 dumclibrary/medspace`
 
 And navigate to [http://localhost:3000](http://localhost:3000)
