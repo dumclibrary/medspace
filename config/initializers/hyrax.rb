@@ -108,7 +108,7 @@ Hyrax.config do |config|
   # config.audit_user_key = 'audituser@example.com'
   #
   # The banner image. Should be 5000px wide by 1000px tall
-  # config.banner_image = 'https://cloud.githubusercontent.com/assets/92044/18370978/88ecac20-75f6-11e6-8399-6536640ef695.jpg'
+  config.banner_image = 'ms_logo.png'
 
   # Temporary paths to hold uploads before they are ingested into FCrepo
   # These must be lambdas that return a Pathname. Can be configured separately
@@ -132,7 +132,7 @@ Hyrax.config do |config|
   # config.working_path = Rails.root.join( 'tmp', 'uploads')
 
   # Should the media display partial render a download link?
-  # config.display_media_download_link = true
+  #  config.display_media_download_link = false
 
   # A configuration point for changing the behavior of the license service
   #   @see Hyrax::LicenseService for implementation details
