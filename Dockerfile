@@ -3,6 +3,7 @@ FROM alpine:3.6
 ENV BUILD_PACKAGES build-base \
                    libxml2-dev \
                    libffi-dev \
+                   mariadb-dev \
                    ruby-dev \
                    sqlite-dev
 
