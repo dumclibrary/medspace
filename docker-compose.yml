@@ -2,6 +2,7 @@ version: '2'
 
 services:
   web:
+    build: .
     image: 'dumclibrary/medspace'
     command: "bundle exec rails server -p 3000 -b '0.0.0.0'"
     env_file:
@@ -13,8 +14,13 @@ services:
     image: 'dumclibrary/medspace'
     restart: 'on-failure'
     env_file:
-          - ./app.env
+      - ./app.env
     command: 'bundle exec rails db:migrate'
+
+  db:
+    image: 'mariadb:10.3.0'
+    env_file:
+     - ./app.env
 
   fcrepo:
     image: 'dumclibrary/fcrepo'
@@ -23,11 +29,4 @@ services:
     image: 'redis:3.2.9-alpine'
 
   solr:
-    image: 'solr:6.6.0-alpine'
-    entrypoint:
-      - docker-entrypoint.sh
-      - solr-precreate
-      - medspace
-      - /config
-    volumes:
-      - ./solr/config:/config
+    image: 'dumclibrary/medspace-solr'
