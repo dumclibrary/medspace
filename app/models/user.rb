@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   # Connects this user object to Hydra behaviors.
   include Hydra::User
+  # Connects this user object to Role-management behaviors.
+  include Hydra::RoleManagement::UserRoles
+
+
   # Connects this user object to Hyrax behaviors.
   include Hyrax::User
   include Hyrax::UserUsageStats
@@ -14,7 +18,8 @@ class User < ApplicationRecord
   include Blacklight::User
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  # original line devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable
 
   # Method added by Blacklight; Blacklight uses #to_s on your
