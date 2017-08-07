@@ -40,8 +40,7 @@ RUN apk --no-cache add $BUILD_PACKAGES \
     && rm /tmp/fits.zip && rm -rf /tmp/fits-$FITS_VERSION \
     && ruby -pi -e "gsub(/gem 'therubyracer', platforms: :ruby/, '')" /srv/rails/hyrax/Gemfile \
     && su rails -c "gem install rails -v $RAILS_VERSION" \
-    && su rails -c "bundle install --gemfile=/srv/rails/hyrax/Gemfile" \
-    && su rails -c "cd /srv/rails/hyrax && bin/rails db:migrate RAILS_ENV=development"
+    && su rails -c "bundle install --gemfile=/srv/rails/hyrax/Gemfile"
 
 USER rails
 
