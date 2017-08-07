@@ -9,6 +9,7 @@ stages:
 variables:
   CONTAINER_IMAGE: $CI_REGISTRY/mclibrary/medspace
   FCREPO_IMAGE: $CI_REGISTRY/mclibrary/medspace/fcrepo
+  SOLR_IMAGE: $CI_REGISTRY/mclibrary/medspace/solr
 
 services:
   - docker:dind
@@ -41,6 +42,14 @@ fcrepo-develop-image:
   script:
     - docker build -t $FCREPO_IMAGE:develop docker-fcrepo
     - docker push $FCREPO_IMAGE:develop
+
+solr-develop-image:
+  stage: build
+  only:
+    - develop
+  script:
+    - docker build -t $SOLR_IMAGE:develop solr
+    - docker push $SOLR_IMAGE:develop
     
 stage-image:
   stage: publish
@@ -60,6 +69,15 @@ fcrepo-stage-image:
     - docker tag $FCREPO_IMAGE:develop $FCREPO_IMAGE:stage
     - docker push $FCREPO_IMAGE:stage
 
+solr-stage-image:
+  stage: publish
+  only:
+    - develop
+  script:
+    - docker pull $SOLR_IMAGE:develop
+    - docker tag $SOLR_IMAGE:develop $SOLR_IMAGE:stage
+    - docker push $SOLR_IMAGE:stage
+
 release-image:
   stage: publish
   only:
@@ -77,3 +95,12 @@ fcrepo-release-image:
     - docker pull $FCREPO_IMAGE:stage
     - docker tag $FCREPO_IMAGE:stage $FCREPO_IMAGE
     - docker push $FCREPO_IMAGE
+
+solr-release-image:
+  stage: publish
+  only:
+    - master
+  script:
+    - docker pull $SOLR_IMAGE:stage
+    - docker tag $SOLR_IMAGE:stage $SOLR_IMAGE
+    - docker push $SOLR_IMAGE
