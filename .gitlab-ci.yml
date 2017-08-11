@@ -77,3 +77,18 @@ solr-release-image:
     - docker pull $SOLR_IMAGE:develop
     - docker tag $SOLR_IMAGE:develop $SOLR_IMAGE
     - docker push $SOLR_IMAGE
+
+deploy-develop:
+  before_script:
+  - eval $(ssh-agent -s)
+
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
+  image: mravenel/alpine
+  #stage: deploy
+  only:
+    - develop
+  script:
+    - ssh deploy@dev-medspace.mc.duke.edu "sudo /home/share/appdata/dev-medspace/update.sh"
