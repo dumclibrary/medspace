@@ -3,7 +3,7 @@
 module Hyrax
   class ImageForm < Hyrax::Forms::WorkForm
     self.model_class = ::Image
-    self.terms += [:resource_type]
+    self.terms += [:resource_type, :holding_entity]
     self.required_fields -=[:creator, :keyword, :rights]
     self.required_fields +=[:description, :subject]
   end

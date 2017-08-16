@@ -3,7 +3,7 @@ module Hyku
     Hyrax::MemberPresenterFactory.file_presenter_class = Hyku::FileSetPresenter
 
     delegate :extent, to: :solr_document
-
+      delegate :holding_entity, to: :solr_document
     def manifest_url
       manifest_helper.polymorphic_url([:manifest, self])
     end

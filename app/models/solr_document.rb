@@ -6,7 +6,6 @@ class SolrDocument
   # Adds Hyrax behaviors to the SolrDocument.
   include Hyrax::SolrDocumentBehavior
 
-
   # self.unique_key = 'id'
 
   # Email uses the semantic field mappings below to generate the body of an email.
@@ -22,7 +21,11 @@ class SolrDocument
   # Recommendation: Use field names from Dublin Core
   use_extension(Blacklight::Document::DublinCore)
 
-  # Do content negotiation for AF models. 
+  # Do content negotiation for AF models.
 
   use_extension( Hydra::ContentNegotiation )
+
+    def holding_entity
+      self[Solrizer.solr_name('holding_entity')]
+    end
 end
