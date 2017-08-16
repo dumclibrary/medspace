@@ -38,6 +38,11 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'rspec', "~> 3.5"
+  gem 'rspec-rails', "~> 3.5"
+  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -62,7 +67,6 @@ gem 'devise'
 gem 'devise-guests', '~> 0.6'
 group :development, :test do
   gem 'fcrepo_wrapper'
-  gem 'rspec-rails'
 end
 
 # RSK added below here
