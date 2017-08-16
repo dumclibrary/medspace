@@ -3,7 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Image do
-  it "has tests" do
-    skip "Add your tests here"
+  it "can make an image" do
+    i = Image.new
+    i.save
+    expect(i).to be_instance_of(Image)
   end
 end
