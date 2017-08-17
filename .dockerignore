@@ -1,9 +1,0 @@
-Dockerfile
-
-tmp/*
-
-docker-fcrepo
-
-data
-
-docker-compose*

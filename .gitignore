@@ -19,7 +19,3 @@
 
 # Ignore Byebug command history file.
 .byebug_history
-
-data
-
-docker-compose.override.yml

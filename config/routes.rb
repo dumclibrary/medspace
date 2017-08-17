@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  mount Riiif::Engine => '/images', as: 'riiif'
+  
   mount Blacklight::Engine => '/'
-  mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
-
+  
     concern :searchable, Blacklight::Routes::Searchable.new
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
@@ -10,19 +9,11 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
-  mount Hydra::RoleManagement::Engine => '/'
-
   mount Qa::Engine => '/authorities'
   mount Hyrax::Engine, at: '/'
   resources :welcome, only: 'index'
   root 'hyrax/homepage#index'
-  curation_concerns_basic_routes do
-    member do
-      get :manifest
-    end
-  end
-
-  curation_concerns_embargo_management
+  curation_concerns_basic_routes
   concern :exportable, Blacklight::Routes::Exportable.new
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
