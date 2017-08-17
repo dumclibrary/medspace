@@ -1,0 +1,11 @@
+
+        <h2><%= t('hyrax.homepage.admin_sets.title') %></h2>
+        <%# render 'explore_collections' %>
+        List of Public collections here
+        <table class="table table-striped collection-highlights">
+          <tbody>
+            <tr>
+              <td><%= link_to Collection.first.title.first, Collection.first %></td>
+            </tr>
+          </tbody>
+        </table>
