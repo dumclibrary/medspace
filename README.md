@@ -1,3 +1,6 @@
+[![build status](https://gitlab.oit.duke.edu/mclibrary/medspace/badges/master/build.svg)](https://gitlab.oit.duke.edu/mclibrary/medspace/commits/master)
+[![Dependency Status](https://gemnasium.com/badges/github.com/dumclibrary/medspace.svg)](https://gemnasium.com/github.com/dumclibrary/medspace)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
