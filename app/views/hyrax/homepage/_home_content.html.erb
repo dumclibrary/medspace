@@ -4,8 +4,11 @@
         List of Public collections here
         <table class="table table-striped collection-highlights">
           <tbody>
+            <% @collection.each do |collection|  %>
             <tr>
-              <td><%= link_to Collection.first.title.first, Collection.first %></td>
+              <td><%= link_to collection.title.first, collection %><br/>
+              <%= collection.description.first %></td>
             </tr>
+            <% end %>
           </tbody>
         </table>
