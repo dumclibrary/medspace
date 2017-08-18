@@ -1,0 +1,8 @@
+de:
+  hyrax:
+    icons:
+      external_object:     'fa fa-file-text-o'
+    select_type:
+      external_object:
+        name:               "External Object"
+        description:        "External object Werke"
