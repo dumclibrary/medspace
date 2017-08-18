@@ -13,7 +13,7 @@ module Dumcla
           index.as :stored_searchable, :facetable
         end
 
-        #Image only metadata
+        # Image only metadata
         property :date_accepted, predicate: ::RDF::Vocab::DC.dateAccepted do |index|
           index.as :stored_sortable
         end
@@ -25,6 +25,11 @@ module Dumcla
         end
         property :provenance, predicate: ::RDF::Vocab::DC.provenance do |index|
           index.as :stored_sortable
+        end
+
+        # document specific metadata
+        property :host_organization, predicate: ::RDF::Vocab::MARCRelators.his do |index|
+          index.as :stored_searchable, :facetable
         end
       end
     end
