@@ -1,0 +1,13 @@
+image: docker:git
+
+stages:
+  - mirror
+
+github_mirror:
+  stage: mirror
+  allow_failure: true
+  script:
+    - cd /tmp
+    - git clone --bare $CI_REPOSITORY_URL
+    - cd medspace.git
+    - git push --mirror https://$GITHUB_TOKEN@github.com/dumclibrary/medspace.git
