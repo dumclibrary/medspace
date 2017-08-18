@@ -348,7 +348,15 @@ GEM
       om (~> 3.1)
     i18n (0.8.6)
     ice_nine (0.11.2)
+    iiif-presentation (0.2.0)
+      activesupport (>= 3.2.18)
+      faraday (>= 0.9)
+      json
+    iiif_manifest (0.2.0)
+      activesupport (>= 4)
+      iiif-presentation (~> 0.2.0)
     inflecto (0.0.2)
+    iso-639 (0.2.8)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -451,9 +459,14 @@ GEM
     mini_mime (0.1.4)
     mini_portile2 (2.2.0)
     minitest (5.10.3)
+    mods (2.1.0)
+      iso-639
+      nokogiri
+      nom-xml (~> 0.6.0)
     multi_json (1.12.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    mysql2 (0.4.9)
     nest (2.1.0)
       redic
     net-http-persistent (2.9.4)
@@ -461,6 +474,10 @@ GEM
     noid (0.9.0)
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
+    nom-xml (0.6.0)
+      activesupport (>= 3.2.18)
+      i18n
+      nokogiri
     oauth (0.5.3)
     oauth2 (1.4.0)
       faraday (>= 0.8, < 0.13)
@@ -477,6 +494,9 @@ GEM
       rails (> 3.2.0)
     orm_adapter (0.5.0)
     os (0.9.6)
+    pdfjs_viewer-rails (0.0.9)
+      rails (> 4.2.0)
+      sass-rails (~> 5.0)
     posix-spawn (0.3.13)
     power_converter (0.1.2)
     public_suffix (2.0.5)
@@ -588,6 +608,9 @@ GEM
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
     retriable (3.1.1)
+    riiif (1.5.1)
+      deprecation (>= 1.0.0)
+      railties (>= 4.2, < 6)
     rsolr (2.0.2)
       builder (>= 2.1.2)
       faraday
@@ -735,11 +758,16 @@ DEPENDENCIES
   fcrepo_wrapper
   hydra-role-management
   hyrax!
+  iiif_manifest (~> 0.2.0)
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
+  mods (~> 2.1)
+  mysql2
+  pdfjs_viewer-rails
   puma (~> 3.0)
   rails (~> 5.0.3)
+  riiif (~> 1.1)
   rsolr (>= 1.0)
   rspec (~> 3.5)
   rspec-rails (~> 3.5)
