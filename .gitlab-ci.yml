@@ -21,13 +21,13 @@ fcrepo_build:
   stage: build
   services:
     - docker:dind
-  only:
-    - master
   before_script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
   script:
     - docker build -t $FCREPO_IMAGE docker-fcrepo
     - docker push $FCREPO_IMAGE
+  only:
+    - master
 
 solr_build:
   stage: build
@@ -38,3 +38,5 @@ solr_build:
   script:
     - docker build -t $SOLR_IMAGE solr
     - docker push $SOLR_IMAGE
+  only:
+    - master
