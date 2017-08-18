@@ -19,6 +19,7 @@ RSpec.feature 'Create a Publication', js: false do
     end
 
     scenario do
+      skip
       visit '/dashboard'
       click_link "Works"
       click_link "Add new work"
