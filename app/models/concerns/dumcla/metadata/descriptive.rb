@@ -20,7 +20,7 @@ module Dumcla
         property :condition, predicate: ::RDF::Vocab::GR.condition do |index|
           index.as :stored_sortable
         end
-        property :accural_method, predicate: ::RDF::Vocab::DC.accrualMethod do |index|
+        property :accrual_method, predicate: ::RDF::Vocab::DC.accrualMethod do |index|
           index.as :stored_sortable
         end
         property :provenance, predicate: ::RDF::Vocab::DC.provenance do |index|
