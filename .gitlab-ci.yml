@@ -6,6 +6,7 @@ stages:
 
 variables:
   FCREPO_IMAGE: $CI_REGISTRY/mclibrary/medspace/fcrepo
+  SOLR_IMAGE: $CI_REGISTRY/mclibrary/medspace/solr
 
 github_mirror:
   stage: mirror
@@ -27,3 +28,11 @@ fcrepo_build:
   script:
     - docker build -t $FCREPO_IMAGE docker-fcrepo
     - docker push $FCREPO_IMAGE
+
+solr_build:
+  stage: build
+  services:
+    - docker:dind
+  script:
+    - docker build -t $SOLR_IMAGE solr
+    - docker push $SOLR_IMAGE
