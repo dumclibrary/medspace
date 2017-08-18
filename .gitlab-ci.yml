@@ -2,6 +2,10 @@ image: docker:git
 
 stages:
   - mirror
+  - build
+
+variables:
+  FCREPO_IMAGE: $CI_REGISTRY/mclibrary/medspace/fcrepo
 
 github_mirror:
   stage: mirror
@@ -11,3 +15,13 @@ github_mirror:
     - git clone --bare $CI_REPOSITORY_URL
     - cd medspace.git
     - git push --mirror https://$GITHUB_TOKEN@github.com/dumclibrary/medspace.git
+
+fcrepo_build:
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+  script:
+    - docker build -t $FCREPO_IMAGE docker-fcrepo
+    - docker push $FCREPO_IMAGE
