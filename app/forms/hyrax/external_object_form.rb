@@ -3,6 +3,6 @@
 module Hyrax
   class ExternalObjectForm < Hyrax::Forms::WorkForm
     self.model_class = ::ExternalObject
-    self.terms += [:resource_type]
+    self.terms += [:resource_type, :holding_entity, :date, :archival_collection]
   end
 end

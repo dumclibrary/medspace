@@ -53,9 +53,9 @@ RSpec.describe Image do
 
     it "can add a type of donation" do
       image = Image.new
-      expect(image.accural_method).to be_empty
-      image.accural_method = ["Gift"]
-      expect(image.accural_method.first).to eq "Gift"
+      expect(image.accrual_method).to be_empty
+      image.accrual_method = ["Gift"]
+      expect(image.accrual_method.first).to eq "Gift"
       #expect(image.resource.dump(:ttl)).to match(/www.loc.gov\/mods\/rdf\/v1#locationPhysical/)
     end
 

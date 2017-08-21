@@ -3,6 +3,6 @@
 module Hyrax
   class DocumentForm < Hyrax::Forms::WorkForm
     self.model_class = ::Document
-    self.terms += [:resource_type]
+    self.terms += [:resource_type, :holding_entity, :date, :archival_collection, :host_organization]
   end
 end
