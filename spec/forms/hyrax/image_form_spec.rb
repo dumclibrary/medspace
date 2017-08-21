@@ -12,6 +12,7 @@ RSpec.describe Hyrax::ImageForm do
     expect(form.terms).to include(:title)
     expect(form.terms).to include(:holding_entity)
     expect(form.terms).to include(:date)
+    expect(form.terms).to include(:provenance)
     expect(form.terms).to include(:archival_collection)
     expect(form.terms).to include(:date_accepted)
     expect(form.terms).to include(:condition)
