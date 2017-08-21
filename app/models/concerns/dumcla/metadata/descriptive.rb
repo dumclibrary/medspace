@@ -15,16 +15,16 @@ module Dumcla
 
         # Image only metadata
         property :date_accepted, predicate: ::RDF::Vocab::DC.dateAccepted do |index|
-          index.as :stored_sortable
+          index.as :stored_searchable
         end
         property :condition, predicate: ::RDF::Vocab::GR.condition do |index|
-          index.as :stored_sortable
+          index.as :stored_searchable
         end
         property :accrual_method, predicate: ::RDF::Vocab::DC.accrualMethod do |index|
-          index.as :stored_sortable
+          index.as :stored_searchable
         end
         property :provenance, predicate: ::RDF::Vocab::DC.provenance do |index|
-          index.as :stored_sortable
+          index.as :stored_searchable
         end
 
         # document specific metadata

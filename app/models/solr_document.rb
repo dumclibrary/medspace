@@ -22,7 +22,32 @@ class SolrDocument
   # Recommendation: Use field names from Dublin Core
   use_extension(Blacklight::Document::DublinCore)
 
-  # Do content negotiation for AF models. 
+  # Do content negotiation for AF models.
 
   use_extension( Hydra::ContentNegotiation )
+
+  def archival_collection
+    self[Solrizer.solr_name('archival_collection')]
+  end
+  def holding_entity
+    self[Solrizer.solr_name('holding_entity')]
+  end
+  def date
+    self[Solrizer.solr_name('date')]
+  end
+  def date_accepted
+    self[Solrizer.solr_name('date_accepted')]
+  end
+  def condition
+    self[Solrizer.solr_name('condition')]
+  end
+  def accrual_method
+    self[Solrizer.solr_name('accrual_method')]
+  end
+  def provenance
+    self[Solrizer.solr_name('provenance')]
+  end
+  def host_organization
+    self[Solrizer.solr_name('host_organization')]
+  end
 end
