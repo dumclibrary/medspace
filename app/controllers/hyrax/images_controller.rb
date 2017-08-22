@@ -17,6 +17,8 @@ module Hyrax
     delegate :provenance, to: :solr_document
 
     # Use this line if you want to use a custom presenter
-    self.show_presenter = Hyrax::ImagePresenter
+    #self.show_presenter = Hyrax::ImagePresenter
+    include Hyku::IIIFManifest
+
   end
 end
