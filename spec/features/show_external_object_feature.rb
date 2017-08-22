@@ -32,7 +32,7 @@ RSpec.feature 'Display an External Object' do
       login_as user
       visit("/concern/external_objects/#{exo.id}")
       expect(page).to have_content exo.title.first
-      expect(page).to have_selector "a[href='#{related_url.first}']"
+      expect(page).to have_link href: "#{exo.related_url.first}"
       expect(page).to have_content exo.archival_collection.first
       expect(page).to have_content exo.date.first
       expect(page).to have_content exo.holding_entity.first
@@ -41,7 +41,7 @@ RSpec.feature 'Display an External Object' do
     scenario "Show an External Object unauthenticated user" do
       visit("/concern/external_objects/#{exo.id}")
       expect(page).to have_content exo.title.first
-      expect(page).to have_selector "a[href='#{related_url.first}']"
+      expect(page).to have_link href: "#{exo.related_url.first}"
       expect(page).to have_content exo.archival_collection.first
       expect(page).not_to have_content exo.date.first
       expect(page).to have_content exo.holding_entity.first

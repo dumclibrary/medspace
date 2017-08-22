@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  
+
   mount Blacklight::Engine => '/'
-  
+  mount PdfjsViewer::Rails::Engine => "/pdfjs", as: "pdfjs"
+
     concern :searchable, Blacklight::Routes::Searchable.new
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
