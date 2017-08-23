@@ -43,13 +43,20 @@ en:
           subject_tesim: Subject
           title_tesim: Title
   hyrax:
-    product_name:           "Hyrax"
+    product_name:           "MEDSpace"
+    base:
+      relationships:
+        header: "Parent Collection"
+    file_set:
+      show:
+        downloadable_content:
+          pdf_viewer: "View Object in Reader"
     product_twitter_handle: "@SamveraRepo"
-    institution_name:       "Institution"
-    institution_name_full:  "The Institution Name"
+    institution_name:       "DUMC Archives"
+    institution_name_full:  "Duke Medical Center Library & Archives"
     account_name:           "My Institution Account Id"
     directory:
-      suffix:               "@example.org"
+      suffix:               "@duke.edu"
     footer:
       copyright_html: "<strong>Copyright &copy; 2017 Samvera</strong> Licensed under the Apache License, Version 2.0"
       service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
