@@ -11,6 +11,11 @@ module Medspace
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    config.tinymce.install = :copy
     config.active_job.queue_adapter = :inline
+    config.generators do |g|
+      g.test_framework :rspec, :spec => true
+    end
+
   end
 end
