@@ -84,4 +84,4 @@ en:
         description: "Description"
         date: "Sorting Date"
         contributor: "Donor"
-        date_created: "Date"
+        date_created: "Object Date"

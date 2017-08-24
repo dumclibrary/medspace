@@ -13,7 +13,7 @@ RSpec.describe Hyrax::ImageForm do
     expect(form.terms).to include(:holding_entity)
     expect(form.terms).to include(:date)
     expect(form.required_fields).to include(:description)
-    expect(form.required_fields).to include(:created)
+    expect(form.required_fields).to include(:date_created)
     expect(form.required_fields).to include(:subject)
     expect(form.required_fields).not_to include(:creator)
     expect(form.required_fields).not_to include(:rights_statement)
