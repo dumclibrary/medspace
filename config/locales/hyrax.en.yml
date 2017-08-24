@@ -55,6 +55,19 @@ en:
       show:
         downloadable_content:
           pdf_viewer: "View Object in Reader"
+    search:
+      form:
+        option:
+          titles:
+            label_long: "Titles"
+            label_short: "Titles"
+          subjects:
+            label_long: "Subjects"
+            label_short: "Subjects"
+          descriptions:
+            label_long: "Descriptions"
+            label_short: "Descriptions"
+
     product_twitter_handle: "@SamveraRepo"
     institution_name:       "DUMC Archives"
     institution_name_full:  "Duke Medical Center Library & Archives"
