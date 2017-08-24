@@ -15,7 +15,7 @@ en:
           based_near_tesim: Location
           contributor_tesim: Contributor
           creator_tesim: Creator
-          date_created_tesim: Date Created
+          date_created_tesim: Date
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
           description_tesim: Description
@@ -27,10 +27,12 @@ en:
           rights_tesim: Rights
           subject_tesim: Subject
         show:
+          contributor: Donor
+          at_location: Library Location
           based_near_tesim: Location
           contributor_tesim: Contributor
           creator_tesim: Creator
-          date_created_tesim: Date Created
+          date_created_tesim: Date
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
           description_tesim: Description
@@ -47,6 +49,8 @@ en:
     base:
       relationships:
         header: "Parent Collection"
+      metadata:
+        header: Item Description
     file_set:
       show:
         downloadable_content:
@@ -60,3 +64,24 @@ en:
     footer:
       copyright_html: "<strong>Copyright &copy; 2017 Samvera</strong> Licensed under the Apache License, Version 2.0"
       service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
+  simple_form:
+    hints:
+      defaults:
+        contributor: "A person or group you want to recognize for donating the object to the Library & Archives."
+        date_created: "The date on which the work was created."
+        date: "The date which will be used to sort the work. Entered in YYYY format."
+        identifier: "A unique handle identifying the work."
+        holding_entity: "Repository which has the original object in its holdings."
+        archival_collection: "Collection where the original object resides (ex. Eugene Stead Papers)"
+        date_accepted: "(Artwork and Artifacts only) The date the object was given to the Library & Archives."
+        condition: "(Artwork and Artifacts only) The physical condition of the object."
+        accrual_method: "(Artwork and Artifacts only) The method by which the Library & Archives obtained the object."
+        provenance: "(Artwork and Artifacts only) The history of the object."
+        at_location: "(Artwork and Artifacts only) Room number where the object is displayed or stored."
+        host_organization: "(Posters and Presentations only) The hosting organization where the object was presented (ex. Medical Library Association)."
+    labels:
+      defaults:
+        description: "Description"
+        date: "Sorting Date"
+        contributor: "Donor"
+        date_created: "Object Date"

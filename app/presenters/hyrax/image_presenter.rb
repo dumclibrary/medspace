@@ -3,6 +3,7 @@
 module Hyrax
   class ImagePresenter < Hyrax::WorkShowPresenter
     delegate :archival_collection, to: :solr_document
+    delegate :at_location, to: :solr_document
     delegate :holding_entity, to: :solr_document
     delegate :date, to: :solr_document
     delegate :date_accepted, to: :solr_document

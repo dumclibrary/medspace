@@ -14,16 +14,17 @@ RSpec.feature 'Create a Image', js: false do
     end
 
     before do
-      AdminSet.find_or_create_default_admin_set_id
       login_as user
     end
 
     scenario do
-      skip
-      visit '/dashboard'
-      click_link "Works"
-      click_link "Add new work"
-
+      visit '/concern/images/new'
+      fill_in 'Title', with: "My Object Title"
+      fill_in 'Description', with: "A description of my object"
+      fill_in 'Subject', with: 'Vase'
+      fill_in 'Object Date', with: '1973'
+      click_link("Additional fields")
+      fill_in "Archival collection", with: "Eugene Stead Papers"
       # If you generate more than one work uncomment these lines
       # choose "payload_concern", option: "Image"
       # click_button "Create work"
