@@ -3,7 +3,10 @@ module Dumcla
     module Descriptive
       extend ActiveSupport::Concern
       included do
-        property :holding_entity, predicate: ::RDF::Vocab::MODS.locationPhysical do |index|
+        property :at_location, predicate: ::RDF::Vocab::PROV::atLocation do |index|
+          index.as :stored_searchable, :facetable
+        end
+        property :holding_entity, predicate: ::RDF::Vocab::MODS::locationPhysical do |index|
           index.as :stored_searchable, :facetable
         end
         property :date, predicate: ::RDF::Vocab::DC11.date do |index|

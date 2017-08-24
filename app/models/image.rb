@@ -4,6 +4,8 @@ class Image < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::Dumcla::Metadata::Descriptive
 
+
+
   self.indexer = ImageIndexer
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []

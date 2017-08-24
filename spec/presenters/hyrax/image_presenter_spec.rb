@@ -11,19 +11,13 @@ RSpec.describe Hyrax::ImagePresenter do
   let(:holding_entity) { ['Medicl Center Archives'] }
   let(:date_accepted) { ['April 9, 1973'] }
   let(:condition) { ['lid broken'] }
+  let(:contributor) { ['Thompson, Adonna'] }
+  let(:at_location) { ['Room 201'] }
   let(:accrual_method) { ['Donation'] }
   let(:provenance) { ['Found at Yard Sale'] }
   let(:visibility) { Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC }
   let :image do
-    Image.new(title: title,
-              archival_collection: archival_collection,
-              holding_entity: holding_entity,
-              date_accepted: date_accepted,
-              date: date,
-              condition: condition,
-              provenance: provenance,
-              accrual_method: accrual_method,
-              visibility: visibility)
+    Image.new(title: title, contributor: contributor, at_location: at_location, archival_collection: archival_collection, holding_entity: holding_entity, date_accepted: date_accepted, date: date, condition: condition, provenance: provenance, accrual_method: accrual_method, visibility: visibility)
   end
 
   let(:ability) { Ability.new(user) }
@@ -34,6 +28,7 @@ RSpec.describe Hyrax::ImagePresenter do
 
   it { is_expected.to delegate_method(:title).to(:solr_document) }
   it { is_expected.to delegate_method(:holding_entity).to(:solr_document) }
+  it { is_expected.to delegate_method(:archival_collection).to(:solr_document) }
   it { is_expected.to delegate_method(:date).to(:solr_document) }
   it { is_expected.to delegate_method(:date_accepted).to(:solr_document) }
   it { is_expected.to delegate_method(:condition).to(:solr_document) }

@@ -15,7 +15,7 @@ en:
           based_near_tesim: Location
           contributor_tesim: Contributor
           creator_tesim: Creator
-          date_created_tesim: Date Created
+          date_created_tesim: Date
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
           description_tesim: Description
@@ -27,10 +27,12 @@ en:
           rights_tesim: Rights
           subject_tesim: Subject
         show:
+          contributor: Donor
+          at_location: Library Location
           based_near_tesim: Location
           contributor_tesim: Contributor
           creator_tesim: Creator
-          date_created_tesim: Date Created
+          date_created_tesim: Date
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
           description_tesim: Description
@@ -47,6 +49,8 @@ en:
     base:
       relationships:
         header: "Parent Collection"
+      metadata:
+        header: Item Description
     file_set:
       show:
         downloadable_content:
@@ -60,3 +64,10 @@ en:
     footer:
       copyright_html: "<strong>Copyright &copy; 2017 Samvera</strong> Licensed under the Apache License, Version 2.0"
       service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
+  simple_form:
+    labels:
+      defaults:
+        description: "Description"
+        date: "Sorting Date"
+        contributor: "Donor"
+        date_created_tesim: "Date"

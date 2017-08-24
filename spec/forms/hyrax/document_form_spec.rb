@@ -14,6 +14,12 @@ RSpec.describe Hyrax::DocumentForm do
     expect(form.terms).to include(:date)
     expect(form.terms).to include(:archival_collection)
     expect(form.terms).to include(:host_organization)
+    expect(form.required_fields).to include(:description)
+    expect(form.required_fields).to include(:created)
+    expect(form.required_fields).to include(:subject)
+    expect(form.required_fields).not_to include(:creator)
+    expect(form.required_fields).not_to include(:rights_statement)
+    expect(form.required_fields).not_to include(:keyword)
 
   end
 end
