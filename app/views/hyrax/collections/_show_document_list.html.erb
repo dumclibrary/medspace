@@ -1,0 +1,11 @@
+<table class="table table-striped">
+  <caption class="sr-only">List of items in this collection</caption>
+  <thead>
+  <tr>
+    <%= render partial: 'show_document_head_row' %>
+  </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'show_document_list_row', collection: documents, as: :document %>
+  </tbody>
+</table>
