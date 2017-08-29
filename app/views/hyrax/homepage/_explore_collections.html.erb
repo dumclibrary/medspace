@@ -1,7 +1,13 @@
+
 <table class="table table-striped collection-highlights">
   <tbody>
-    <% collections.each do |collection| %>
-      <tr>
+
+
+            <% collections.each_with_index do |collection, index| %>
+            <% if (index%2==0) %>
+
+            <tr>
+              <%end%>
         <td>
           <div class="media">
             <%= link_to [hyrax, collection], class: 'media-left', 'aria-hidden' => true do %>
@@ -18,13 +24,16 @@
             </div>
           </div>
         </td>
+        <% if (index%2==1) %>
       </tr>
+          <%end%>
     <% end %>
-  </tbody>
+   </tbody>
 </table>
+
 <ul class="list-inline collection-highlights-list">
   <li>
-    <%= link_to t('hyrax.homepage.admin_sets.link'),
+    <%= link_to t('hyrax.homepage.admin_ssets.link'),
                 main_app.search_catalog_path(f: { human_readable_type_sim: ["Collection"]}),
                 class: 'btn btn-default' %>
   </li>
