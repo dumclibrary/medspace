@@ -52,9 +52,9 @@ class CatalogController < ApplicationController
     # config.add_facet_field solr_name("based_near_label", :facetable), limit: 5
     # config.add_facet_field solr_name("publisher", :facetable), limit: 5
     # config.add_facet_field solr_name("file_format", :facetable), limit: 5
-    config.add_facet_field solr_name("holding_entity", :facetable), limit: 3, label: "Holding Entity"
-    config.add_facet_field solr_name("host_organization", :facetable), limit: 5, label: 'Host Organization'
-    config.add_facet_field solr_name("date", :facetable), limit: 5
+    config.add_facet_field solr_name("holding_entity", :facetable), limit: 3, label: "Location"
+    config.add_facet_field solr_name("host_organization", :facetable), limit: 5, label: 'Organization'
+    config.add_facet_field solr_name("date", :facetable), limit: 5, label: "Date"
 
 
     # The generic_type isn't displayed on the facet list
