@@ -276,10 +276,8 @@ class CatalogController < ApplicationController
     # except in the relevancy case).
     # label is key, solr field is value
     config.add_sort_field "score desc, #{uploaded_field} desc", label: "relevance"
-    config.add_sort_field "system_title_dtsi asc", label: "title (A-Z)"
+    config.add_sort_field "title_ssort asc", label: "title (A-Z)"
     config.add_sort_field "title_ssort desc", label: "title (Z-A)"
-    config.add_sort_field "system_create_dtsi desc", label: "date created \u25BC"
-    config.add_sort_field "system_create_dtsi asc", label: "date created \u25B2"
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
