@@ -1,5 +1,5 @@
 
-<table class="table table-striped collection-highlights">
+<table class="collection-highlights_local">
   <tbody>
 
 
@@ -8,17 +8,16 @@
 
             <tr>
               <%end%>
-        <td>
+        <td align="center">
           <div class="media">
-            <%= link_to [hyrax, collection], class: 'media-left', 'aria-hidden' => true do %>
-              <%= render_thumbnail_tag collection, { class: 'hidden-xs file_listing_thumbnail' }, { suppress_link: true } %>
+            <%= link_to [hyrax, collection],  'aria-hidden' => true do %>
+              <%= render_thumbnail_tag collection, { class: 'hidden-xs file_listing_thumbnail_local' }, { suppress_link: true } %>
             <% end %>
             <div class="media-body">
               <div class="media-heading">
                 <%= link_to [hyrax, collection] do %>
-                  <%= collection.title_or_label %>
+                  <h3><%= collection.title_or_label %></h3>
                 <% end %>
-                <br/>
                 <%= collection.description.first %>
               </div>
             </div>
