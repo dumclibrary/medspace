@@ -6,6 +6,7 @@ ENV BUILD_PACKAGES curl unzip
 
 ENV RUNTIME_PACKAGES ghostscript \
                      libreoffice \
+                     nodejs \
                      openjdk-8-jre-headless
 
 RUN apt-get update && apt-get install -y $BUILD_PACKAGES $RUNTIME_PACKAGES
