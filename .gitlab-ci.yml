@@ -5,6 +5,7 @@ stages:
   - build
 
 variables:
+  MEDSPACE_IMAGE: $CI_REGISTRY/mclibrary/medspace
   FCREPO_IMAGE: $CI_REGISTRY/mclibrary/medspace/fcrepo
   SOLR_IMAGE: $CI_REGISTRY/mclibrary/medspace/solr
 
@@ -16,6 +17,18 @@ github_mirror:
     - git clone --bare $CI_REPOSITORY_URL
     - cd medspace.git
     - git push --mirror https://$GITHUB_TOKEN@github.com/dumclibrary/medspace.git
+
+medspace_build:
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+  script:
+    - docker build -t $MEDSPACE_IMAGE .
+    - docker push $MEDSPACE_IMAGE
+  only:
+    - master
 
 fcrepo_build:
   stage: build
