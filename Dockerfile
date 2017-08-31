@@ -19,3 +19,9 @@ RUN curl -o /tmp/fits.zip http://projects.iq.harvard.edu/files/fits/files/fits-$
     && ln -s /usr/local/bin/fits.sh /usr/local/bin/fits \
     && rm /tmp/fits.zip && rm -rf /tmp/fits-$FITS_VERSION \
     && apt-get purge -y --auto-remove $BUILD_PACKAGES
+
+ADD . /srv/rails
+
+WORKDIR /srv/rails
+
+RUN useradd -m rails && chown -R rails:rails /srv/rails && su rails -c "bundle install"
