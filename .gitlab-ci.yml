@@ -2,6 +2,7 @@ image: docker:git
 
 stages:
   - mirror
+  - test
   - build
 
 variables:
@@ -17,7 +18,7 @@ github_mirror:
     - git clone --bare $CI_REPOSITORY_URL
     - cd medspace.git
     - git push --mirror https://$GITHUB_TOKEN@github.com/dumclibrary/medspace.git
-    
+
 test:
   image: $CI_REGISTRY/mclibrary/medspace
   services:
