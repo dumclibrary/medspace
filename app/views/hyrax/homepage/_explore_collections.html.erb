@@ -1,0 +1,39 @@
+
+<table class="collection-highlights_local">
+  <tbody>
+
+
+            <% collections.each_with_index do |collection, index| %>
+            <% if (index%2==0) %>
+
+            <tr>
+              <%end%>
+        <td align="center">
+          <div class="media">
+            <%= link_to [hyrax, collection],  'aria-hidden' => true do %>
+              <%= render_thumbnail_tag collection, { class: 'hidden-xs file_listing_thumbnail_local' }, { suppress_link: true } %>
+            <% end %>
+            <div class="media-body">
+              <div class="media-heading">
+                <%= link_to [hyrax, collection] do %>
+                  <h3><%= collection.title_or_label %></h3>
+                <% end %>
+                <%= collection.description.first %>
+              </div>
+            </div>
+          </div>
+        </td>
+        <% if (index%2==1) %>
+      </tr>
+          <%end%>
+    <% end %>
+   </tbody>
+</table>
+
+<ul class="list-inline collection-highlights-list">
+  <li>
+    <%= link_to t('hyrax.homepage.admin_ssets.link'),
+                main_app.search_catalog_path(f: { human_readable_type_sim: ["Collection"]}),
+                class: 'btn btn-default' %>
+  </li>
+</ul>

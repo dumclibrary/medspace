@@ -10,7 +10,7 @@ class CatalogController < ApplicationController
   end
 
   def self.modified_field
-    solr_name('system_modified', :stored_sortable, type: :date)
+    solr_name('date_created', :stored_sortable, type: :date)
   end
 
   configure_blacklight do |config|
@@ -41,17 +41,21 @@ class CatalogController < ApplicationController
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
-    config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5
+    config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
+    #config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5
     config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
     config.add_facet_field solr_name("creator", :facetable), limit: 5
-    config.add_facet_field solr_name("contributor", :facetable), label: "Contributor", limit: 5
+    # config.add_facet_field solr_name("contributor", :facetable), label: "Contributor", limit: 5
     # config.add_facet_field solr_name("keyword", :facetable), limit: 5
     config.add_facet_field solr_name("subject", :facetable), limit: 5
     # config.add_facet_field solr_name("language", :facetable), limit: 5
-    config.add_facet_field solr_name("based_near_label", :facetable), limit: 5
-    config.add_facet_field solr_name("publisher", :facetable), limit: 5
-    config.add_facet_field solr_name("file_format", :facetable), limit: 5
-    config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
+    # config.add_facet_field solr_name("based_near_label", :facetable), limit: 5
+    # config.add_facet_field solr_name("publisher", :facetable), limit: 5
+    # config.add_facet_field solr_name("file_format", :facetable), limit: 5
+    config.add_facet_field solr_name("holding_entity", :facetable), limit: 3, label: "Location"
+    config.add_facet_field solr_name("host_organization", :facetable), limit: 5, label: 'Organization'
+    config.add_facet_field solr_name("date", :facetable), limit: 5, label: "Date"
+
 
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile
@@ -272,10 +276,8 @@ class CatalogController < ApplicationController
     # except in the relevancy case).
     # label is key, solr field is value
     config.add_sort_field "score desc, #{uploaded_field} desc", label: "relevance"
-    config.add_sort_field "#{uploaded_field} desc", label: "date uploaded \u25BC"
-    config.add_sort_field "#{uploaded_field} asc", label: "date uploaded \u25B2"
-    config.add_sort_field "#{modified_field} desc", label: "date modified \u25BC"
-    config.add_sort_field "#{modified_field} asc", label: "date modified \u25B2"
+    config.add_sort_field "title_ssort asc", label: "title (A-Z)"
+    config.add_sort_field "title_ssort desc", label: "title (Z-A)"
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.

@@ -13,3 +13,20 @@
 @import "blacklight_gallery/slideshow";
 @import "blacklight_gallery/osd_viewer";
 @import 'hyrax/hyrax';
+
+
+.file_listing_thumbnail_local {
+}
+
+.background-container-gradient-local {
+  @include masthead-background-containers();
+}
+
+.background-container-local {
+  @include masthead-background-containers();
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  // Add small amount of blur to help text stand out
+
+}

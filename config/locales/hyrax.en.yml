@@ -46,6 +46,9 @@ en:
           title_tesim: Title
   hyrax:
     product_name:           "MEDSpace"
+    homepage:
+      admin_ssets:
+        link: "View All Collections"
     base:
       relationships:
         header: "Parent Collection"
@@ -55,6 +58,19 @@ en:
       show:
         downloadable_content:
           pdf_viewer: "View Object in Reader"
+    search:
+      form:
+        option:
+          titles:
+            label_long: "Titles"
+            label_short: "Titles"
+          subjects:
+            label_long: "Subjects"
+            label_short: "Subjects"
+          descriptions:
+            label_long: "Descriptions"
+            label_short: "Descriptions"
+
     product_twitter_handle: "@SamveraRepo"
     institution_name:       "DUMC Archives"
     institution_name_full:  "Duke Medical Center Library & Archives"
@@ -62,7 +78,11 @@ en:
     directory:
       suffix:               "@duke.edu"
     footer:
-      copyright_html: "<strong>Copyright &copy; 2017 Samvera</strong> Licensed under the Apache License, Version 2.0"
+      medlibrary_html: <a href="https://mclibrary.duke.edu" class="navbar-link" target="_blank">Duke Medical Center Library</a>
+      medarchives_html: <a href="https://archives.mc.duke.edu" class="navbar-link" target="_blank">Duke Medical Center Archives</a>
+      rubenstein_html: <a href="http://library.duke.edu/rubenstein/" class="navbar-link" target="_blank">David M. Rubenstein Rare Book & Manuscript Library</a>
+      hom_html: <a href="http://library.duke.edu/rubenstein/history-of-medicine/index.html" class="navbar-link" target="_blank">History of Medicine Collection</a>
+      copyright_html: "<strong>Copyright &copy; 2017 Duke Medical Center Library & Archives</strong>"
       service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
   simple_form:
     hints:
