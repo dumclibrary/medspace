@@ -27,6 +27,8 @@ medspace_build:
   script:
     - docker build -t $MEDSPACE_IMAGE .
     - docker push $MEDSPACE_IMAGE
+  only:
+    - master
 
 fcrepo_build:
   stage: build
