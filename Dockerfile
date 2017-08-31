@@ -5,8 +5,9 @@ ENV FITS_VERSION 1.0.5
 ENV BUILD_PACKAGES curl unzip
 
 ENV RUNTIME_PACKAGES ghostscript \
+                     imagemagick \
                      libreoffice \
-                     nodejs \
+                     nodejs
 
 
 RUN apt-get update && apt-get install -y $BUILD_PACKAGES $RUNTIME_PACKAGES
