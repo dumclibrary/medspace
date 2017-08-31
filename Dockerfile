@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM ruby:2.3.4
 
 ENV FITS_VERSION 1.0.5
 
@@ -7,7 +7,7 @@ ENV BUILD_PACKAGES curl unzip
 ENV RUNTIME_PACKAGES ghostscript \
                      libreoffice \
                      nodejs \
-                     openjdk-8-jre-headless
+
 
 RUN apt-get update && apt-get install -y $BUILD_PACKAGES $RUNTIME_PACKAGES
 
