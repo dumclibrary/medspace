@@ -1,16 +1,23 @@
-<footer class="navbar navbar-inverse site-footer">
+<footer id="bottom" class="navbar navbar-inverse site-footer">
   <div class="container-fluid">
+    <center>
+      <div id="bottom" class="row">
+        <ul class="nav navbar-nav">
+          <li><%= t('hyrax.footer.medlibrary_html') %></li>
+          <li><%= t('hyrax.footer.medarchives_html') %></li>
+          <li><%= t('hyrax.footer.rubenstein_html') %></li>
+          <li><%= t('hyrax.footer.hom_html') %></li>
+        </ul>
+      </div>
+
     <div class="navbar-text text-left">
-        <p><%= t('hyrax.footer.medlibrary_html') %></p>
-        <p><%= t('hyrax.footer.medarchives_html') %></p>
         <p><%= t('hyrax.product_name') %> v<%= Hyrax::VERSION %></p>
     </div>
     <div class="navbar-right">
       <div class="navbar-text text-right">
-        <p><%= t('hyrax.footer.rubenstein_html') %></p>
-        <p><%= t('hyrax.footer.hom_html') %></p>
         <p><%= t('hyrax.footer.copyright_html') %></p>
       </div>
     </div>
+  </center>
   </div>
 </footer>
