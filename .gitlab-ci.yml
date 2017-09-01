@@ -29,7 +29,7 @@ test:
     SOLR_URL: http://$CI_REGISTRY-mclibrary-medspace-solr:8983/solr/medspace
   script:
     - bundle install
-    - bundle exec rake spec
+    - bundle exec rspec
 
 medspace_build:
   stage: build
