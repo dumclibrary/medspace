@@ -13,6 +13,10 @@ class CatalogController < ApplicationController
     solr_name('date_created', :stored_sortable, type: :date)
   end
 
+  def self.title_ssort
+    solr_name('title', :stored_sortable, type: :text_en)
+  end
+
   configure_blacklight do |config|
     config.view.gallery.partials = [:index_header, :index]
     config.view.masonry.partials = [:index]
@@ -276,8 +280,8 @@ class CatalogController < ApplicationController
     # except in the relevancy case).
     # label is key, solr field is value
     config.add_sort_field "score desc, #{uploaded_field} desc", label: "relevance"
-    config.add_sort_field "title_ssort asc", label: "title (A-Z)"
-    config.add_sort_field "title_ssort desc", label: "title (Z-A)"
+    config.add_sort_field "#{title_ssort} asc", label: "title"
+    #config.add_sort_field "#{title_ssort} desc", label: "title (Z-A)"
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
