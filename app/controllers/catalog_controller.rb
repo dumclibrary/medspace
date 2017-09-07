@@ -5,6 +5,7 @@ class CatalogController < ApplicationController
   # This filter applies the hydra access controls
   before_action :enforce_show_permissions, only: :show
 
+
   def self.uploaded_field
     solr_name('system_create', :stored_sortable, type: :date)
   end
@@ -14,13 +15,13 @@ class CatalogController < ApplicationController
   end
 
   def self.title_ssort
-    solr_name('title', :stored_sortable, type: :text_en)
+    solr_name('title', "sort")
   end
 
   configure_blacklight do |config|
     config.view.gallery.partials = [:index_header, :index]
     config.view.masonry.partials = [:index]
-    config.view.slideshow.partials = [:index]
+  #  config.view.slideshow.partials = [:index]
 
 
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
@@ -33,9 +34,11 @@ class CatalogController < ApplicationController
 
     ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
     config.default_solr_params = {
+
       qt: "search",
       rows: 10,
       qf: "title_tesim description_tesim creator_tesim keyword_tesim"
+
     }
 
     # solr field configuration for document/show views
@@ -135,9 +138,11 @@ class CatalogController < ApplicationController
     config.add_search_field('all_fields', label: 'All Fields') do |field|
       all_names = config.show_fields.values.map(&:field).join(" ")
       title_name = solr_name("title", :stored_searchable)
+
       field.solr_parameters = {
         qf: "#{all_names} file_format_tesim all_text_timv",
-        pf: title_name.to_s
+        pf: title_name.to_s,
+        fq: "generic_type_sim:Work"
       }
     end
 
@@ -280,7 +285,7 @@ class CatalogController < ApplicationController
     # except in the relevancy case).
     # label is key, solr field is value
     config.add_sort_field "score desc, #{uploaded_field} desc", label: "relevance"
-    config.add_sort_field "#{title_ssort} asc", label: "title"
+    config.add_sort_field "title_ssort asc", label: "title"
     #config.add_sort_field "#{title_ssort} desc", label: "title (Z-A)"
 
     # If there are more than this many search results, no spelling ("did you
