@@ -3,6 +3,7 @@ en:
     search:
       fields:
         facet:
+          resource_type: Bob
           based_near_sim: Location
           creator_sim: Creator
           file_format_sim: Format
@@ -27,6 +28,7 @@ en:
           rights_tesim: Rights
           subject_tesim: Subject
         show:
+          human_readable_type_sim: Bob
           contributor: Donor
           at_location: Library Location
           based_near_tesim: Location
