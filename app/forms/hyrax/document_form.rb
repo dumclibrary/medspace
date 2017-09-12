@@ -6,6 +6,6 @@ module Hyrax
     self.terms += [:resource_type, :holding_entity, :date, :archival_collection, :host_organization]
     self.required_fields +=[:description, :date_created, :subject]
     self.required_fields -=[:creator, :rights_statement, :keyword]
-    self.terms -= [:source, :location, :language, :keyword]
+    self.terms -= [:source, :rights_statement, :license, :based_near, :location, :language, :keyword]
   end
 end

@@ -1,0 +1,2 @@
+<%= f.input :host_organization, as: :select, collection: Hyrax::HostOrganizationService.select_options,
+    input_html: { class: 'form-control', multiple: true } %>

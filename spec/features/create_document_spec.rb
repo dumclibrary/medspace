@@ -25,11 +25,12 @@ RSpec.feature 'Create a Document', js: false do
       fill_in 'Object Date', with: '1973'
       click_link("Additional fields")
       fill_in "Archival collection", with: "Eugene Stead Papers"
+      select('Medical Library Association', from: 'Host organization')
       # If you generate more than one work uncomment these lines
       # choose "payload_concern", option: "Image"
       # click_button "Create work"
 
-      expect(page).to have_content "Add New Document"
+      expect(page).to have_content "Medical Library Association"
     end
   end
 end
