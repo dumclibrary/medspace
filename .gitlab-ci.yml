@@ -78,6 +78,8 @@ deploy_staging:
     - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
   image: mravenel/alpine
   stage: deploy
+  only:
+    - master
   script:
     - ssh deploy@dev-medspace.mc.duke.edu "sudo /home/share/appdata/dev-medspace/update.sh"
   environment:
