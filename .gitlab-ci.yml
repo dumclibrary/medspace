@@ -4,6 +4,7 @@ stages:
   - mirror
   - test
   - build
+  - deploy
 
 variables:
   MEDSPACE_IMAGE: $CI_REGISTRY/mclibrary/medspace
@@ -20,6 +21,7 @@ github_mirror:
     - git push --mirror https://$GITHUB_TOKEN@github.com/dumclibrary/medspace.git
 
 test:
+  stage: test
   image: $CI_REGISTRY/mclibrary/medspace
   services:
     - $CI_REGISTRY/mclibrary/medspace/solr
@@ -66,3 +68,21 @@ solr_build:
     - docker push $SOLR_IMAGE
   only:
     - master
+
+deploy_staging:
+  before_script:
+    - eval $(ssh-agent -s)
+
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
+  image: mravenel/alpine
+  stage: deploy
+  only:
+    - master
+  script:
+    - ssh deploy@dev-medspace.mc.duke.edu "sudo /home/share/appdata/dev-medspace/update.sh"
+  environment:
+    name: staging
+    url: https://dev-medspace.mc.duke.edu
