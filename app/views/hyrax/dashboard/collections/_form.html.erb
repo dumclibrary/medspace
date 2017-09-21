@@ -20,7 +20,7 @@
           <div class="panel-body">
 
             <h2 class="non lower"><%= t('hyrax.collection.form.description') %></h2>
-            <div id="base-terms">
+            <div class="col-sm-6" id="base-terms">
               <% f.object.primary_terms.each do |term| %>
                 <%= render_edit_field_partial(term, f: f) %>
               <% end %>
@@ -39,7 +39,7 @@
                       role: "button",
                       'aria-expanded'=> "false",
                       'aria-controls'=> "extended-terms" %>
-              <div id="extended-terms">
+              <div  class="col-sm-6" id="extended-terms">
                 <% f.object.secondary_terms.each do |term| %>
                   <%= render_edit_field_partial(term, f: f) %>
                 <% end %>

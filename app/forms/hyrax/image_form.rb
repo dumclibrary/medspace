@@ -10,4 +10,5 @@ module Hyrax
     self.required_fields +=[:description, :date_created, :subject]
     self.required_fields -= [:creator, :source, :rights_statement, :license, :based_near, :language, :keyword]
   end
+
 end
