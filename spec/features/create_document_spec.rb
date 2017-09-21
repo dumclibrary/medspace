@@ -23,7 +23,7 @@ RSpec.feature 'Create a Document', js: false do
       fill_in 'Description', with: "A description of my object"
       fill_in 'Subject', with: 'Vase'
       fill_in 'Object Date', with: '1973'
-      click_link("Additional fields")
+      # removed link during customization click_link("Additional fields")
       fill_in "Archival collection", with: "Eugene Stead Papers"
       select('Medical Library Association', from: 'Host organization')
       # If you generate more than one work uncomment these lines
