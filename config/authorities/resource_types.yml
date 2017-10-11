@@ -1,23 +1,121 @@
 terms:
-  - id: Artifact
-    term: Artifact
-  - id: Article
-    term: Article
-  - id: Artwork
-    term: Artwork
-  - id: Audio
-    term: Audio
-  - id: Correspondence
-    term: Correspondence
-  - id: Image
-    term: Image
-  - id: Poster
-    term: Poster
-  - id: Presentation
-    term: Presentation
-  - id: Publication
-    term: Publication
-  - id: Video
-    term: Video
-  - id: Other
-    term: Other
+ - id: Abstract
+   term: Abstract
+ - id: Advertisement
+   term: Advertisement
+ - id: Agenda
+   term: Agenda
+ - id: Announcement
+   term: Announcement
+ - id: Application
+   term: Application
+ - id: Article
+   term: Article
+ - id: Articles of Incorporation
+   term: Articles of Incorporation
+ - id: Artifact
+   term: Artifact
+ - id: Artwork
+   term: Artwork
+ - id: Award
+   term: Award
+ - id: Bibliography
+   term: Bibliography
+ - id: Biography
+   term: Biography
+ - id: Brochure
+   term: Brochure
+ - id: Bulletin
+   term: Bulletin
+ - id: By-laws
+   term: By-laws
+ - id: Certificate
+   term: Certificate
+ - id: Constitution
+   term: Constitution
+ - id: Correspondence
+   term: Correspondence
+ - id: Document
+   term: Document
+ - id: Draft
+   term: Draft
+ - id: Drawing
+   term: Drawing
+ - id: Essay
+   term: Essay
+ - id: Excerpt
+   term: Excerpt
+ - id: Image
+   term: Image
+ - id: Journal
+   term: Journal
+ - id: Legal document
+   term: Legal document
+ - id: List
+   term: List
+ - id: Manual
+   term: Manual
+ - id: Manuscript
+   term: Manuscript
+ - id: Membership list
+   term: Membership list
+ - id: Minutes
+   term: Minutes
+ - id: Monograph
+   term: Monograph
+ - id: Newsletter
+   term: Newsletter
+ - id: Newspaper article
+   term: Newspaper article
+ - id: Newspaper column
+   term: Newspaper column
+ - id: Notes
+   term: Notes
+ - id: Official report
+   term: Official report
+ - id: Oral History
+   term: Oral History
+ - id: Pamphlet
+   term: Pamphlet
+ - id: Petition
+   term: Petition
+ - id: Photographic print
+   term: Photographic print
+ - id: Poster
+   term: Poster
+ - id: Presentation
+   term: Presentation
+ - id: Press release
+   term: Press release
+ - id: Proceedings
+   term: Proceedings
+ - id: Program
+   term: Program
+ - id: Publication
+   term: Publication
+ - id: Realia
+   term: Realia
+ - id: Report
+   term: Report
+ - id: Research Proposal
+   term: Research Proposal
+ - id: Serial
+   term: Serial
+ - id: Slideshow and script
+   term: Slideshow and script
+ - id: Speech
+   term: Speech
+ - id: Summary
+   term: Summary
+ - id: Survey
+   term: Survey
+ - id: Table
+   term: Table
+ - id: Transcript
+   term: Transcript
+ - id: Video
+   term: Video
+ - id: Work Book
+   term: Work Book
+ - id: Other
+   term: Other
