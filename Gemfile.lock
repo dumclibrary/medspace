@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/samvera/hyrax.git
-  revision: e82cab89c6c8591445d2731a28938a510e7ab605
-  ref: e82cab8
+  revision: ec976679c3c074e01a69c26f5d3920d9f0ae60b8
+  ref: ec97667
   specs:
-    hyrax (2.0.0.beta5)
+    hyrax (2.0.0.rc1)
       active-fedora (>= 11.3.1)
       active_fedora-noid (~> 2.0, >= 2.0.2)
       almond-rails (~> 0.1)
@@ -120,7 +120,7 @@ GEM
       execjs
     awesome_nested_set (3.1.3)
       activerecord (>= 4.0.0, < 5.2)
-    aws-partitions (1.24.0)
+    aws-partitions (1.25.0)
     aws-sdk-core (3.6.0)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
