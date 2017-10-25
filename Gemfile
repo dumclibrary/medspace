@@ -71,6 +71,7 @@ group :development, :test do
 end
 
 # RK adding below here
+gem 'blacklight-spotlight', '~> 1.0'
 gem 'mods', '~> 2.1'
 gem 'riiif', '~> 1.1'
 gem 'iiif_manifest', '~> 0.2.0'
