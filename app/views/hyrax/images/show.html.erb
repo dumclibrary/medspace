@@ -11,6 +11,16 @@
     <%= render 'representative_media', presenter: @presenter %>
   </div>
   <div class="col-sm-8">
+    <% if %>
+    <% @presenter.resource_type.first == 'Image' %>
+    <% if %>
+    <% @presenter.holding_entity.first == 'Duke Medical Center Archives' %>
+    <a href="mailto:dumc.archives@mc.duke.edu?subject=Image request for: <%= @presenter.title.first %>&amp;body=MEDSpace URL: <%= request.original_url %>">Request a copy of this image</a>
+    <% elsif %>
+    <% @presenter.holding_entity.first == 'David M. Rubenstein Rare Book & Manuscript Library' %>
+    <a href="mailto:rachel.ingold@duke.edu?subject=Image request for: <%= @presenter.title.first %>&amp;body=MEDSpace URL: <%= request.original_url %>">Request a copy of this image</a>
+    <% end %>
+    <% end %>
     <%# render 'work_description', presenter: @presenter %>
     <%= render 'metadata', presenter: @presenter %>
     <%= render 'relationships', presenter: @presenter %>

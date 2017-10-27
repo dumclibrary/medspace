@@ -24,3 +24,6 @@
 
 # Ignore dump.rdb
 dump.rdb
+
+# Ignore fits
+/fits/*
