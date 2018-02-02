@@ -11,7 +11,7 @@ module Medspace
     # @param data_path [String] the path to directory where the content files are located.
     # @param default_model [String] the type of work we want to create if the <work_type> isn't specified in the XML file.
     def initialize(input_file, data_path)
-      # Validator.new(input_file).validate
+      Validator.new(input_file).validate
       @input_file = input_file
       @data_path = data_path
       @doc = File.open(input_file) { |f| Nokogiri::XML(f) }
@@ -29,7 +29,7 @@ module Medspace
     def import
       @records.each do |record|
         work = process_record(record)
-        Medspace::Log.new("Adding #{work.id} to collection: #{collection_name}", 'info')
+        Medspace::Log.new("Adding #{work.id} to collection: #{collection_name}", 'info') unless work.nil?
       end
       @collection.save
     end
@@ -38,20 +38,37 @@ module Medspace
       @records.count
     end
 
+    # rubocop:disable Metrics/MethodLength
+    def assign_attributes(msi_record:, work:)
+      work.title = msi_record.title
+      work.date_created = msi_record.date_created
+      work.date = msi_record.date
+      work.date_accepted = msi_record.date_accepted
+      work.condition = msi_record.condition
+      work.holding_entity = msi_record.holding_entity
+      work.identifier = msi_record.identifier
+      work.contributor = msi_record.contributor
+      work.creator = msi_record.creator
+      work.subject = msi_record.subject
+      work.description = msi_record.description
+      work.archival_collection = msi_record.archival_collection
+      work.resource_type = msi_record.resource_type
+      work.accrual_method = msi_record.accrual_method
+      work.provenance = msi_record.provenance
+      work.based_near = msi_record.based_near
+      work.visibility = Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
+      work
+    end
+    # rubocop:enable Metrics/MethodLength
+
     def process_record(record)
       msi_record = Medspace::Record.new(record)
       work_type = work_model(msi_record.work_type)
-      # Medspace::Log.new("Creating new #{work_type} for #{msi_record.legacy_file_name}", 'info')
+      # do not create a duplicate work
+      return if work_type.where(identifier: [msi_record.identifier.first]).count.positive?
+      Medspace::Log.new("Creating new #{work_type} for #{msi_record.file_name}", 'info')
       work = work_type.new
-      work.title = msi_record.title
-      work.creator = msi_record.creator
-      # work.contributor = msi_record.contributor
-      # work.subject = msi_record.subject
-      work.description = msi_record.description
-      # work.requires = msi_record.requires
-      # work.replaces = msi_record.replaces
-      # work.abstract = msi_record.abstract
-      work.visibility = Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
+      work = assign_attributes(msi_record: msi_record, work: work)
       save_work(msi_record, work)
       @collection.add_members(work.id)
       work
@@ -94,7 +111,7 @@ module Medspace
         if Hyrax::CurationConcern.actor.create(env) != false
           Medspace::Log.new("Saved work with title: #{msi_record.title[0]}", 'info')
         else
-          Medspace::Log.new("Problem saving #{msi_record.legacy_file_name}", 'error')
+          Medspace::Log.new("Problem saving #{msi_record.file_name}", 'error')
         end
       end
   end

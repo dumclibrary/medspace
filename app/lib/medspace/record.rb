@@ -3,15 +3,15 @@
 # export:
 #
 #   <record>
-#    <title>Classical macroeconomic model for the United States, a / Thomas J. Sargent.</title>
-#    <creator>Sargent, Thomas J.</creator>
+#    <title>Exhibit Room B, postgraduate course on fractures</title>
+#    <subject>Education, Medical</subject>
 # To use the class, pass it an XML document that has been
 # opened with Nokogiri:
 # msi_record = Medspace::Record.new(record_xml)
 #
 # then you can access the properties:
 # msi_record.title
-# > "Classical macroeconomic model for the United States, a"
+# > "Exhibit Room B, postgraduate course on fractures"
 module Medspace
   class Record
     ##
@@ -33,6 +33,13 @@ module Medspace
 
     ##
     # @return [Array<String>]
+    # returns the date_created
+    def date_created
+      get_values(@record_hash["date_created"])
+    end
+
+    ##
+    # @return [Array<String>]
     # returns the descriptions
     def description
       get_values(@record_hash["description"])
@@ -40,10 +47,86 @@ module Medspace
 
     ##
     # @return [Array<String>]
-    # the title without the / Author, Name
-    # part at the end and without any spaces at the end
+    # returns the title
     def title
       get_values(@record_hash["title"])
+    end
+
+    ##
+    # @return [Array<String>]
+    # returns the resource type
+    def contributor
+      get_values(@record_hash["contributor"])
+    end
+
+    ##
+    # @return [Array<String>]
+    # returns the identifier
+    def identifier
+      get_values(@record_hash["identifier"])
+    end
+
+    ##
+    # @return [Array<String>]
+    # returns the archival_collection
+    def archival_collection
+      get_values(@record_hash["archival_collection"])
+    end
+
+    ##
+    # @return [Array<String>]
+    # returns the date
+    def date
+      get_values(@record_hash["date"])
+    end
+
+    ##
+    # @return [Array<String>]
+    # returns the date accepted
+    def date_accepted
+      get_values(@record_hash["date_accepted"])
+    end
+
+    ##
+    # @return [Array<String>]
+    # returns the condition
+    def condition
+      get_values(@record_hash["condition"])
+    end
+
+    ##
+    # @return [Array<String>]
+    # returns the accrual_method
+    def accrual_method
+      get_values(@record_hash["accrual_method"])
+    end
+
+    ##
+    # @return [Array<String>]
+    # returns the provenance
+    def provenance
+      get_values(@record_hash["provenance"])
+    end
+
+    ##
+    # @return [Array<String>]
+    # returns based_near
+    def based_near
+      get_values(@record_hash["based_near"])
+    end
+
+    ##
+    # @return [Array<String>]
+    # returns the resource type
+    def resource_type
+      get_values(@record_hash["resource_type"])
+    end
+
+    ##
+    # @return [Array<String>]
+    # returns the holding entity
+    def holding_entity
+      get_values(@record_hash["holding_entity"])
     end
 
     ##
@@ -54,9 +137,16 @@ module Medspace
     end
 
     ##
-    # @return [String] Returns the legacyFileName element
+    # @return [String] Returns the File element
     def file_name
       @record_hash["file"]
+    end
+
+    ##
+    # @return [Array<String>]
+    # returns the subjects
+    def subject
+      get_values(@record_hash["subject"])
     end
 
     private
