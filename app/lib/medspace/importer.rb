@@ -19,7 +19,7 @@ module Medspace
       @collection = collection
     end
 
-    # Class level method, to be called, e.g., from a rake task
+    # Class level method, to be called from a rake task
     # @example
     # Medspace::Importer.import('my_file.xml', 'path/to/data_dir')
     def self.import(input_file, data_path)
@@ -56,6 +56,8 @@ module Medspace
       work.accrual_method = msi_record.accrual_method
       work.provenance = msi_record.provenance
       work.based_near = msi_record.based_near
+      work.host_organization = msi_record.host_organization
+      work.publisher = msi_record.publisher
       work.visibility = Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
       work
     end
@@ -63,15 +65,19 @@ module Medspace
 
     def process_record(record)
       msi_record = Medspace::Record.new(record)
-      work_type = work_model(msi_record.work_type)
+      work_type = work_model(msi_record.work_type.capitalize)
+
       # do not create a duplicate work
       return if work_type.where(identifier: [msi_record.identifier.first]).count.positive?
       Medspace::Log.new("Creating new #{work_type} for #{msi_record.file_name}", 'info')
       work = work_type.new
       work = assign_attributes(msi_record: msi_record, work: work)
-      save_work(msi_record, work)
-      @collection.add_members(work.id)
-      work
+      # will need to report error, not add to collection
+      # if invalid, won't be able to return the work
+      if save_work(msi_record, work)
+        @collection.add_members(work.id)
+        return work
+      end
     end
 
     ##
@@ -112,6 +118,7 @@ module Medspace
           Medspace::Log.new("Saved work with title: #{msi_record.title[0]}", 'info')
         else
           Medspace::Log.new("Problem saving #{msi_record.file_name}", 'error')
+          false
         end
       end
   end

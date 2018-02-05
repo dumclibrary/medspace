@@ -7,40 +7,52 @@
   <!-- This defines the basic structure of the
        import XML. It says that it needs
        to have an <object> element
-       that has a <title> element -->
+       that has a <work_type> element, a
+       <collection> element, and a <title> element -->
   <define name="export">
-        <element name="object">
-          <oneOrMore>
-            <element name="title">
-              <text/>
-            </element>
-          </oneOrMore>
-          <oneOrMore>
-            <ref name="anyElement"/>
-          </oneOrMore>
+    <element name="object">
+      <oneOrMore>
+        <element name="work_type">
+          <text/>
         </element>
+      </oneOrMore>
+      <oneOrMore>
+        <element name="collection">
+          <text/>
+        </element>
+      </oneOrMore>
+      <oneOrMore>
+        <element name="title">
+          <text/>
+        </element>
+      </oneOrMore>
+      <oneOrMore>
+        <ref name="anyElement"/>
+      </oneOrMore>
+    </element>
   </define>
 
   <!-- This lets us say that that an element can have any
        elements nested in it. Our export only needs to have
        a <title> element.
   -->
+
   <define name="anyElement">
-        <element>
+    <element>
+        <anyName/>
+        <ref name="anyAttributes"/>
+        <mixed>
+            <zeroOrMore>
+                <ref name="anyElement"/>
+            </zeroOrMore>
+        </mixed>
+    </element>
+  </define>
+  <define name="anyAttributes">
+    <zeroOrMore>
+        <attribute>
             <anyName/>
-            <ref name="anyAttributes"/>
-            <mixed>
-                <zeroOrMore>
-                    <ref name="anyElement"/>
-                </zeroOrMore>
-            </mixed>
-        </element>
-    </define>
-    <define name="anyAttributes">
-        <zeroOrMore>
-            <attribute>
-                <anyName/>
-            </attribute>
-        </zeroOrMore>
-    </define>
+        </attribute>
+    </zeroOrMore>
+  </define>
 </grammar>

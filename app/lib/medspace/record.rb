@@ -110,6 +110,13 @@ module Medspace
 
     ##
     # @return [Array<String>]
+    # returns the publishers
+    def publisher
+      get_values(@record_hash["publisher"])
+    end
+
+    ##
+    # @return [Array<String>]
     # returns based_near
     def based_near
       get_values(@record_hash["based_near"])
@@ -127,6 +134,13 @@ module Medspace
     # returns the holding entity
     def holding_entity
       get_values(@record_hash["holding_entity"])
+    end
+
+    ##
+    # @return [Array<String>]
+    # returns the host organization
+    def host_organization
+      get_values(@record_hash["host_organization"])
     end
 
     ##

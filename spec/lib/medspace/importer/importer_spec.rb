@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 require 'rails_helper'
-
 describe Medspace::Importer do
   let(:msi) { described_class.new(input_file, data_path) }
   let(:input_file) { file_fixture('sample_medspace_data.xml') }
@@ -113,6 +112,69 @@ describe Medspace::Importer do
 
       it 'sets based_near' do
         expect(work.based_near).to eq(['Italy'])
+      end
+
+      it 'sets host organization' do
+        expect(work.host_organization).to eq(['Duke University'])
+      end
+
+      it 'sets the publishers' do
+        expect(work.publisher).to eq(['Duke University Medical Publishing'])
+      end
+    end
+
+    context "Without a Description" do
+      let(:input_file) { file_fixture('no_description_data.xml') }
+      it 'will not create a record' do
+        expect(work.nil?).to be_truthy
+      end
+      it 'will not create the collection' do
+        expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
+      end
+    end
+    context 'Without date_created' do
+      let(:input_file) { file_fixture('no_date_created_data.xml') }
+      it 'will not create a record' do
+        expect(work.nil?).to be_truthy
+      end
+      it 'will not create the collection' do
+        expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
+      end
+    end
+    context 'Without a subject' do
+      let(:input_file) { file_fixture('no_subject_data.xml') }
+      it 'will not create a record' do
+        expect(work.nil?).to be_truthy
+      end
+      it 'will not create the collection' do
+        expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
+      end
+    end
+    context 'When resource_type is Artifact' do
+      let(:input_file) { file_fixture('no_based_near_data.xml') }
+      it 'will not create a record if based_near is missing' do
+        expect(work.nil?).to be_truthy
+      end
+      it 'will not create the collection if based_near is missing' do
+        expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
+      end
+    end
+    context 'When resource_type is Poster' do
+      let(:input_file) { file_fixture('no_host_organization_data.xml') }
+      it 'will not create a record if host_organization is missing' do
+        expect(work.nil?).to be_truthy
+      end
+      it 'will not create the collection if based_near is missing' do
+        expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
+      end
+    end
+    context 'When resource_type is Presentation' do
+      let(:input_file) { file_fixture('no_host_presentation_data.xml') }
+      it 'will not create a record if host_organization is missing' do
+        expect(work.nil?).to be_truthy
+      end
+      it 'will not create the collection if based_near is missing' do
+        expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
       end
     end
   end

@@ -1,13 +1,81 @@
-# Generated via
-#  `rails generate hyrax:work Image`
+# frozen_string_literal: true
+# Generated via `rails generate hyrax:work Image`
 require 'rails_helper'
 
 RSpec.describe Image do
-
   it "requires a title" do
     image = Image.new
+    image.description = ["test description"]
+    image.date_created = ["1934"]
+    image.subject = ["Medicine"]
     expect(image.save).to eq false
     image.title = ["test"]
+    expect(image.save).to eq true
+  end
+
+  it "requires a description" do
+    image = Image.new
+    image.title = ["test"]
+    image.date_created = ["1934"]
+    image.subject = ["Medicine"]
+    expect(image.save).to eq false
+    image.description = ["test description"]
+    expect(image.save).to eq true
+  end
+
+  it "requires a date_created" do
+    image = Image.new
+    image.title = ["test"]
+    image.description = ["test description"]
+    image.subject = ["Medicine"]
+    expect(image.save).to eq false
+    image.date_created = ["1934"]
+    expect(image.save).to eq true
+  end
+
+  it "requires a subject" do
+    image = Image.new
+    image.title = ["test"]
+    image.description = ["test description"]
+    image.date_created = ["1934"]
+    expect(image.save).to eq false
+    image.subject = ["Medicine"]
+    expect(image.save).to eq true
+  end
+
+  it "requires based_near if resource_type is 'Artifact'" do
+    image = Image.new
+    image.title = ["test"]
+    image.description = ["test description"]
+    image.date_created = ["1934"]
+    image.subject = ["Medicine"]
+    image.resource_type = ["Artifact"]
+    expect(image.save).to eq false
+    image.based_near = ["Room 222"]
+    expect(image.save).to eq true
+  end
+
+  it "requires host_organization if resource_type is 'Poster'" do
+    image = Image.new
+    image.title = ["test"]
+    image.description = ["test description"]
+    image.date_created = ["1934"]
+    image.subject = ["Medicine"]
+    image.resource_type = ["Poster"]
+    expect(image.save).to eq false
+    image.host_organization = ["CDC"]
+    expect(image.save).to eq true
+  end
+
+  it "requires host_organization if resource_type is 'Presentation'" do
+    image = Image.new
+    image.title = ["test"]
+    image.description = ["test description"]
+    image.date_created = ["1934"]
+    image.subject = ["Medicine"]
+    image.resource_type = ["Presentation"]
+    expect(image.save).to eq false
+    image.host_organization = ["Duke University"]
     expect(image.save).to eq true
   end
 
