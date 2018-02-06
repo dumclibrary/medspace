@@ -2,10 +2,10 @@
 require 'rails_helper'
 describe Medspace::Importer do
   let(:msi) { described_class.new(input_file, data_path) }
-  let(:input_file) { file_fixture('sample_medspace_data.xml') }
-  let(:data_path) { Rails.root.join('spec', 'fixtures', 'files') }
+  let(:input_file) { file_fixture('importer/document/document_medspace_data.xml') }
+  let(:data_path) { Rails.root.join('spec', 'fixtures', 'files', 'importer', 'document') }
   let(:msi_invalid) { described_class.new(input_file_with_no_title, data_path) }
-  let(:input_file_with_no_title) { file_fixture('invalid_medspace_data.xml') }
+  let(:input_file_with_no_title) { file_fixture('importer/document/invalid_medspace_data.xml') }
 
   context 'processing an export file' do
     it 'can instantiate' do
@@ -36,13 +36,13 @@ describe Medspace::Importer do
       msi.import
       msi.import
 
-      number_of_works = Image.where(identifier: Image.last.identifier).count
+      number_of_works = Document.where(identifier: Document.last.identifier).count
 
       expect(number_of_works).to eq 1
     end
 
     it 'creates a Fedora record from a Medspace object' do
-      expect(work).to be_instance_of(Image)
+      expect(work).to be_instance_of(Document)
     end
 
     it 'sets the Fedora object\'s visibility to open' do
@@ -52,7 +52,7 @@ describe Medspace::Importer do
     it 'adds the object to the collection' do
       msi.import
 
-      expect(msi.collection.members.last.id).to eq(Image.last.id)
+      expect(msi.collection.members.last.id).to eq(Document.last.id)
     end
 
     it 'sets all subject elements' do
@@ -68,7 +68,7 @@ describe Medspace::Importer do
     end
 
     it "sets the identifier" do
-      expect(work.identifier).to eq(['edc00014'])
+      expect(work.identifier).to eq(['ede00014'])
     end
 
     it "sets the holding_entity" do
@@ -80,11 +80,11 @@ describe Medspace::Importer do
     end
 
     it "sets the resource_type" do
-      expect(work.resource_type).to eq(['Image'])
+      expect(work.resource_type).to eq(['Document'])
     end
 
     context 'with complete metadata' do
-      let(:input_file) { file_fixture('complete_medspace_data.xml') }
+      let(:input_file) { file_fixture('importer/document/complete_medspace_data.xml') }
 
       it 'sets the contributor' do
         expect(work.contributor).to eq(['Jonas Salk'])
@@ -124,7 +124,7 @@ describe Medspace::Importer do
     end
 
     context "Without a Description" do
-      let(:input_file) { file_fixture('no_description_data.xml') }
+      let(:input_file) { file_fixture('importer/document/no_description_data.xml') }
       it 'will not create a record' do
         expect(work.nil?).to be_truthy
       end
@@ -132,8 +132,9 @@ describe Medspace::Importer do
         expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
       end
     end
+
     context 'Without date_created' do
-      let(:input_file) { file_fixture('no_date_created_data.xml') }
+      let(:input_file) { file_fixture('importer/document/no_date_created_data.xml') }
       it 'will not create a record' do
         expect(work.nil?).to be_truthy
       end
@@ -142,7 +143,7 @@ describe Medspace::Importer do
       end
     end
     context 'Without a subject' do
-      let(:input_file) { file_fixture('no_subject_data.xml') }
+      let(:input_file) { file_fixture('importer/document/no_subject_data.xml') }
       it 'will not create a record' do
         expect(work.nil?).to be_truthy
       end
@@ -151,7 +152,7 @@ describe Medspace::Importer do
       end
     end
     context 'When resource_type is Artifact' do
-      let(:input_file) { file_fixture('no_based_near_data.xml') }
+      let(:input_file) { file_fixture('importer/document/no_based_near_data.xml') }
       it 'will not create a record if based_near is missing' do
         expect(work.nil?).to be_truthy
       end
@@ -160,7 +161,7 @@ describe Medspace::Importer do
       end
     end
     context 'When resource_type is Poster' do
-      let(:input_file) { file_fixture('no_host_organization_data.xml') }
+      let(:input_file) { file_fixture('importer/document/no_host_organization_data.xml') }
       it 'will not create a record if host_organization is missing' do
         expect(work.nil?).to be_truthy
       end
@@ -169,10 +170,11 @@ describe Medspace::Importer do
       end
     end
     context 'When resource_type is Presentation' do
-      let(:input_file) { file_fixture('no_host_presentation_data.xml') }
+      let(:input_file) { file_fixture('importer/document/no_host_presentation_data.xml') }
       it 'will not create a record if host_organization is missing' do
         expect(work.nil?).to be_truthy
       end
+
       it 'will not create the collection if based_near is missing' do
         expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
       end
@@ -190,8 +192,27 @@ describe Medspace::Importer do
         expect { msi.import }.to output(/Exhibit Room B, postgraduate course on fractures/).to_stdout_from_any_process
       end
 
-      it 'has an error message when something goes wrong during the import' do
-        expect { msi_invalid.import }.to raise_error('XML is invalid')
+      it 'keeps going when there are validation errors' do
+        expect { msi_invalid.import }.not_to raise_error('XML is invalid')
+      end
+
+      it 'logs an error message with a filename from invalid xml' do
+        expect { msi_invalid.import }.to output(/XML\: spec\/fixtures\/files\/importer\/document\/invalid_medspace_data.xml is invalid/).to_stdout_from_any_process
+      end
+
+      context 'when some records fail to import' do
+        let(:input_file_1) { file_fixture('importer/document/no_based_near_data.xml') }
+        let(:input_file_2) { file_fixture('importer/document/no_subject_data.xml') }
+        let(:input_file_3) { file_fixture('importer/document/document_medspace_data.xml') }
+        let(:input_file_4) { file_fixture('importer/document/complete_medspace_data.xml') }
+        let(:model) { Document }
+
+        # 2 of the 4 records failed, so 2 should be successful
+        it 'successfully imports the valid records' do
+          # directory = ''
+          xml_files = [input_file_1, input_file_2, input_file_3, input_file_4]
+          expect { xml_files.each { |file| described_class.import(file, data_path) } }.to change { model.count }.by(2)
+        end
       end
     end
   end

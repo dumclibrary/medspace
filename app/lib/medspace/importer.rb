@@ -65,15 +65,13 @@ module Medspace
 
     def process_record(record)
       msi_record = Medspace::Record.new(record)
-      work_type = work_model(msi_record.work_type.capitalize)
-
+      work_type = work_model(msi_record.work_type.classify)
       # do not create a duplicate work
       return if work_type.where(identifier: [msi_record.identifier.first]).count.positive?
       Medspace::Log.new("Creating new #{work_type} for #{msi_record.file_name}", 'info')
       work = work_type.new
       work = assign_attributes(msi_record: msi_record, work: work)
-      # will need to report error, not add to collection
-      # if invalid, won't be able to return the work
+      # report error from save_work, do not add to collection if invalid
       if save_work(msi_record, work)
         @collection.add_members(work.id)
         return work

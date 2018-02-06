@@ -10,8 +10,14 @@ namespace :import do
   def import_data
     options = options(ARGV)
     puts "Importing records using options: #{options}"
-    Medspace::Importer.import(options[:input_file], options[:data_path])
-    puts "Import complete"
+
+    directory = options[:directory]
+    xml_files = File.join(directory, "*.xml")
+
+    Dir.glob(xml_files).each do |file|
+      Medspace::Importer.import(file, directory)
+      puts "Import complete"
+    end
   end
 
   # Read the options that the user supplied on the command line.
@@ -21,12 +27,8 @@ namespace :import do
     user_inputs = {}
     opts = OptionParser.new
 
-    opts.on('-i INPUT FILE', '--input_file', '(required) The XML file containing the Medspace records you want to import') do |input_file|
-      user_inputs[:input_file] = input_file
-    end
-
-    opts.on('-d DATA PATH', '--data_path', '(required) The path to the directory where the collection folders are stored') do |data_path|
-      user_inputs[:data_path] = data_path
+    opts.on('-i DIRECTORY', '--directory', '(required) The directory of xml files you want to import') do |directory|
+      user_inputs[:directory] = directory
     end
 
     opts.on('-h', '--help', 'Print this help message') do
@@ -37,7 +39,7 @@ namespace :import do
     args = opts.order!(ARGV) {}
     opts.parse!(args)
 
-    required_options = [:input_file, :data_path]
+    required_options = [:directory]
     missing_options = required_options - user_inputs.keys
     missing_options.each { |o| puts "Error: Missing required option: --#{o}" }
 

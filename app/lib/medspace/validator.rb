@@ -12,6 +12,7 @@ module Medspace
     def initialize(xml_file)
       schema_file = Rails.root.join('app', 'lib', 'medspace', 'schema', 'medspace_export.rng')
       schema = Nokogiri::XML::RelaxNG(File.open(schema_file))
+      @xml = xml_file
       doc = Nokogiri::XML(File.open(xml_file))
       @result = schema.validate(doc)
     end
@@ -24,14 +25,12 @@ module Medspace
     end
 
     ##
-    # This method will log the result of validation and
-    # raise an error if the XML is invalid
+    # This method will log the result of validation
     def validate
       if valid?
         Medspace::Log.new('XML is valid', 'info')
       else
-        Medspace::Log.new('XML is invalid', 'error')
-        raise 'XML is invalid'
+        Medspace::Log.new("XML: #{@xml} is invalid", 'error')
       end
     end
   end
