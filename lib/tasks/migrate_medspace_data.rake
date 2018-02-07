@@ -13,10 +13,12 @@ namespace :import do
 
     directory = options[:directory]
     xml_files = File.join(directory, "*.xml")
-
+    works = 0
+    works = Image.all.size + Document.all.size + ExternalObject.all.size
     Dir.glob(xml_files).each do |file|
       Medspace::Importer.import(file, directory)
-      puts "Import complete"
+      new_works = Image.all.size + Document.all.size + ExternalObject.all.size
+      puts "Import complete: #{new_works - works} created."
     end
   end
 

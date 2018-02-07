@@ -67,7 +67,10 @@ module Medspace
       msi_record = Medspace::Record.new(record)
       work_type = work_model(msi_record.work_type.classify)
       # do not create a duplicate work
-      return if work_type.where(identifier: [msi_record.identifier.first]).count.positive?
+      if work_type.where(identifier: [msi_record.identifier.first]).count.positive?
+        Medspace::Log.new("Duplicate: record already exists for #{msi_record.identifier.first}", 'error')
+        return
+      end
       Medspace::Log.new("Creating new #{work_type} for #{msi_record.file_name}", 'info')
       work = work_type.new
       work = assign_attributes(msi_record: msi_record, work: work)
@@ -110,8 +113,8 @@ module Medspace
         uploaded_file = Medspace::ImportFile.new(msi_record, data_path, importer_user).uploaded_file
         uploaded_file_id = uploaded_file.try(:id)
         attributes = { uploaded_files: [uploaded_file_id] }
-
         env = Hyrax::Actors::Environment.new(work, current_ability, attributes)
+
         if Hyrax::CurationConcern.actor.create(env) != false
           Medspace::Log.new("Saved work with title: #{msi_record.title[0]}", 'info')
         else

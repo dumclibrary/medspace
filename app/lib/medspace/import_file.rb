@@ -24,7 +24,7 @@ module Medspace
     def uploaded_file
       return nil if @record.file_name.blank?
       if check_for_file(file_path)
-        Medspace::Log.new("Loading file: #{file_path}", 'info')
+        Medspace::Log.new("Loading file: #{File.basename(file_path)}", 'info')
         Hyrax::UploadedFile.create(user: @user, file: File.open(file_path, 'r'))
       else
         Medspace::Log.new("This file does not exist: #{file_path}", 'error')

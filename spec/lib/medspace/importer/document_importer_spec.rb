@@ -197,7 +197,7 @@ describe Medspace::Importer do
       end
 
       it 'logs an error message with a filename from invalid xml' do
-        expect { msi_invalid.import }.to output(/XML\: spec\/fixtures\/files\/importer\/document\/invalid_medspace_data.xml is invalid/).to_stdout_from_any_process
+        expect { msi_invalid.import }.to output(/XML\: invalid_medspace_data.xml is invalid/).to_stdout_from_any_process
       end
 
       context 'when some records fail to import' do

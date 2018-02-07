@@ -12,26 +12,74 @@ module Medspace
     def initialize(xml_file)
       schema_file = Rails.root.join('app', 'lib', 'medspace', 'schema', 'medspace_export.rng')
       schema = Nokogiri::XML::RelaxNG(File.open(schema_file))
-      @xml = xml_file
-      doc = Nokogiri::XML(File.open(xml_file))
-      @result = schema.validate(doc)
+      @xml = File.basename(xml_file)
+      @doc = Nokogiri::XML(File.open(xml_file))
+      @result = schema.validate(@doc)
+      @errors = []
     end
 
     ##
     # @return [Boolean]
     # Returns a boolean for the validation result
     def valid?
-      @result.empty?
+      @result.empty? && required_nodes?
+    end
+
+    def required_nodes?
+      subject? && description? && date_created? && based_near? && host_organization?
+      @errors.empty?
     end
 
     ##
     # This method will log the result of validation
     def validate
       if valid?
-        Medspace::Log.new('XML is valid', 'info')
+        Medspace::Log.new("XML: #{@xml} is valid", 'info')
       else
-        Medspace::Log.new("XML: #{@xml} is invalid", 'error')
+        Medspace::Log.new("XML: #{@xml} is invalid. The errors are: #{@errors}", 'error')
       end
     end
+
+    private
+
+      def subject?
+        if @doc.xpath('object//subject').empty?
+          @errors << "Missing subject"
+          return false
+        end
+        true
+      end
+
+      def description?
+        if @doc.xpath('object//description').empty?
+          @errors << "Missing description"
+          return false
+        end
+        true
+      end
+
+      def date_created?
+        if @doc.xpath('object//date_created').empty?
+          @errors << "Missing date_created"
+          return false
+        end
+        true
+      end
+
+      def based_near?
+        if @doc.xpath('object//resource_type').text == 'Artifact' && @doc.xpath('object//based_near').empty?
+          @errors << "Missing based_near"
+          return false
+        end
+        true
+      end
+
+      def host_organization?
+        if (@doc.xpath('object//resource_type').text == 'Poster' || @doc.xpath('object//resource_type').text == 'Presentation') && @doc.xpath('object//host_organization').empty?
+          @errors << "Missing host_organization"
+          return false
+        end
+        true
+      end
   end
 end
