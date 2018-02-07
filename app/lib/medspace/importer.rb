@@ -111,15 +111,25 @@ module Medspace
         current_ability = ::Ability.new(importer_user)
 
         uploaded_file = Medspace::ImportFile.new(msi_record, data_path, importer_user).uploaded_file
-        uploaded_file_id = uploaded_file.try(:id)
-        attributes = { uploaded_files: [uploaded_file_id] }
+        attributes = file_ids(uploaded_file)
         env = Hyrax::Actors::Environment.new(work, current_ability, attributes)
-
         if Hyrax::CurationConcern.actor.create(env) != false
           Medspace::Log.new("Saved work with title: #{msi_record.title[0]}", 'info')
         else
           Medspace::Log.new("Problem saving #{msi_record.file_name}", 'error')
           false
+        end
+      end
+
+      def file_ids(uploaded_file)
+        if uploaded_file.is_a? Array
+          uploaded_file_ids = uploaded_file.collect do |uf|
+            Hyrax::UploadedFile.where(file: uf).first.id
+          end
+          { uploaded_files: uploaded_file_ids }
+        else
+          uploaded_file_id = uploaded_file.try(:id)
+          { uploaded_files: [uploaded_file_id] }
         end
       end
   end

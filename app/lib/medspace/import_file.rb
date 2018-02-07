@@ -23,23 +23,35 @@ module Medspace
     # @return [Hyrax::UploadedFile, nil]
     def uploaded_file
       return nil if @record.file_name.blank?
-      if check_for_file(file_path)
-        Medspace::Log.new("Loading file: #{File.basename(file_path)}", 'info')
-        Hyrax::UploadedFile.create(user: @user, file: File.open(file_path, 'r'))
+      if @record.file_name.is_a? Array
+        @record.file_name.each do |file_name|
+          _uploaded_file(file_name)
+        end
       else
-        Medspace::Log.new("This file does not exist: #{file_path}", 'error')
+        _uploaded_file(@record.file_name)
       end
     end
 
     ##
     # @return [String]
     # this returns the full path to the file
-    def file_path
-      "#{@data_path}/#{@record.file_name}"
+    def file_path(file_name)
+      "#{@data_path}/#{file_name}"
     end
 
-    def check_for_file(file_path)
-      File.file?(file_path)
+    def check_for_file(full_path)
+      File.file?(full_path)
     end
+
+    private
+
+      def _uploaded_file(file_name)
+        if check_for_file(file_path(file_name))
+          Medspace::Log.new("Loading file: #{File.basename(file_path(file_name))}", 'info')
+          Hyrax::UploadedFile.create(user: @user, file: File.open(file_path(file_name), 'r'))
+        else
+          Medspace::Log.new("This file does not exist: #{file_path(file_name)}", 'error')
+        end
+      end
   end
 end

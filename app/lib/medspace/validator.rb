@@ -42,6 +42,8 @@ module Medspace
 
     private
 
+      # title is validated by the schema
+
       def subject?
         if @doc.xpath('object//subject').empty?
           @errors << "Missing subject"
