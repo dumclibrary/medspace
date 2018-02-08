@@ -59,8 +59,10 @@ module Medspace
     def validate_collection
       if valid_collection?
         Medspace::Log.new("XML: #{@xml} is valid", 'info')
+        true
       else
         Medspace::Log.new("XML: #{@xml} is invalid. The errors are: #{@errors}", 'error')
+        false
       end
     end
 
