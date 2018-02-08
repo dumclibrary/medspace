@@ -42,7 +42,8 @@ module Medspace
     # @return [Array<String>]
     # returns the descriptions
     def description
-      get_values(@record_hash["description"])
+      description = @record_xml.xpath('//description')
+      description.collect(&:content)
     end
 
     ##

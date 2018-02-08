@@ -25,6 +25,22 @@ module Medspace
       @result.empty? && required_nodes?
     end
 
+    ##
+    # @return [Boolean]
+    # Returns a boolean for the validation result
+    def valid_collection?
+      required_collection_nodes?
+    end
+
+    ##
+    # Returns a boolean for validation result
+    def required_collection_nodes?
+      title? && description?
+      @errors.empty?
+    end
+    ##
+
+    # Returns a boolean for validation result
     def required_nodes?
       subject? && description? && date_created? && based_near? && host_organization?
       @errors.empty?
@@ -40,9 +56,24 @@ module Medspace
       end
     end
 
+    def validate_collection
+      if valid_collection?
+        Medspace::Log.new("XML: #{@xml} is valid", 'info')
+      else
+        Medspace::Log.new("XML: #{@xml} is invalid. The errors are: #{@errors}", 'error')
+      end
+    end
+
     private
 
-      # title is validated by the schema
+      # title is validated by the schema for objects, here for collections
+      def title?
+        if @doc.xpath('object//title').empty?
+          @errors << "Missing title"
+          return false
+        end
+        true
+      end
 
       def subject?
         if @doc.xpath('object//subject').empty?
