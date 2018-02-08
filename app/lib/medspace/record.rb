@@ -43,7 +43,7 @@ module Medspace
     # returns the descriptions
     def description
       description = @record_xml.xpath('//description')
-      description.collect(&:content)
+      get_values(description.collect(&:content))
     end
 
     ##

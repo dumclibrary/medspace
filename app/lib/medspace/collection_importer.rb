@@ -33,6 +33,7 @@ module Medspace
       msci_record = Medspace::Record.new(record)
       collection = CollectionBuilder.new(msci_record.title).find_or_create
       collection.description = msci_record.description
+      collection.save!
       collection
     end
   end
