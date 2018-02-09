@@ -4,6 +4,7 @@ describe Medspace::Importer do
   let(:msi) { described_class.new(input_file, data_path) }
   let(:input_file) { file_fixture('importer/image/sample_medspace_data.xml') }
   let(:data_path) { Rails.root.join('spec', 'fixtures', 'files', 'importer', 'image') }
+  let(:collection) { msi.collection }
   let(:msi_invalid) { described_class.new(input_file_with_no_title, data_path) }
   let(:input_file_with_no_title) { file_fixture('importer/image/invalid_medspace_data.xml') }
 
@@ -21,7 +22,7 @@ describe Medspace::Importer do
       expect(msi.input_file).to eq input_file
     end
     it 'can determine the collection title' do
-      expect(msi.collection_name).to eq(['Foundations of Excellence'])
+      expect(msi.collection_name).to eq(['Great Images In Medicine'])
     end
   end
 
@@ -79,8 +80,16 @@ describe Medspace::Importer do
       expect(work.archival_collection).to eq(["Photograph & Negative Collection"])
     end
 
+    it "sets the related_url" do
+      expect(work.related_url).to eq(['http://cbc.ca'])
+    end
+
     it "sets the resource_type" do
       expect(work.resource_type).to eq(['Image'])
+    end
+
+    it "adds its collection to the member_of_collections" do
+      expect(work.member_of_collections).to eq([collection])
     end
 
     context 'with complete metadata' do

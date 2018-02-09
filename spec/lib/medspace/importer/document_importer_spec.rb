@@ -25,7 +25,7 @@ describe Medspace::Importer do
     end
   end
 
-  context 'processing a single record' do
+  context 'processing a single record', image_tests: true do
     before do
       ActiveFedora::Cleaner.clean!
     end
@@ -83,7 +83,11 @@ describe Medspace::Importer do
       expect(work.resource_type).to eq(['Document'])
     end
 
-    context 'with complete metadata' do
+    it "sets the related_url" do
+      expect(work.related_url).to eq(['http://cbc.ca'])
+    end
+
+    context 'with complete metadata', image_tests: true do
       let(:input_file) { file_fixture('importer/document/complete_medspace_data.xml') }
 
       it 'sets the contributor' do
@@ -123,7 +127,7 @@ describe Medspace::Importer do
       end
     end
 
-    context "Without a Description" do
+    context "Without a Description", image_tests: true do
       let(:input_file) { file_fixture('importer/document/no_description_data.xml') }
       it 'will not create a record' do
         expect(work.nil?).to be_truthy
@@ -133,7 +137,7 @@ describe Medspace::Importer do
       end
     end
 
-    context 'Without date_created' do
+    context 'Without date_created', image_tests: true do
       let(:input_file) { file_fixture('importer/document/no_date_created_data.xml') }
       it 'will not create a record' do
         expect(work.nil?).to be_truthy
@@ -142,7 +146,7 @@ describe Medspace::Importer do
         expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
       end
     end
-    context 'Without a subject' do
+    context 'Without a subject', image_tests: true do
       let(:input_file) { file_fixture('importer/document/no_subject_data.xml') }
       it 'will not create a record' do
         expect(work.nil?).to be_truthy
@@ -151,7 +155,7 @@ describe Medspace::Importer do
         expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
       end
     end
-    context 'When resource_type is Artifact' do
+    context 'When resource_type is Artifact', image_tests: true do
       let(:input_file) { file_fixture('importer/document/no_based_near_data.xml') }
       it 'will not create a record if based_near is missing' do
         expect(work.nil?).to be_truthy
@@ -160,7 +164,7 @@ describe Medspace::Importer do
         expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
       end
     end
-    context 'When resource_type is Poster' do
+    context 'When resource_type is Poster', image_tests: true do
       let(:input_file) { file_fixture('importer/document/no_host_organization_data.xml') }
       it 'will not create a record if host_organization is missing' do
         expect(work.nil?).to be_truthy
@@ -169,7 +173,7 @@ describe Medspace::Importer do
         expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
       end
     end
-    context 'When resource_type is Presentation' do
+    context 'When resource_type is Presentation', image_tests: true do
       let(:input_file) { file_fixture('importer/document/no_host_presentation_data.xml') }
       it 'will not create a record if host_organization is missing' do
         expect(work.nil?).to be_truthy

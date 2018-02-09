@@ -55,7 +55,7 @@ module Medspace
 
     ##
     # @return [Array<String>]
-    # returns the resource type
+    # returns the contributor
     def contributor
       get_values(@record_hash["contributor"])
     end
@@ -121,6 +121,13 @@ module Medspace
     # returns based_near
     def based_near
       get_values(@record_hash["based_near"])
+    end
+
+    ##
+    # @return [Array<String>]
+    # returns the related_url
+    def related_url
+      get_values(@record_hash["related_url"])
     end
 
     ##
