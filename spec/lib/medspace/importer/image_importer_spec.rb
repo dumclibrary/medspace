@@ -22,7 +22,7 @@ describe Medspace::Importer do
       expect(msi.input_file).to eq input_file
     end
     it 'can determine the collection title' do
-      expect(msi.collection_name).to eq(['Great Images In Medicine'])
+      expect(msi.collection_name).to eq(['New Images In Medicine'])
     end
   end
 
@@ -93,7 +93,7 @@ describe Medspace::Importer do
     end
 
     context 'with complete metadata' do
-      let(:input_file) { file_fixture('importer/image/complete_medspace_data.xml') }
+      let(:input_file) { file_fixture('importer/image/based_near_data.xml') }
 
       it 'sets the contributor' do
         expect(work.contributor).to eq(['Jonas Salk'])
