@@ -53,12 +53,15 @@ module Medspace
       work.description = msi_record.description
       work.archival_collection = msi_record.archival_collection
       work.resource_type = msi_record.resource_type
+      work.related_url = msi_record.related_url
       work.accrual_method = msi_record.accrual_method
       work.provenance = msi_record.provenance
       work.based_near = msi_record.based_near
       work.host_organization = msi_record.host_organization
       work.publisher = msi_record.publisher
       work.visibility = Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
+      # this ensures solr_indexing of collection information happens for the work
+      work.member_of_collections << @collection
       work
     end
     # rubocop:enable Metrics/MethodLength

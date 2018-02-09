@@ -55,35 +55,39 @@ describe Medspace::Importer do
       expect(msi.collection.members.last.id).to eq(ExternalObject.last.id)
     end
 
-    it 'sets all subject elements' do
+    it 'sets all subject elements', image_tests: true do
       expect(work.subject).to eq(["Technology", "Duke University. School of Medicine", "Duke University. Hospital", "Medicine -- Study and teaching -- North Carolina", "Education, Medical"])
     end
 
-    it 'sets the date created' do
+    it 'sets the date created', image_tests: true do
       expect(work.date_created).to eq(['1934'])
     end
 
-    it "sets the date" do
+    it "sets the date", image_tests: true do
       expect(work.date).to eq(['1934'])
     end
 
-    it "sets the identifier" do
+    it "sets the identifier", image_tests: true do
       expect(work.identifier).to eq(['ede00014'])
     end
 
-    it "sets the holding_entity" do
+    it "sets the holding_entity", image_tests: true do
       expect(work.holding_entity).to eq(['Medical Center Archives'])
     end
 
-    it "sets the archival_collection" do
+    it "sets the archival_collection", image_tests: true do
       expect(work.archival_collection).to eq(["Photograph & Negative Collection"])
     end
 
-    it "sets the resource_type" do
+    it "sets the related_url", image_tests: true do
+      expect(work.related_url).to eq(['http://cbc.ca'])
+    end
+
+    it "sets the resource_type", image_tests: true do
       expect(work.resource_type).to eq(['ExternalObject'])
     end
 
-    context 'with complete metadata' do
+    context 'with complete metadata', image_tests: true do
       let(:input_file) { file_fixture('importer/external_object/complete_medspace_data.xml') }
 
       it 'sets the contributor' do
@@ -123,7 +127,7 @@ describe Medspace::Importer do
       end
     end
 
-    context "Without a Description" do
+    context "Without a Description", image_tests: true do
       let(:input_file) { file_fixture('importer/external_object/no_description_data.xml') }
       it 'will not create a record' do
         expect(work.nil?).to be_truthy
@@ -133,7 +137,7 @@ describe Medspace::Importer do
       end
     end
 
-    context 'Without date_created' do
+    context 'Without date_created', image_tests: true do
       let(:input_file) { file_fixture('importer/external_object/no_date_created_data.xml') }
       it 'will not create a record' do
         expect(work.nil?).to be_truthy
@@ -142,7 +146,7 @@ describe Medspace::Importer do
         expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
       end
     end
-    context 'Without a subject' do
+    context 'Without a subject', image_tests: true do
       let(:input_file) { file_fixture('importer/external_object/no_subject_data.xml') }
       it 'will not create a record' do
         expect(work.nil?).to be_truthy
@@ -151,7 +155,7 @@ describe Medspace::Importer do
         expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
       end
     end
-    context 'When resource_type is Artifact' do
+    context 'When resource_type is Artifact', image_tests: true do
       let(:input_file) { file_fixture('importer/external_object/no_based_near_data.xml') }
       it 'will not create a record if based_near is missing' do
         expect(work.nil?).to be_truthy
@@ -160,7 +164,7 @@ describe Medspace::Importer do
         expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
       end
     end
-    context 'When resource_type is Poster' do
+    context 'When resource_type is Poster', image_tests: true do
       let(:input_file) { file_fixture('importer/external_object/no_host_organization_data.xml') }
       it 'will not create a record if host_organization is missing' do
         expect(work.nil?).to be_truthy
@@ -169,7 +173,7 @@ describe Medspace::Importer do
         expect(Collection.where(title: ['Foundations of Excellence']).first.nil?).to be_truthy
       end
     end
-    context 'When resource_type is Presentation' do
+    context 'When resource_type is Presentation', image_tests: true do
       let(:input_file) { file_fixture('importer/external_object/no_host_presentation_data.xml') }
       it 'will not create a record if host_organization is missing' do
         expect(work.nil?).to be_truthy
