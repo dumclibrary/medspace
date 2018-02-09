@@ -110,7 +110,7 @@ module Medspace
     private
 
       def save_work(msi_record, work)
-        importer_user = ::User.batch_user
+        importer_user = User.where(email: 'rskoonts@duke.edu').first || ::User.batch_user
         current_ability = ::Ability.new(importer_user)
 
         uploaded_file = Medspace::ImportFile.new(msi_record, data_path, importer_user).uploaded_file
