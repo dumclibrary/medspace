@@ -1,5 +1,4 @@
-# Generated via
-#  `rails generate hyrax:work Image`
+# Generated via `rails generate hyrax:work Image`
 require 'rails_helper'
 include Warden::Test::Helpers
 
@@ -14,7 +13,6 @@ RSpec.feature 'Create a Image', js: false do
     end
 
     before do
-      AdminSet.find_or_create_default_admin_set_id
       login_as user
     end
 
