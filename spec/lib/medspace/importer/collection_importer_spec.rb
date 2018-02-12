@@ -26,13 +26,6 @@ describe Medspace::CollectionImporter do
         expect { validator.validate_collection }.to output(/XML\: collection_sans_description.xml is invalid. The errors are\: \[\"Missing description\"\]/).to_stdout_from_any_process
       end
     end
-    context 'validating resource_type' do
-      let(:msci_sans_resource_type) { file_fixture('importer/collection/collection_sans_resource_type.xml') }
-      let(:validator) { Medspace::Validator.new(msci_sans_resource_type) }
-      it 'validates for description' do
-        expect { validator.validate_collection }.to output(/XML\: collection_sans_resource_type.xml is invalid. The errors are\: \[\"Missing resource_type\"\]/).to_stdout_from_any_process
-      end
-    end
   end
 
   context 'processing the xml object' do
