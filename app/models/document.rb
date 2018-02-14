@@ -1,5 +1,5 @@
-# Generated via
-#  `rails generate hyrax:work Document`
+# frozen_string_literal: true
+# Generated via `rails generate hyrax:work Document`
 class Document < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::Dumcla::Metadata::Descriptive
@@ -7,7 +7,7 @@ class Document < ActiveFedora::Base
   self.indexer = DocumentIndexer
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
-  validates :title, presence: { message: 'Your work must have a title.' }
+  include ::Dumcla::Validation
 
   self.human_readable_type = 'Document'
 

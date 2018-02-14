@@ -1,5 +1,4 @@
-# Generated via
-#  `rails generate hyrax:work Image`
+# Generated via `rails generate hyrax:work Image`
 require 'rails_helper'
 include Warden::Test::Helpers
 
@@ -29,8 +28,8 @@ RSpec.feature 'Create a Image', js: false do
       # If you generate more than one work uncomment these lines
       # choose "payload_concern", option: "Image"
       # click_button "Create work"
-      check('agreement')
-      click_on('Save')
+      # check('agreement')
+      # click_on('Save')
       expect(page).to have_content "Duke Medical Center Archives"
     end
   end
