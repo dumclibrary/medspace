@@ -9,7 +9,7 @@ class Document < ActiveFedora::Base
   # self.valid_child_concerns = []
   include ::Dumcla::Validation
 
-  self.human_readable_type = 'Document'
+  #self.human_readable_type = 'Document'
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)

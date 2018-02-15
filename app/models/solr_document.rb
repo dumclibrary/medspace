@@ -53,4 +53,7 @@ class SolrDocument
   def at_location
     self[Solrizer.solr_name('at_location')]
   end
+  def title_ssort
+    self[Solrizer.solr_name('title_ssort')]
+  end
 end

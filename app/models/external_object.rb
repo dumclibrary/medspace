@@ -9,7 +9,7 @@ class ExternalObject < ActiveFedora::Base
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
 
-  self.human_readable_type = 'External Object'
+  #self.human_readable_type = 'External Object'
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)

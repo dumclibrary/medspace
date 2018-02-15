@@ -8,7 +8,7 @@ class Image < ActiveFedora::Base
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
 
-  self.human_readable_type = 'Image'
+  #self.human_readable_type = 'Image'
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
