@@ -4,6 +4,9 @@ RSpec.feature 'Display an Image' do
   let(:title) { ['Apothecary jar. Label: Pom: Pice N:'] }
   let(:archival_collection) { ['Eugene Stead papers'] }
   let(:date) { ['1973-04-09'] }
+  let(:date_created) { ['2018-02-05'] }
+  let(:subject) { ['Apothecary jar', 'Apothecary', 'Medicine', 'Ceramic', 'Jar, covered', 'Porcelain', 'Apothecaries'] }
+  let(:description) { ['Apothecary jar. 19th century. France. Porcelain. Label: Pom: Pice N: Handpainted scene of lions, scrolls and foliage. Marked "L. Caut, Paris, 30 Rue des Francs Bourgeant."'] }
   let(:holding_entity) { ['Medical Center Archives'] }
   let(:date_accepted) { ['April 9, 1973'] }
   let(:condition) { ['lid broken'] }
@@ -13,7 +16,7 @@ RSpec.feature 'Display an Image' do
   let(:resource_type) { ['Image'] }
   let(:visibility) { Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC }
   let :image do
-    Image.new(title: title, based_near: based_near, archival_collection: archival_collection, holding_entity: holding_entity, date_accepted: date_accepted, date: date, condition: condition, provenance: provenance, accrual_method: accrual_method, visibility: visibility)
+    Image.new(title: title, based_near: based_near, archival_collection: archival_collection, date_created: date_created, subject: subject, description: description, holding_entity: holding_entity, date_accepted: date_accepted, date: date, condition: condition, provenance: provenance, accrual_method: accrual_method, visibility: visibility)
   end
 
   context 'a logged in user' do
