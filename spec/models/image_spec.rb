@@ -3,6 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Image do
+
+  it_behaves_like 'a work with facetable years'
+
   it "requires a title" do
     image = Image.new
     image.description = ["test description"]

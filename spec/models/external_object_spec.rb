@@ -3,6 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe ExternalObject do
+
+  it_behaves_like 'a work with facetable years'
+
   it "requires a title" do
     exo = ExternalObject.new
     exo.date_created = ["1934"]
