@@ -8,6 +8,8 @@ container_id=${container_id:-$timestamp}
 
 ansible-playbook tests/$playbook --syntax-check
 
+docker pull gitlab-registry.oit.duke.edu/mclibrary/server-configuration:hyrax
+
 docker run \
   --detach \
   --privileged \

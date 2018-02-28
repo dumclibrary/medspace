@@ -1,0 +1,3 @@
+---
+# Hack to get synchronize module working locally for testing
+medspace_host: ""

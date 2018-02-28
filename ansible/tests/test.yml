@@ -1,1 +1,16 @@
 ---
+- name: medspace deployment
+  hosts: all
+  become: true
+
+  pre_tasks:
+  - name: install rsync
+    yum:
+      name: rsync
+      state: present
+
+  tasks:
+    - include_role:
+        name: medspace
+      vars:
+        medspace_host: "localhost:"

@@ -1,0 +1,10 @@
+---
+- name: copy files to server
+  synchronize:
+    src: ../../../..
+    dest: "{{ medspace_host }}/srv/"
+    recursive: yes
+    delete: yes
+    checksum: yes
+    rsync_opts:
+      - "--exclude=.git"
