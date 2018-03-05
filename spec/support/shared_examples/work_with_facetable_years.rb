@@ -2,7 +2,7 @@ RSpec.shared_examples 'a work with facetable years' do
 
   let(:work) { described_class.new }
 
-  it 'indexes years in YYYY format' do
+  it "indexes years in YYYY format" do
     work.date = ["1835"]
     expect(work.to_solr['year_iim']).to include 1835
   end
@@ -32,12 +32,17 @@ RSpec.shared_examples 'a work with facetable years' do
     expect(work.to_solr['year_iim']).to contain_exactly 1441, 1847, 1848, 1849, 1850, 1851, 1852, 2018
   end
 
-  it 'returns nil when the date is empty' do
+  it "returns nil when the date is empty" do
     work.date = nil
     expect(work.to_solr['year_iim']).to eq []
   end
 
-  it 'raises an error on invalid dates' do
+  it "returns nil when the date contains 'undated'" do
+    work.date = ["undated"]
+    expect(work.to_solr['year_iim']).to eq []
+  end
+
+  it "raises an error on invalid dates" do
     work.date = ["Mid 20th Century"]
     expect { work.to_solr['year_iim'] }.to raise_error "Invalid date: #{work.date.first.inspect}"
   end

@@ -27,13 +27,15 @@ module Medspace
       dates.flat_map{ |date| extract_year(date) }.uniq
     end
 
-    # Return an integer corresponding to the year in a string representing a date
+    # Return an integer corresponding to the year in a string  date
     # Accepts years in form YYYY, iso8601, and ranges YYYY-YYYY
     # @param date [String]
     # @return [Array<Integer>] the four digit integer(s) corresponding to year(s) in the date or date range
     def extract_year(date)
       if date.blank?
-        [nil]
+        []
+      elsif date == "undated"
+        []
       elsif /^\d{4}$/ =~ date
         # Date.iso8601 doesn't support YYYY dates
         [date.to_i]
