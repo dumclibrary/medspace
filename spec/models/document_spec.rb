@@ -4,6 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Document do
 
+  it_behaves_like 'a work with facetable years'
+
   it "requires a title" do
     doc = Document.new
     doc.date_created = ["1934"]
@@ -96,7 +98,6 @@ RSpec.describe Document do
     expect(doc.date.first).to eq "1973-04-09"
     #expect(doc.resource.dump(:ttl)).to match(/www.loc.gov\/mods\/rdf\/v1#locationPhysical/)
   end
-
 
   it "can add an archival collection" do
     doc = Document.new
