@@ -1,10 +1,40 @@
 ---
+- name: ensure that /srv exists
+  file:
+    path: /srv
+    group: wheel
+    mode: "u=rwx,g=rwx"
+    state: directory
+  become: true
+
 - name: copy files to server
   synchronize:
     src: ../../../..
     dest: "{{ medspace_host }}/srv/"
-    recursive: yes
     delete: yes
     checksum: yes
+    archive: no
+    links: yes
+    recursive: yes
     rsync_opts:
       - "--exclude=.git"
+      - "--exclude=.idea"
+
+- name: install bundle
+  gem:
+    name: bundler
+    state: present
+  environment: "{{ medspace_ruby_environment }}"
+
+- name: install gems
+  bundler:
+    chdir: /srv/medspace
+    state: present
+    executable: /srv/medspace/bin/bundle
+  environment: "{{ medspace_ruby_environment }}"
+
+- name: perform database migration
+  shell: bin/rails db:migrate RAILS_ENV=development
+  args:
+    chdir: /srv/medspace
+  environment: "{{ medspace_ruby_environment }}"
