@@ -4,6 +4,10 @@ medspace_host_synchronize_hack: ""
 
 medspace_user: "medspace"
 
+medspace_services:
+  - medspace
+  - medspace_sidekiq
+
 medspace_ruby_environment:
   PATH: /opt/rh/rh-ruby23/root/usr/local/bin:/opt/rh/rh-ruby23/root/usr/bin:/opt/rh/rh-git29/root/usr/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ffmpeg
   LD_LIBRARY_PATH: /opt/rh/rh-ruby23/root/usr/local/lib64:/opt/rh/rh-ruby23/root/usr/lib64:/opt/rh/httpd24/root/usr/lib64

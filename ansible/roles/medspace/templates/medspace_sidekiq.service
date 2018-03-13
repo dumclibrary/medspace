@@ -1,0 +1,13 @@
+[Unit]
+Description=Medspace Sidekiq Service
+Requires=network.target
+
+[Service]
+User={{ medspace_user }}
+Group={{ medspace_user }}
+Type=simple
+WorkingDirectory=/srv/medspace
+ExecStart=/usr/bin/bash -lc 'bin/bundle exec sidekiq'
+
+[Install]
+WantedBy=multi-user.target

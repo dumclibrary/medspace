@@ -6,22 +6,24 @@
 
 - name: copy medspace service
   template:
-    src: medspace.service
-    dest: /etc/systemd/system/medspace.service
-  register: medspace_service
+    src: "{{ item }}.service"
+    dest: /etc/systemd/system/
+  with_items: "{{ medspace_services }}"
+  register: medspace_services_task
   notify:
-    - restart medspace
+    - restart medspace services
 
 - name: reload systemd daemon
   systemd:
     daemon_reload: yes
-  when: medspace_service.changed
+  when: medspace_services_task.changed
 
-- name: enable medspace service
+- name: enable medspace services
   service:
-    name: medspace
+    name: "{{ item }}"
     enabled: true
     state: started
+  with_items: "{{ medspace_services }}"
 
 - name: copy files to server
   synchronize:
