@@ -4,7 +4,12 @@
     name: "{{ medspace_user }}"
     system: yes
 
-- name: copy medspace service
+- name: copy medspace environment file
+  template:
+    src: medspace.env
+    dest: /etc/default/medspace.env
+
+- name: copy medspace services
   template:
     src: "{{ item }}.service"
     dest: /etc/systemd/system/
@@ -39,6 +44,11 @@
     rsync_opts:
       - "--exclude=.git"
       - "--exclude=.idea"
+      - "--exclude=ansible"
+      - "--exclude=public/assets"
+      - "--exclude=log/*"
+      - "--exclude=solr"
+      - "--exclude=docker-fcrepo"
   become_user: "{{ medspace_user }}"
 
 - name: set correct ownership
@@ -52,7 +62,7 @@
   gem:
     name: bundler
     state: present
-  environment: "{{ medspace_ruby_environment }}"
+  environment: "{{ medspace_environment }}"
   become_user: "{{ medspace_user }}"
 
 - name: install gems
@@ -60,12 +70,20 @@
     chdir: /srv/medspace
     state: present
     executable: /srv/medspace/bin/bundle
-  environment: "{{ medspace_ruby_environment }}"
+  environment: "{{ medspace_environment }}"
   become_user: "{{ medspace_user }}"
 
 - name: perform database migration
-  shell: bin/rails db:migrate RAILS_ENV=development
+  shell: bin/rails db:migrate RAILS_ENV=production
   args:
     chdir: /srv/medspace
-  environment: "{{ medspace_ruby_environment }}"
+  environment: "{{ medspace_environment }}"
+  become_user: "{{ medspace_user }}"
+
+- name: compile assets
+  shell: bin/rails assets:precompile RAILS_ENV=production
+  args:
+    chdir: /srv/medspace
+    creates: /srv/medspace/public/assets
+  environment: "{{ medspace_environment }}"
   become_user: "{{ medspace_user }}"

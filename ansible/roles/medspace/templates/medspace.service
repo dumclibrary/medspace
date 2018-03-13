@@ -3,6 +3,7 @@ Description=Medspace Website
 Requires=network.target
 
 [Service]
+EnvironmentFile=/etc/default/medspace.env
 User={{ medspace_user }}
 Group={{ medspace_user }}
 Type=simple

@@ -8,3 +8,5 @@
         name: medspace
       vars:
         medspace_host_synchronize_hack: "localhost:"
+        medspace_secret_key_base: "secret_key"
+        medspace_devise_secret_key: "devise secret key"
