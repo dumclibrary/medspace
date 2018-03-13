@@ -1,30 +1,57 @@
 ---
-- name: ensure that /srv exists
-  file:
-    path: /srv
-    group: wheel
-    mode: "u=rwx,g=rwx"
-    state: directory
-  become: true
+- name: create medspace system user
+  user:
+    name: "{{ medspace_user }}"
+    system: yes
+
+- name: copy medspace service
+  template:
+    src: medspace.service
+    dest: /etc/systemd/system/medspace.service
+  register: medspace_service
+  notify:
+    - restart medspace
+
+- name: reload systemd daemon
+  systemd:
+    daemon_reload: yes
+  when: medspace_service.changed
+
+- name: enable medspace service
+  service:
+    name: medspace
+    enabled: true
+    state: started
 
 - name: copy files to server
   synchronize:
     src: ../../../..
-    dest: "{{ medspace_host }}/srv/"
+    dest: "{{ medspace_host_synchronize_hack }}/srv/"
     delete: yes
     checksum: yes
     archive: no
     links: yes
+    owner: no
+    group: no
     recursive: yes
     rsync_opts:
       - "--exclude=.git"
       - "--exclude=.idea"
+  become_user: "{{ medspace_user }}"
+
+- name: set correct ownership
+  file:
+    path: /srv/medspace
+    owner: "{{ medspace_user }}"
+    group: "{{ medspace_user }}"
+    recurse: yes
 
 - name: install bundle
   gem:
     name: bundler
     state: present
   environment: "{{ medspace_ruby_environment }}"
+  become_user: "{{ medspace_user }}"
 
 - name: install gems
   bundler:
@@ -32,9 +59,11 @@
     state: present
     executable: /srv/medspace/bin/bundle
   environment: "{{ medspace_ruby_environment }}"
+  become_user: "{{ medspace_user }}"
 
 - name: perform database migration
   shell: bin/rails db:migrate RAILS_ENV=development
   args:
     chdir: /srv/medspace
   environment: "{{ medspace_ruby_environment }}"
+  become_user: "{{ medspace_user }}"

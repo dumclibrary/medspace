@@ -1,12 +1,10 @@
 ---
 - name: medspace deployment
   hosts: all
-
-  pre_tasks:
-
+  become: true
 
   tasks:
     - include_role:
         name: medspace
       vars:
-        medspace_host: "localhost:"
+        medspace_host_synchronize_hack: "localhost:"

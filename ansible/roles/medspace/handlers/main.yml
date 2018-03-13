@@ -1,0 +1,6 @@
+---
+- name: restart medspace
+  service:
+    name: medspace
+    enabled: true
+    state: restarted

@@ -1,6 +1,8 @@
 ---
 # Hack to get synchronize module working locally for testing
-medspace_host: ""
+medspace_host_synchronize_hack: ""
+
+medspace_user: "medspace"
 
 medspace_ruby_environment:
   PATH: /opt/rh/rh-ruby23/root/usr/local/bin:/opt/rh/rh-ruby23/root/usr/bin:/opt/rh/rh-git29/root/usr/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ffmpeg
