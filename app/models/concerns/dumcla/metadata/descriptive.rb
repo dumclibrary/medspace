@@ -15,6 +15,9 @@ module Dumcla
         property :archival_collection, predicate: ::RDF::Vocab::BIBO.Collection do |index|
           index.as :stored_searchable, :facetable
         end
+        property :handle, predicate: ::RDF::Vocab::DataCite::handle, multiple: false do |index|
+          index.as :stored_searchable
+        end
 
         # Image only metadata
         property :date_accepted, predicate: ::RDF::Vocab::DC.dateAccepted do |index|

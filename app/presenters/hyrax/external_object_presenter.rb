@@ -6,6 +6,7 @@ module Hyrax
     delegate :archival_collection, to: :solr_document
     delegate :holding_entity, to: :solr_document
     delegate :date, to: :solr_document
+    delegate :handle, to: :solr_document
 
   end
 end
