@@ -20,20 +20,20 @@ github_mirror:
     - cd medspace.git
     - git push --mirror https://$GITHUB_TOKEN@github.com/dumclibrary/medspace.git
 
-#test:
-#  stage: test
-#  image: $CI_REGISTRY/mclibrary/medspace
-#  services:
-#    - redis:3-alpine
-#    - $CI_REGISTRY/mclibrary/medspace/solr
-#    - $CI_REGISTRY/mclibrary/medspace/fcrepo
-#  variables:
-#    REDIS_HOST: redis
-#    FCREPO_URL: http://$CI_REGISTRY-mclibrary-medspace-fcrepo:8080
-#    SOLR_URL: http://$CI_REGISTRY-mclibrary-medspace-solr:8983/solr/medspace
-#  script:
-#    - bundle install
-#    - bundle exec rspec
+test:
+  stage: test
+  image: $CI_REGISTRY/mclibrary/medspace
+  services:
+    - redis:3-alpine
+    - $CI_REGISTRY/mclibrary/medspace/solr
+    - $CI_REGISTRY/mclibrary/medspace/fcrepo
+  variables:
+    REDIS_HOST: redis
+    FCREPO_URL: http://$CI_REGISTRY-mclibrary-medspace-fcrepo:8080
+    SOLR_URL: http://$CI_REGISTRY-mclibrary-medspace-solr:8983/solr/medspace
+  script:
+    - bundle install
+    - bundle exec rspec
 
 medspace_build:
   stage: build
