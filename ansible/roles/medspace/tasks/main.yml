@@ -35,6 +35,8 @@
       - "--exclude=solr"
       - "--exclude=start_test_servers.sh"
       - "--exclude=tmp/*"
+  notify:
+    - restart medspace services
 
 - name: set correct ownership
   file:
@@ -42,6 +44,8 @@
     owner: "{{ medspace_user }}"
     group: "{{ medspace_user }}"
     recurse: yes
+  notify:
+    - restart medspace services
 
 - name: install bundle
   gem:
@@ -57,6 +61,8 @@
     executable: /srv/medspace/bin/bundle
   environment: "{{ medspace_environment }}"
   become_user: "{{ medspace_user }}"
+  notify:
+    - restart medspace services
 
 - include_tasks: database.yml
 
@@ -64,6 +70,8 @@
   template:
     src: medspace.env
     dest: /etc/default/medspace.env
+  notify:
+    - restart medspace services
 
 - name: copy medspace services
   template:
