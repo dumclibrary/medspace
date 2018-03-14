@@ -25,6 +25,8 @@
       - "--exclude=docker-fcrepo"
       - "--exclude=db/*.sqlite3"
       - "--exclude=tmp"
+  notify:
+    - restart medspace services
 
 - name: set correct ownership
   file:
@@ -32,6 +34,8 @@
     owner: "{{ medspace_user }}"
     group: "{{ medspace_user }}"
     recurse: yes
+  notify:
+    - restart medspace services
 
 - name: install bundle
   gem:
@@ -47,6 +51,8 @@
     executable: /srv/medspace/bin/bundle
   environment: "{{ medspace_environment }}"
   become_user: "{{ medspace_user }}"
+  notify:
+    - restart medspace services
 
 - name: compile assets
   shell: bin/rails assets:precompile RAILS_ENV=production
@@ -62,6 +68,8 @@
   template:
     src: medspace.env
     dest: /etc/default/medspace.env
+  notify:
+    - restart medspace services
 
 - name: copy medspace services
   template:
