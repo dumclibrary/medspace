@@ -4,32 +4,6 @@
     name: "{{ medspace_user }}"
     system: yes
 
-- name: copy medspace environment file
-  template:
-    src: medspace.env
-    dest: /etc/default/medspace.env
-
-- name: copy medspace services
-  template:
-    src: "{{ item }}.service"
-    dest: /etc/systemd/system/
-  with_items: "{{ medspace_services }}"
-  register: medspace_services_task
-  notify:
-    - restart medspace services
-
-- name: reload systemd daemon
-  systemd:
-    daemon_reload: yes
-  when: medspace_services_task.changed
-
-- name: enable medspace services
-  service:
-    name: "{{ item }}"
-    enabled: true
-    state: started
-  with_items: "{{ medspace_services }}"
-
 - name: copy files to server
   synchronize:
     src: ../../../..
@@ -88,3 +62,29 @@
     creates: /srv/medspace/public/assets
   environment: "{{ medspace_environment }}"
   become_user: "{{ medspace_user }}"
+
+- name: copy medspace environment file
+  template:
+    src: medspace.env
+    dest: /etc/default/medspace.env
+
+- name: copy medspace services
+  template:
+    src: "{{ item }}.service"
+    dest: /etc/systemd/system/
+  with_items: "{{ medspace_services }}"
+  register: medspace_services_task
+  notify:
+    - restart medspace services
+
+- name: reload systemd daemon
+  systemd:
+    daemon_reload: yes
+  when: medspace_services_task.changed
+
+- name: enable medspace services
+  service:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  with_items: "{{ medspace_services }}"
