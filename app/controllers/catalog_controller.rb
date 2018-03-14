@@ -51,7 +51,7 @@ class CatalogController < ApplicationController
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
     # config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
-    #config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5
+    # config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5
     config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
     config.add_facet_field solr_name("creator", :facetable), limit: 5
     # config.add_facet_field solr_name("contributor", :facetable), label: "Contributor", limit: 5
@@ -63,7 +63,7 @@ class CatalogController < ApplicationController
     # config.add_facet_field solr_name("file_format", :facetable), limit: 5
     config.add_facet_field solr_name("holding_entity", :facetable), limit: 3, label: "Location"
     config.add_facet_field solr_name("host_organization", :facetable), limit: 5, label: 'Organization'
-    config.add_facet_field solr_name("date", :facetable), limit: 5, label: "Date"
+    #config.add_facet_field solr_name("date", :facetable), limit: 5, label: "Date"
     config.add_facet_field 'year_iim', label: 'Year', range: true
 
     # The generic_type isn't displayed on the facet list

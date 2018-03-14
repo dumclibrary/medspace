@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921174506) do
+ActiveRecord::Schema.define(version: 20180305192209) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id",       null: false
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 20170921174506) do
     t.string   "access"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["permission_template_id", "agent_id", "agent_type", "access"], name: "uk_permission_template_accesses", unique: true
   end
 
   create_table "permission_templates", force: :cascade do |t|
