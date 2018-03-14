@@ -80,7 +80,7 @@ solr_build:
 medspace_deploy:
   stage: deploy
   before_script:
-    - apk --no-cache add ansible openssh-client rsync coreutils
+    - apk --no-cache add ansible openssh-client rsync
     - echo "$ANSIBLE_VAULT_FILE" > ansible/group_vars/all/vault.yml
   script:
     - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
