@@ -17,6 +17,8 @@ docker run \
   --publish 2222:22 \
   --publish 3000:3000 \
   --publish 80:80 \
+  --publish 8080:8080 \
+  --publish 8983:8983 \
   --volume /sys/fs/cgroup:/sys/fs/cgroup:ro \
   gitlab-registry.oit.duke.edu/mclibrary/server-configuration:hyrax
 

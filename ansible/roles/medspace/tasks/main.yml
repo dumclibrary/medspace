@@ -25,7 +25,6 @@
       - "--exclude=docker-fcrepo"
       - "--exclude=db/*.sqlite3"
       - "--exclude=tmp"
-  become_user: "{{ medspace_user }}"
 
 - name: set correct ownership
   file:
@@ -86,3 +85,4 @@
   with_items: "{{ medspace_services }}"
 
 - include_tasks: proxy.yml
+- include_tasks: solr.yml

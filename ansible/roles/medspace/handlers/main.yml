@@ -8,3 +8,8 @@
   service:
     name: nginx
     state: restarted
+
+- name: restart solr
+  service:
+    name: solr
+    state: restarted
