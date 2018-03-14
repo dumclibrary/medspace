@@ -81,8 +81,7 @@ medspace_deploy:
   stage: deploy
   before_script:
     - apk --no-cache add ansible openssh-client rsync coreutils
-    - echo $ANSIBLE_VAULT > ansible/group_vars/all/vault.yml
-    - sha1sum ansible/group_vars/all/vault.yml
+    - rsync -avz ansible@medspace.mc.duke.edu:~/medspace/vault.yml ansible/group_vars/all/vault.yml
   script:
     - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
   tags:
