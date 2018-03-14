@@ -48,14 +48,6 @@
   environment: "{{ medspace_environment }}"
   become_user: "{{ medspace_user }}"
 
-- name: compile assets
-  shell: bin/rails assets:precompile RAILS_ENV=production
-  args:
-    chdir: /srv/medspace
-    creates: /srv/medspace/public/assets
-  environment: "{{ medspace_environment }}"
-  become_user: "{{ medspace_user }}"
-
 - include_tasks: database.yml
 
 - name: copy medspace environment file
