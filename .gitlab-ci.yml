@@ -35,6 +35,19 @@ test:
     - bundle install
     - bundle exec rspec
 
+assets_precompile:
+  image: $CI_REGISTRY/mclibrary/medspace
+  stage: build
+  script:
+    - bin/rails assets:precompile RAILS_ENV=production DEVISE_SECRET_KEY=secret
+  only:
+    - master
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - public
+
 medspace_build:
   stage: build
   services:
@@ -92,3 +105,8 @@ medspace_deploy:
   environment:
     name: staging
     url: https://dev-medspace.mc.duke.edu
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - public
