@@ -44,6 +44,8 @@ medspace_build:
   script:
     - docker build -t $MEDSPACE_IMAGE .
     - docker push $MEDSPACE_IMAGE
+  tags:
+    - docker
   only:
     - master
 
@@ -56,6 +58,8 @@ fcrepo_build:
   script:
     - docker build -t $FCREPO_IMAGE docker-fcrepo
     - docker push $FCREPO_IMAGE
+  tags:
+    - docker
   only:
     - master
 
@@ -68,23 +72,7 @@ solr_build:
   script:
     - docker build -t $SOLR_IMAGE solr
     - docker push $SOLR_IMAGE
+  tags:
+    - docker
   only:
     - master
-
-deploy_staging:
-  before_script:
-    - eval $(ssh-agent -s)
-
-    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-
-    - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
-  image: mravenel/alpine
-  stage: deploy
-  only:
-    - master
-  script:
-    - ssh deploy@dev-medspace.mc.duke.edu "sudo /home/share/appdata/dev-medspace/update.sh"
-  environment:
-    name: staging
-    url: https://dev-medspace.mc.duke.edu
