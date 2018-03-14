@@ -83,6 +83,8 @@ medspace_deploy:
     - apk --no-cache add ansible openssh-client rsync coreutils
 #    - rsync -avz ansible@medspace.mc.duke.edu:~/medspace/vault.yml ansible/group_vars/all/vault.yml
     - echo $ANSIBLE_VAULT_FILE > ansible/group_vars/all/vault.yml
+    - cat ansible/group_vars/all/vault.yml
+    - echo $ANSIBLE_VAULT_FILE
   script:
     - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
   tags:
