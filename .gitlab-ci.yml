@@ -82,6 +82,7 @@ medspace_deploy:
   before_script:
     - apk --no-cache add ansible openssh-client rsync
     - echo $ANSIBLE_VAULT > ansible/group_vars/all/vault.yml
+    - cat ansible_group_vars/all/vault.yml
   script:
     - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
   tags:
