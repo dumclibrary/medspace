@@ -5,6 +5,9 @@ medspace_rails_env: production
 
 medspace_user: "medspace"
 
+medspace_nginx_ssl: true
+medspace_nginx_port: 443
+
 medspace_services:
   - medspace
   - medspace_sidekiq

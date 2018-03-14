@@ -3,3 +3,8 @@
   service:
     name: medspace
     state: restarted
+
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted

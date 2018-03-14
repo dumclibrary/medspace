@@ -84,3 +84,5 @@
     enabled: true
     state: started
   with_items: "{{ medspace_services }}"
+
+- include_tasks: proxy.yml

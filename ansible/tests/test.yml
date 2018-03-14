@@ -11,3 +11,5 @@
         medspace_secret_key_base: "secret_key"
         medspace_devise_secret_key: "devise secret key"
         medspace_database_password: password
+        medspace_nginx_ssl: false
+        medspace_nginx_port: 80
