@@ -49,13 +49,6 @@
   environment: "{{ medspace_environment }}"
   become_user: "{{ medspace_user }}"
 
-- name: perform database migration
-  shell: bin/rails db:migrate RAILS_ENV=production
-  args:
-    chdir: /srv/medspace
-  environment: "{{ medspace_environment }}"
-  become_user: "{{ medspace_user }}"
-
 - name: compile assets
   shell: bin/rails assets:precompile RAILS_ENV=production
   args:
@@ -63,6 +56,8 @@
     creates: /srv/medspace/public/assets
   environment: "{{ medspace_environment }}"
   become_user: "{{ medspace_user }}"
+
+- include_tasks: database.yml
 
 - name: copy medspace environment file
   template:
