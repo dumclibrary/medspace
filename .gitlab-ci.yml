@@ -40,6 +40,8 @@ assets_precompile:
   stage: build
   script:
     - bin/rails assets:precompile RAILS_ENV=production DEVISE_SECRET_KEY=secret
+  only:
+    - master
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
@@ -97,8 +99,8 @@ medspace_deploy:
     - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
   tags:
     - deploy
-#  only:
-#    - master
+  only:
+    - master
   when: manual
   environment:
     name: staging
