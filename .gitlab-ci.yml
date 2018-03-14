@@ -39,7 +39,7 @@ assets_precompile:
   image: $CI_REGISTRY/mclibrary/medspace
   stage: build
   script:
-    - bin/rails assets:precompile RAILS_ENV=production
+    - bin/rails assets:precompile RAILS_ENV=production DEVISE_SECRET_KEY=secret
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
