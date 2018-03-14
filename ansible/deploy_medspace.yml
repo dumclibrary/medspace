@@ -1,6 +1,6 @@
 - name: deploy medspace
-  hosts: web
+  hosts: medspace
   become: true
 
   tasks:
-    - ping:
+    - import_role: name=medspace
