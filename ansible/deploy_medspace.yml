@@ -1,0 +1,6 @@
+- name: deploy medspace
+  hosts: web
+  become: true
+
+  tasks:
+    - ping:
