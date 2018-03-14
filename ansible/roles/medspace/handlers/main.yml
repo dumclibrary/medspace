@@ -1,0 +1,15 @@
+---
+- name: restart medspace services
+  service:
+    name: medspace
+    state: restarted
+
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted
+
+- name: restart solr
+  service:
+    name: solr
+    state: restarted

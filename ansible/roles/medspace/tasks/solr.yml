@@ -1,0 +1,33 @@
+---
+- name: deploy solr
+  block:
+    - name: create core
+      command: /opt/solr/bin/solr create -c medspace
+      args:
+        creates: /var/solr/data/medspace
+      notify:
+        - restart solr
+
+    - name: copy files to server
+      synchronize:
+        src: ../../../../solr/config/
+        dest: "{{ medspace_host_synchronize_hack }}/var/solr/data/medspace/conf"
+        delete: yes
+        checksum: yes
+        archive: no
+        links: yes
+        owner: no
+        group: no
+        recursive: yes
+      notify:
+        - restart solr
+  become_user: solr
+
+- name: set solr core ownership
+  file:
+    path: /var/solr/data/medspace
+    owner: solr
+    group: solr
+    recurse: yes
+  notify:
+    - restart solr

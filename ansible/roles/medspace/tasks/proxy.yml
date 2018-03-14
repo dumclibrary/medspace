@@ -1,0 +1,14 @@
+---
+- name: copy configuration
+  template:
+    src: nginx.conf
+    dest: /etc/nginx/conf.d/{{ inventory_hostname }}.conf
+    owner: root
+    group: root
+    mode: "u=rw,g-w,o-w"
+  notify:
+    - restart nginx
+
+- name: test nginx configuration
+  shell: nginx -t
+  changed_when: false
