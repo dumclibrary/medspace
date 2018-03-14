@@ -11,3 +11,4 @@
 
 - name: test nginx configuration
   shell: nginx -t
+  changed_when: false
