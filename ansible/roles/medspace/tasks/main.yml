@@ -23,7 +23,7 @@
       - "--exclude=log/*"
       - "--exclude=solr"
       - "--exclude=docker-fcrepo"
-      - "--exclude=db/*"
+      - "--exclude=db/*.sqlite3"
   become_user: "{{ medspace_user }}"
 
 - name: set correct ownership
