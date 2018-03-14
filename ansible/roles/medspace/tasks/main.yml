@@ -18,13 +18,23 @@
     rsync_opts:
       - "--exclude=.git"
       - "--exclude=.idea"
+      - "--exclude=.dockerignore"
+      - "--exclude=.fcrepo_wrapper"
+      - "--exclude=.gitignore"
+      - "--exclude=.rspec"
+      - "--exclude=.ruby-version"
+      - "--exclude=.solr*"
       - "--exclude=ansible"
-      - "--exclude=public/assets"
+      - "--exclude=app.env"
+      - "--exclude=db/*.sqlite3"
+      - "--exclude=docker-compose.yml"
+      - "--exclude=docker-fcrepo"
+      - "--exclude=Dockerfile"
+      - "--exclude=fits"
       - "--exclude=log/*"
       - "--exclude=solr"
-      - "--exclude=docker-fcrepo"
-      - "--exclude=db/*.sqlite3"
-      - "--exclude=tmp"
+      - "--exclude=start_test_servers.sh"
+      - "--exclude=tmp/*"
 
 - name: set correct ownership
   file:
