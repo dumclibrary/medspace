@@ -84,7 +84,6 @@ medspace_deploy:
 #    - rsync -avz ansible@medspace.mc.duke.edu:~/medspace/vault.yml ansible/group_vars/all/vault.yml
     - echo $ANSIBLE_VAULT_FILE > ansible/group_vars/all/vault.yml
   script:
-    - printenv
     - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
   tags:
     - deploy
