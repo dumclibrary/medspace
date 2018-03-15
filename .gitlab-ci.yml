@@ -1,5 +1,10 @@
 image: docker:git
 
+cache:
+  key: "$CI_COMMIT_REF_NAME"
+  paths:
+    - public/assets
+
 stages:
   - mirror
   - test
@@ -43,11 +48,7 @@ assets_precompile:
     - bin/rails assets:precompile RAILS_ENV=production DEVISE_SECRET_KEY=secret
     - ls public
     - ls public/assets
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: push
-    paths:
-      - public/assets
+
 
 medspace_deploy:
   stage: deploy
@@ -68,11 +69,6 @@ medspace_deploy:
   environment:
     name: staging
     url: https://dev-medspace.mc.duke.edu
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: pull
-    paths:
-      - public/assets
 
 medspace_build:
   stage: build
