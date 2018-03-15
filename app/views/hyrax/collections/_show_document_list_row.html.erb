@@ -18,8 +18,11 @@
           <% end %>
         </h4>
           <%= document.date_created.first %>
+
           <br/>
-          <%= document.description.first %>
+          <%# document.description.first %>
+          <% info = document.description.first %>
+          <%= truncate(info, length: 150, separator: ' ')  %>
 
         <%= render_collection_links(document) %>
       </div>

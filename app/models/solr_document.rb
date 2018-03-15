@@ -56,4 +56,7 @@ class SolrDocument
   def title_ssort
     self[Solrizer.solr_name('title_ssort')]
   end
+  def handle
+    self[Solrizer.solr_name('handle')]
+  end
 end

@@ -10,5 +10,6 @@ module Hyrax
     delegate :accrual_method, to: :solr_document
     delegate :provenance, to: :solr_document
     delegate :condition, to: :solr_document
+    delegate :handle, to: :solr_document
   end
 end

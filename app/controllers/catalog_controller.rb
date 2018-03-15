@@ -51,7 +51,7 @@ class CatalogController < ApplicationController
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
     # config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
-    #config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5
+    # config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5
     config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
     config.add_facet_field solr_name("creator", :facetable), limit: 5
     # config.add_facet_field solr_name("contributor", :facetable), label: "Contributor", limit: 5
@@ -63,7 +63,7 @@ class CatalogController < ApplicationController
     # config.add_facet_field solr_name("file_format", :facetable), limit: 5
     config.add_facet_field solr_name("holding_entity", :facetable), limit: 3, label: "Location"
     config.add_facet_field solr_name("host_organization", :facetable), limit: 5, label: 'Organization'
-    config.add_facet_field solr_name("date", :facetable), limit: 5, label: "Date"
+    #config.add_facet_field solr_name("date", :facetable), limit: 5, label: "Date"
     config.add_facet_field 'year_iim', label: 'Year', range: true
 
     # The generic_type isn't displayed on the facet list
@@ -91,6 +91,7 @@ class CatalogController < ApplicationController
     # config.add_index_field solr_name("date_uploaded", :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     # config.add_index_field solr_name("date_modified", :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
     config.add_index_field solr_name("date_created", :stored_searchable), itemprop: 'dateCreated'
+    #config.add_index_field solr_name("handle", :stored_searchable), label: "Persistant URL"
     # config.add_index_field solr_name("rights", :stored_searchable), helper_method: :license_links
     # config.add_index_field solr_name("resource_type", :stored_searchable), label: "Resource Type", link_to_search: solr_name("resource_type", :facetable)
     # config.add_index_field solr_name("file_format", :stored_searchable), link_to_search: solr_name("file_format", :facetable)
@@ -112,6 +113,7 @@ class CatalogController < ApplicationController
     # config.add_show_field solr_name("contributor", :stored_searchable)
     config.add_show_field solr_name("publisher", :stored_searchable)
     config.add_show_field solr_name("based_near_label", :stored_searchable)
+    config.add_show_field solr_name("handle", :stored_searchable)
     # config.add_show_field solr_name("language", :stored_searchable)
     # config.add_show_field solr_name("date_uploaded", :stored_searchable)
     # config.add_show_field solr_name("date_modified", :stored_searchable)

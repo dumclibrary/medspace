@@ -6,5 +6,6 @@ module Hyrax
     delegate :holding_entity, to: :solr_document
     delegate :host_organization, to: :solr_document
     delegate :date, to: :solr_document
+    delegate :handle, to: :solr_document
   end
 end

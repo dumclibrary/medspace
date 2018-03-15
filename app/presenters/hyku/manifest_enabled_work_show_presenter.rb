@@ -12,6 +12,7 @@ module Hyku
       delegate :based_near, to: :solr_document
       delegate :provenance, to: :solr_document
       delegate :condition, to: :solr_document
+      delegate :handle, to: :solr_document
     def manifest_url
       manifest_helper.polymorphic_url([:manifest, self])
     end
