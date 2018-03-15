@@ -84,7 +84,6 @@ medspace_build:
   tags:
     - docker
   only:
-    - master
     - schedules
 
 fcrepo_build:
@@ -99,7 +98,6 @@ fcrepo_build:
   tags:
     - docker
   only:
-    - master
     - schedules
 
 solr_build:
@@ -114,5 +112,4 @@ solr_build:
   tags:
     - docker
   only:
-    - master
     - schedules
