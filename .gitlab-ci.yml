@@ -41,25 +41,15 @@ github_mirror:
 #    - bundle install
 #    - bundle exec rspec
 
-assets_precompile:
-  image: $CI_REGISTRY/mclibrary/medspace
-  stage: build
-  script:
-    - bundle install
-    - bin/rails assets:precompile RAILS_ENV=production DEVISE_SECRET_KEY=secret
-    - ls public
-    - ls public/assets
-
-
 medspace_deploy:
+  image: $CI_REGISTRY/mclibrary/medspace
   stage: deploy
   before_script:
-    - apk --no-cache add ansible openssh-client rsync
     - echo "$ANSIBLE_VAULT_FILE" > ansible/group_vars/all/vault.yml
   script:
-   - ls public
-   - ls public/assets
-#    - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
+   - bin/bundle install
+   - bin/rails assets:precompile RAILS_ENV=production DEVISE_SECRET_KEY=secret
+   - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
   tags:
     - deploy
 #  only:
