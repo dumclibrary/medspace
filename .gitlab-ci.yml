@@ -2,6 +2,7 @@ image: docker:git
 
 cache:
   key: "$CI_COMMIT_REF_NAME"
+  untracked: true
   paths:
     - public/assets
 
