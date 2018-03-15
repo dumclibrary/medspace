@@ -77,7 +77,7 @@
 - name: copy medspace service environment files
   template:
     src: "{{ item }}"
-    dest: /etc/default/medspace.env
+    dest: /etc/default/{{ item }}
     owner: root
     group: wheel
     mode: "u=rw,g=r,o-rw"
