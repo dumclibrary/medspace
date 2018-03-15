@@ -1,0 +1,7 @@
+---
+ansible_user: "{{ vault_ansible_user }}"
+ansible_become_pass: "{{ vault_ansible_become_pass }}"
+
+medspace_secret_key_base: "{{ vault_medspace_secret_key_base }}"
+medspace_devise_secret_key: "{{ vault_medspace_devise_secret_key }}"
+medspace_database_password: "{{ vault_medspace_database_password }}"

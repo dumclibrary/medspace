@@ -1,0 +1,6 @@
+- name: deploy medspace
+  hosts: medspace
+  become: true
+
+  tasks:
+    - import_role: name=medspace

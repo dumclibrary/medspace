@@ -1,0 +1,20 @@
+---
+- name: create medspace database
+  mysql_db:
+    name: "{{ medspace_database_name }}"
+    state: present
+
+- name: create medspace user
+  mysql_user:
+    name: "{{ medspace_database_user }}"
+    state: present
+    host: "%"
+    password: "{{ medspace_database_password }}"
+    priv: "{{ medspace_database_name }}.*:ALL"
+
+- name: perform database migration
+  shell: bin/rails db:migrate
+  args:
+    chdir: /srv/medspace
+  environment: "{{ medspace_environment }}"
+  become_user: "{{ medspace_user }}"

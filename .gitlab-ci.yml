@@ -35,6 +35,19 @@ test:
     - bundle install
     - bundle exec rspec
 
+assets_precompile:
+  image: $CI_REGISTRY/mclibrary/medspace
+  stage: build
+  script:
+    - bin/rails assets:precompile RAILS_ENV=production DEVISE_SECRET_KEY=secret
+  only:
+    - master
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - public
+
 medspace_build:
   stage: build
   services:
@@ -44,6 +57,8 @@ medspace_build:
   script:
     - docker build -t $MEDSPACE_IMAGE .
     - docker push $MEDSPACE_IMAGE
+  tags:
+    - docker
   only:
     - master
 
@@ -56,6 +71,8 @@ fcrepo_build:
   script:
     - docker build -t $FCREPO_IMAGE docker-fcrepo
     - docker push $FCREPO_IMAGE
+  tags:
+    - docker
   only:
     - master
 
@@ -68,23 +85,28 @@ solr_build:
   script:
     - docker build -t $SOLR_IMAGE solr
     - docker push $SOLR_IMAGE
+  tags:
+    - docker
   only:
     - master
 
-deploy_staging:
-  before_script:
-    - eval $(ssh-agent -s)
-
-    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-
-    - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
-  image: mravenel/alpine
+medspace_deploy:
   stage: deploy
+  before_script:
+    - apk --no-cache add ansible openssh-client rsync
+    - echo "$ANSIBLE_VAULT_FILE" > ansible/group_vars/all/vault.yml
+  script:
+    - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
+  tags:
+    - deploy
   only:
     - master
-  script:
-    - ssh deploy@dev-medspace.mc.duke.edu "sudo /home/share/appdata/dev-medspace/update.sh"
+  when: manual
   environment:
     name: staging
     url: https://dev-medspace.mc.duke.edu
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - public

@@ -1,0 +1,98 @@
+---
+- name: create medspace system user
+  user:
+    name: "{{ medspace_user }}"
+    system: yes
+
+- name: copy files to server
+  synchronize:
+    src: ../../../..
+    dest: "{{ medspace_host_synchronize_hack }}/srv/"
+    delete: yes
+    checksum: yes
+    archive: no
+    links: yes
+    owner: no
+    group: no
+    recursive: yes
+    rsync_opts:
+      - "--exclude=.git"
+      - "--exclude=.idea"
+      - "--exclude=.dockerignore"
+      - "--exclude=.fcrepo_wrapper"
+      - "--exclude=.gitignore"
+      - "--exclude=.rspec"
+      - "--exclude=.ruby-version"
+      - "--exclude=.solr*"
+      - "--exclude=ansible"
+      - "--exclude=app.env"
+      - "--exclude=db/*.sqlite3"
+      - "--exclude=docker-compose.yml"
+      - "--exclude=docker-fcrepo"
+      - "--exclude=Dockerfile"
+      - "--exclude=fits"
+      - "--exclude=log/*"
+      - "--exclude=solr"
+      - "--exclude=start_test_servers.sh"
+      - "--exclude=tmp/*"
+  notify:
+    - restart medspace services
+
+- name: set correct ownership
+  file:
+    path: /srv/medspace
+    owner: "{{ medspace_user }}"
+    group: "{{ medspace_user }}"
+    recurse: yes
+  notify:
+    - restart medspace services
+
+- name: install bundle
+  gem:
+    name: bundler
+    state: present
+  environment: "{{ medspace_environment }}"
+  become_user: "{{ medspace_user }}"
+
+- name: install gems
+  bundler:
+    chdir: /srv/medspace
+    state: present
+    executable: /srv/medspace/bin/bundle
+  environment: "{{ medspace_environment }}"
+  become_user: "{{ medspace_user }}"
+  notify:
+    - restart medspace services
+
+- include_tasks: database.yml
+
+- name: copy medspace environment file
+  template:
+    src: medspace.env
+    dest: /etc/default/medspace.env
+  notify:
+    - restart medspace services
+
+- name: copy medspace services
+  template:
+    src: "{{ item }}.service"
+    dest: /etc/systemd/system/
+  with_items: "{{ medspace_services }}"
+  register: medspace_services_task
+  notify:
+    - restart medspace services
+
+- name: reload systemd daemon
+  systemd:
+    daemon_reload: yes
+  when: medspace_services_task.changed
+
+- name: enable medspace services
+  service:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  with_items: "{{ medspace_services }}"
+
+- include_tasks: proxy.yml
+- include_tasks: solr.yml

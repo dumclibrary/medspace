@@ -1,0 +1,16 @@
+---
+- name: restart medspace services
+  service:
+    name: "{{ item }}"
+    state: restarted
+  with_items: "{{ medspace_services }}"
+
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted
+
+- name: restart solr
+  service:
+    name: solr
+    state: restarted
