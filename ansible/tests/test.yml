@@ -13,3 +13,4 @@
         medspace_database_password: password
         medspace_nginx_ssl: false
         medspace_nginx_port: 80
+        medspace_rails_env: development
