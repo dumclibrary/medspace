@@ -1,9 +1,9 @@
 [Unit]
-Description=Medspace - {{ medspace_rails_env }}
+Description=Medspace - development
 Requires=network.target
 
 [Service]
-EnvironmentFile=/etc/default/medspace.env
+EnvironmentFile=/etc/default/medspace_development.env
 User={{ medspace_user }}
 Group={{ medspace_user }}
 Type=simple
