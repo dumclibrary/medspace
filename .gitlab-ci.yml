@@ -41,8 +41,8 @@ assets_precompile:
   script:
     - bundle install
     - bin/rails assets:precompile RAILS_ENV=production DEVISE_SECRET_KEY=secret
-  only:
-    - master
+    - ls public
+    - ls public/assets
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
@@ -55,14 +55,16 @@ medspace_deploy:
     - apk --no-cache add ansible openssh-client rsync
     - echo "$ANSIBLE_VAULT_FILE" > ansible/group_vars/all/vault.yml
   script:
-    - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
+   - ls public
+   - ls public/assets
+#    - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
   tags:
     - deploy
-  only:
-    - master
+#  only:
+#    - master
   except:
     - schedules
-  when: manual
+#  when: manual
   environment:
     name: staging
     url: https://dev-medspace.mc.duke.edu
