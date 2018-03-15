@@ -1,11 +1,5 @@
 image: docker:git
 
-cache:
-  key: "$CI_COMMIT_REF_NAME"
-  untracked: true
-  paths:
-    - public/assets
-
 stages:
   - mirror
   - test
@@ -52,11 +46,11 @@ medspace_deploy:
    - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
   tags:
     - deploy
-#  only:
-#    - master
+  only:
+    - master
   except:
     - schedules
-#  when: manual
+  when: manual
   environment:
     name: staging
     url: https://dev-medspace.mc.duke.edu
