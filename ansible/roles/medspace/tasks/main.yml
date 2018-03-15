@@ -66,10 +66,21 @@
 
 - include_tasks: database.yml
 
-- name: copy medspace environment file
+- name: copy medspace environment script
+  template:
+    src: medspace.sh
+    dest: /etc/profile.d/medspace.sh
+    owner: "{{ medspace_user }}"
+    group: "wheel"
+    mode: "u=rw,g=r,o-rw"
+
+- name: copy medspace service environment file
   template:
     src: medspace.env
     dest: /etc/default/medspace.env
+    owner: root
+    group: wheel
+    mode: "u=rw,g=r,o-rw"
   notify:
     - restart medspace services
 
