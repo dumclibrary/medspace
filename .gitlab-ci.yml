@@ -35,27 +35,15 @@ github_mirror:
 #    - bundle install
 #    - bundle exec rspec
 
-assets_precompile:
-  image: $CI_REGISTRY/mclibrary/medspace
-  stage: build
-  script:
-    - bundle install
-    - bin/rails assets:precompile RAILS_ENV=production DEVISE_SECRET_KEY=secret
-  only:
-    - master
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: push
-    paths:
-      - public
-
 medspace_deploy:
+  image: $CI_REGISTRY/mclibrary/medspace
   stage: deploy
   before_script:
-    - apk --no-cache add ansible openssh-client rsync
     - echo "$ANSIBLE_VAULT_FILE" > ansible/group_vars/all/vault.yml
   script:
-    - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
+   - bin/bundle install
+   - bin/rails assets:precompile RAILS_ENV=production DEVISE_SECRET_KEY=secret
+   - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
   tags:
     - deploy
   only:
@@ -66,11 +54,6 @@ medspace_deploy:
   environment:
     name: staging
     url: https://dev-medspace.mc.duke.edu
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: pull
-    paths:
-      - public
 
 medspace_build:
   stage: build
@@ -84,7 +67,6 @@ medspace_build:
   tags:
     - docker
   only:
-    - master
     - schedules
 
 fcrepo_build:
@@ -99,7 +81,6 @@ fcrepo_build:
   tags:
     - docker
   only:
-    - master
     - schedules
 
 solr_build:
@@ -114,5 +95,4 @@ solr_build:
   tags:
     - docker
   only:
-    - master
     - schedules
