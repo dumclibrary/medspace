@@ -47,7 +47,7 @@ assets_precompile:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
     paths:
-      - public
+      - public/assets
 
 medspace_deploy:
   stage: deploy
@@ -72,7 +72,7 @@ medspace_deploy:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
     paths:
-      - public
+      - public/assets
 
 medspace_build:
   stage: build
