@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
-describe Medspace::Importer do
+describe Medspace::Importer, :import_tests => true do
   let(:msi) { described_class.new(input_file, data_path) }
   let(:input_file) { file_fixture('importer/document/document_medspace_data.xml') }
   let(:data_path) { Rails.root.join('spec', 'fixtures', 'files', 'importer', 'document') }

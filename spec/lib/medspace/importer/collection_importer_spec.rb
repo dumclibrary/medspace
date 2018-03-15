@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
-describe Medspace::CollectionImporter do
+describe Medspace::CollectionImporter, :import_tests => true do
   let(:msci) { described_class.new(input_file) }
   let(:input_file) { file_fixture('importer/collection/collection_1.xml') }
   let(:msci_sans_title) { file_fixture('importer/collection/collection_sans_title.xml') }

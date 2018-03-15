@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Medspace::ImportFile do
+describe Medspace::ImportFile, :import_tests => true do
   let(:doc) { File.open(file_fixture('importer/image/file_data.xml')) { |f| Nokogiri::XML(f) } }
   let(:first_record) { doc.xpath("//object") }
   let(:record) { Medspace::Record.new(first_record) }
