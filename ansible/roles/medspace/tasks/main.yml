@@ -74,13 +74,16 @@
     group: "wheel"
     mode: "u=rw,g=r,o-rw"
 
-- name: copy medspace service environment file
+- name: copy medspace service environment files
   template:
-    src: medspace.env
+    src: "{{ item }}"
     dest: /etc/default/medspace.env
     owner: root
     group: wheel
     mode: "u=rw,g=r,o-rw"
+  with_items:
+    - medspace.env
+    - medspace_development.env
   notify:
     - restart medspace services
 
@@ -92,6 +95,11 @@
   register: medspace_services_task
   notify:
     - restart medspace services
+
+- name: copy medspace development service
+  template:
+    src: medspace_development.service
+    dest: /etc/systemd/system/
 
 - name: reload systemd daemon
   systemd:
