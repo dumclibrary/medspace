@@ -5,7 +5,6 @@ stages:
   - test
   - build
   - deploy
-  - publish
 
 variables:
   MEDSPACE_IMAGE: $CI_REGISTRY/mclibrary/medspace
@@ -61,6 +60,8 @@ medspace_deploy:
     - deploy
   only:
     - master
+  except:
+    - schedules
   when: manual
   environment:
     name: staging
@@ -72,7 +73,7 @@ medspace_deploy:
       - public
 
 medspace_build:
-  stage: publish
+  stage: build
   services:
     - docker:dind
   before_script:
@@ -84,9 +85,10 @@ medspace_build:
     - docker
   only:
     - master
+    - schedules
 
 fcrepo_build:
-  stage: publish
+  stage: build
   services:
     - docker:dind
   before_script:
@@ -98,9 +100,10 @@ fcrepo_build:
     - docker
   only:
     - master
+    - schedules
 
 solr_build:
-  stage: publish
+  stage: build
   services:
     - docker:dind
   before_script:
@@ -112,3 +115,4 @@ solr_build:
     - docker
   only:
     - master
+    - schedules
