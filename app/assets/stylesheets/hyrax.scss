@@ -21,6 +21,14 @@
   max-height: 200px;
 }
 
+.list-thumbnail-localc {
+  width: 30%;
+  float: left;
+  max-width: 200px;
+  max-height: 200px;
+  padding-bottom: 200px;
+}
+
 .list-thumbnail-local {
   width: 30%;
   float: left;
@@ -28,6 +36,7 @@
   max-height: 125px;
   padding-bottom: 200px;
 }
+
 .background-container-gradient-local {
   @include masthead-background-containers();
 }
