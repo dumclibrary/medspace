@@ -1,35 +1,39 @@
 
-<table class="collection-highlights_local">
+<table border="1" class="collection-highlights_local">
   <tbody>
-
-
             <% collections.each_with_index do |collection, index| %>
+
             <% if (index%2==0) %>
 
             <tr>
               <%end%>
-        <td align="center">
-          <div class="media">
+        <td align="center" valign="top">
+          <div class="media" width="20%">
             <%= link_to [hyrax, collection],  'aria-hidden' => true do %>
               <%= render_thumbnail_tag collection, { class: 'hidden-xs file_listing_thumbnail_local' }, { suppress_link: true } %>
             <% end %>
             <div class="media-body">
               <div class="media-heading">
                 <%= link_to [hyrax, collection] do %>
-                  <h3><%= collection.title_or_label %></h3>
+                  <b><%= collection.title_or_label %></b>
                 <% end %>
-                <%# collection.description.first %>
               </div>
             </div>
           </div>
-        </td>
+              </td>
+              <td class="my-td">
+
+                <% info = collection.description.first %>
+                <%= truncate(info, length: 255, separator: ' ')  %>
+
+              </td>
         <% if (index%2==1) %>
       </tr>
-          <%end%>
+          <% end %>
     <% end %>
    </tbody>
 </table>
-
+<center>
 <ul class="list-inline collection-highlights-list">
   <li>
     <%= link_to t('hyrax.homepage.admin_ssets.link'),
@@ -37,3 +41,4 @@
                 class: 'btn btn-default' %>
   </li>
 </ul>
+</center>
