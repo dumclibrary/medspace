@@ -1,13 +1,13 @@
 
-<table border="1" class="collection-highlights_local">
+<table class="collection-highlights_local">
   <tbody>
             <% collections.each_with_index do |collection, index| %>
 
             <% if (index%2==0) %>
 
-            <tr>
-              <%end%>
-        <td align="center" valign="top">
+            <tr class="lbw">
+        <%end%>
+        <td class="lbw" align="center">
           <div class="media" width="20%">
             <%= link_to [hyrax, collection],  'aria-hidden' => true do %>
               <%= render_thumbnail_tag collection, { class: 'hidden-xs file_listing_thumbnail_local' }, { suppress_link: true } %>
@@ -21,11 +21,9 @@
             </div>
           </div>
               </td>
-              <td class="my-td">
-
+              <td class="lbw my-td">
                 <% info = collection.description.first %>
                 <%= truncate(info, length: 255, separator: ' ')  %>
-
               </td>
         <% if (index%2==1) %>
       </tr>
