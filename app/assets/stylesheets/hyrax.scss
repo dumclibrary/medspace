@@ -21,12 +21,21 @@
   max-height: 200px;
 }
 
-.list-thumbnail-localc {
+.file_listing_thumbnail_local img {
+  max-width: 200px;
+  max-height: 200px;
+}
+.list-thumbnail-localc  {
   width: 30%;
   float: left;
   max-width: 200px;
   max-height: 200px;
   padding-bottom: 200px;
+}
+
+.list-thumbnail-localc img {
+  max-width: 200px;
+  max-height: 200px;
 }
 
 .list-thumbnail-local {
@@ -37,6 +46,10 @@
   padding-bottom: 200px;
 }
 
+.list-thumbnail-local img {
+  max-width: 125px;
+  max-height: 125px;
+}
 .background-container-gradient-local {
   @include masthead-background-containers();
 }
@@ -47,7 +60,17 @@
   max-width: 100%;
   max-height: 100%;
 }
+tr.lbw td.lbw
+{
+    background-color: #f2f2f2;
+}
 
+tr.lbw:nth-child(even) td.lbw:nth-child(odd),
+tr.lbw:nth-child(odd) td.lbw:nth-child(even)
+{
+    background-color: #ffffff;
+
+}
 .my-td {
   width: 30%;
   padding: 15px;
