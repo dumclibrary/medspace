@@ -18,7 +18,7 @@
 !/tmp/.keep
 *.log
 *.tmp
-/import/*
+/testfiles/*
 # Ignore Byebug command history file.
 .byebug_history
 
