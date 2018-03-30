@@ -10,7 +10,6 @@
 <%= presenter.attribute_to_html(:host_organization, render_as: :faceted) %>
 <%= presenter.attribute_to_html(:archival_collection) %>
 <%= presenter.attribute_to_html(:at_location) %>
-<%= presenter.attribute_to_html(:handle) %>
 <%= presenter.attribute_to_html(:contributor, render_as: :faceted) unless current_user.nil?  %>
 <%= presenter.attribute_to_html(:date) unless current_user.nil?  %>
 <%= presenter.attribute_to_html(:date_accepted) unless current_user.nil?  %>

@@ -5,10 +5,9 @@
                     class: "representative-media",
                     alt: "",
                     role: "presentation" %>
-      <%= link_to pdfjs.reduced_path(file: "#{hyrax.download_path(file_set.id)}"), target: :_blank, class: "btn btn-default" do %>
-   <!-- %= link_to hyrax.download_path(file_set.id), target: :_blank, class: "btn btn-default" do % -->
-   <%= t('hyrax.file_set.show.downloadable_content.pdf_viewer') %>
-   <% end %>
+      <%# link_to pdfjs.reduced_path(file: "#{hyrax.download_path(file_set.id)}"), target: :_blank, class: "btn btn-default" do %>
+   <%# t('hyrax.file_set.show.downloadable_content.pdf_viewer') %>
+   <%# end %>
 
       <%= link_to hyrax.download_path(file_set),
                   data: { turbolinks: false },
