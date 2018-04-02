@@ -1,21 +1,114 @@
-
+<center>
+<ul class="list-inline collection-highlights-list">
+  <li>
+    <%= link_to t('hyrax.homepage.admin_ssets.link'),
+                main_app.search_catalog_path(f: { human_readable_type_sim: ["Collection"]}),
+                class: 'btn btn-default' %>
+  </li>
+</ul>
+</center>
 <table class="collection-highlights_local">
   <tbody>
-            <% collections.each_with_index do |collection, index| %>
-
-            <% if (index%2==0) %>
-
+        <%# collections.each_with_index do |collection, index| %>
+            <%# if (collection.id=='2z10wq20d') || (collection.id=='w0892992w') || (collection.id=='kh04dp681') || (collection.id=='6m311p28w') || (collection.id=='1j92g7448') || (collection.id=='5d86p021v')  %>
             <tr class="lbw">
-        <%end%>
-        <td class="lbw" align="center">
+              <% collection = Collection.find('4t64gn166') %>
+                      <td class="lbw" align="center">
+              <div class="media" width="20%">
+                <%= link_to [hyrax, collection],  'aria-hidden' => true do %>
+                <%# render_thumbnail_tag collection, { class: 'hidden-xs file_listing_thumbnail_local' }, { suppress_link: true } %>
+                <img class="hidden-xs file_listing_thumbnail_local" src="/downloads/<%= collection.thumbnail_id %>?file=thumbnail" alt="thumbnail"/>
+                <% end %>
+                <div class="media-body">
+                  <div class="media-heading">
+                    <%= link_to [hyrax, collection] do %>
+                      <b><%= collection.title.first %></b>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+                  </td>
+                  <td class="lbw my-td">
+                    <% info = collection.description.first %>
+                    <%= truncate(info, length: 255, separator: ' ')  %>
+                  </td>
+
+              <% collection = Collection.find('pk02c9724') %>
+                      <td class="lbw" align="center">
+              <div class="media" width="20%">
+                <%= link_to [hyrax, collection],  'aria-hidden' => true do %>
+                  <%# render_thumbnail_tag collection, { class: 'hidden-xs file_listing_thumbnail_local' }, { suppress_link: true } %>
+                  <img class="hidden-xs file_listing_thumbnail_local" src="/downloads/<%= collection.thumbnail_id %>?file=thumbnail" alt="thumbnail"/>
+                <% end %>
+                <div class="media-body">
+                  <div class="media-heading">
+                    <%= link_to [hyrax, collection] do %>
+                      <b><%= collection.title.first %></b>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+                  </td>
+                  <td class="lbw my-td">
+                    <% info = collection.description.first %>
+                    <%= truncate(info, length: 255, separator: ' ')  %>
+                  </td>
+          </tr>
+          <tr class="lbw">
+            <% collection = Collection.find('fq977t769') %>
+                    <td class="lbw" align="center">
+            <div class="media" width="20%">
+              <%= link_to [hyrax, collection],  'aria-hidden' => true do %>
+              <%# render_thumbnail_tag collection, { class: 'hidden-xs file_listing_thumbnail_local' }, { suppress_link: true } %>
+              <img class="hidden-xs file_listing_thumbnail_local" src="/downloads/<%= collection.thumbnail_id %>?file=thumbnail" alt="thumbnail"/>
+              <% end %>
+              <div class="media-body">
+                <div class="media-heading">
+                  <%= link_to [hyrax, collection] do %>
+                    <b><%= collection.title.first %></b>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+                </td>
+                <td class="lbw my-td">
+                  <% info = collection.description.first %>
+                  <%= truncate(info, length: 255, separator: ' ')  %>
+                </td>
+
+            <% collection = Collection.find('vd66vz88c') %>
+                    <td class="lbw" align="center">
+            <div class="media" width="20%">
+              <%= link_to [hyrax, collection],  'aria-hidden' => true do %>
+                <%# render_thumbnail_tag collection, { class: 'hidden-xs file_listing_thumbnail_local' }, { suppress_link: true } %>
+                <img class="hidden-xs file_listing_thumbnail_local" src="/downloads/<%= collection.thumbnail_id %>?file=thumbnail" alt="thumbnail"/>
+              <% end %>
+              <div class="media-body">
+                <div class="media-heading">
+                  <%= link_to [hyrax, collection] do %>
+                    <b><%= collection.title.first %></b>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+                </td>
+                <td class="lbw my-td">
+                  <% info = collection.description.first %>
+                  <%= truncate(info, length: 255, separator: ' ')  %>
+                </td>
+        </tr>
+        <tr class="lbw">
+          <% collection = Collection.find('5138jd84x') %>
+                  <td class="lbw" align="center">
           <div class="media" width="20%">
             <%= link_to [hyrax, collection],  'aria-hidden' => true do %>
-              <%= render_thumbnail_tag collection, { class: 'hidden-xs file_listing_thumbnail_local' }, { suppress_link: true } %>
+            <%# render_thumbnail_tag collection, { class: 'hidden-xs file_listing_thumbnail_local' }, { suppress_link: true } %>
+            <img class="hidden-xs file_listing_thumbnail_local" src="/downloads/<%= collection.thumbnail_id %>?file=thumbnail" alt="thumbnail"/>
             <% end %>
             <div class="media-body">
               <div class="media-heading">
                 <%= link_to [hyrax, collection] do %>
-                  <b><%= collection.title_or_label %></b>
+                  <b><%= collection.title.first %></b>
                 <% end %>
               </div>
             </div>
@@ -25,10 +118,29 @@
                 <% info = collection.description.first %>
                 <%= truncate(info, length: 255, separator: ' ')  %>
               </td>
-        <% if (index%2==1) %>
+
+          <% collection = Collection.find('sj139192w') %>
+                  <td class="lbw" align="center">
+          <div class="media" width="20%">
+            <%= link_to [hyrax, collection],  'aria-hidden' => true do %>
+              <%# render_thumbnail_tag collection, { class: 'hidden-xs file_listing_thumbnail_local' }, { suppress_link: true } %>
+              <img class="hidden-xs file_listing_thumbnail_local" src="/downloads/<%= collection.thumbnail_id %>?file=thumbnail" alt="thumbnail"/>
+            <% end %>
+            <div class="media-body">
+              <div class="media-heading">
+                <%= link_to [hyrax, collection] do %>
+                  <b><%= collection.title.first %></b>
+                <% end %>
+              </div>
+            </div>
+          </div>
+              </td>
+              <td class="lbw my-td">
+                <% info = collection.description.first %>
+                <%= truncate(info, length: 255, separator: ' ')  %>
+              </td>
       </tr>
-          <% end %>
-    <% end %>
+    <%# end %>
    </tbody>
 </table>
 <center>
