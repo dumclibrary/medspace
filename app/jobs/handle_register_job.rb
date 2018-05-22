@@ -18,7 +18,7 @@ class HandleRegisterJob < ApplicationJob
   ##
   # @param object [ActiveFedora::Base]
   def perform(object)
-    HandleDispatcher.assign_for!(object: object)
+    HandleDispatcher.assign_for!(object: object, attribute: :handle)
     object.save!
   end
 end
