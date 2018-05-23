@@ -6,6 +6,8 @@
 #   HandleRegisterJob.perform_later(object)
 #
 # @see ActiveJob::Base, HandleDispatcher.assign_for!
+require 'handle'
+
 class HandleRegisterJob < ApplicationJob
   queue_as :handle
 

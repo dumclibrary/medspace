@@ -6,6 +6,8 @@
 #   HandleUpdateJob.perform_later(object)
 #
 # @see ActiveJob::Base, HandleRegistrar#update!
+require 'handle'
+
 class HandleUpdateJob < ApplicationJob
   queue_as :handle
 
