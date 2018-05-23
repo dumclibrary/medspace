@@ -15,12 +15,12 @@ namespace :handle do
     end
 
     desc 'Registers handles for all objects that do not already have one'
-    task :register_all do
+    task :register_all => :environment do
       [Image, Document, ExternalObject].each do |model_class|
-        model_class.all do |work|
-          if object.handle.empty?
+        model_class.all.each do |work|
+          if work.handle.empty?
             handle = HandleDispatcher.assign_for!(object: work, attribute: :handle)
-            puts "Registered a handle #{handle} for #{work.id}"
+            puts "Registered a handle #{handle} for #{work}"
           end
         end
       end
