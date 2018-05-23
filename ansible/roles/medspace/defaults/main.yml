@@ -24,6 +24,7 @@ medspace_handle_prefix: "2193"
 medspace_handle_admin_prefix: "0.NA/2193"
 medspace_handle_index: "300"
 medspace_handle_pkey_file: "/etc/hsj/medspace/privkey.bin"
+medspace_hdl_home: "/opt/hsj"
 
 medspace_environment:
   PATH: /opt/rh/rh-ruby23/root/usr/local/bin:/opt/rh/rh-ruby23/root/usr/bin:/opt/rh/rh-git29/root/usr/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ffmpeg
