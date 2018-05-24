@@ -23,7 +23,7 @@ medspace_handle_email: "russell.koonts@duke.edu"
 medspace_handle_prefix: "2193"
 medspace_handle_admin_prefix: "0.NA/2193"
 medspace_handle_index: "300"
-medspace_handle_pkey_file: "/etc/hsj/medspace/privkey.bin"
+medspace_handle_pkey_file: "/etc/hsj/medspace/admpriv.bin"
 medspace_hdl_home: "/opt/hsj"
 
 medspace_environment:
