@@ -204,7 +204,7 @@ Hyrax.config do |config|
   end
 end
 
-# Hyrax::CurationConcern.actor_factory.use Hyrax::Actors::HandleAssuranceActor
+Hyrax::CurationConcern.actor_factory.use Hyrax::Actors::HandleAssuranceActor
 
 Date::DATE_FORMATS[:standard] = "%m/%d/%Y"
 
