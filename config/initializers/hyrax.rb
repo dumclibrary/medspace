@@ -204,6 +204,8 @@ Hyrax.config do |config|
   end
 end
 
+Hyrax::CurationConcern.actor_factory.use Hyrax::Actors::HandleAssuranceActor
+
 Date::DATE_FORMATS[:standard] = "%m/%d/%Y"
 
 Qa::Authorities::Local.register_subauthority('subjects', 'Qa::Authorities::Local::TableBasedAuthority')
