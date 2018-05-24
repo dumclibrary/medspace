@@ -28,17 +28,12 @@ describe HandleDispatcher do
 
   shared_examples 'performs handle assignment' do |method|
     it 'returns the same object' do
-      expect(dispatcher.public_send(method, object: object)).to eql object
-    end
-
-    it 'assigns to the identifier attribute by default' do
-      dispatcher.public_send(method, object: object)
-      expect(object.identifier).to contain_exactly(handle_url)
+      expect(dispatcher.public_send(method, object: object, attribute: :handle)).to eql object
     end
 
     it 'assigns to specified attribute when requested' do
-      dispatcher.public_send(method, object: object, attribute: :keyword)
-      expect(object.keyword).to contain_exactly(handle_url)
+      dispatcher.public_send(method, object: object, attribute: :handle)
+      expect(object.handle).to match(handle_url)
     end
   end
 
@@ -64,7 +59,7 @@ describe HandleDispatcher do
     include_examples 'performs handle assignment', :assign_for!
 
     it 'saves the object' do
-      expect { dispatcher.assign_for!(object: object) }
+      expect { dispatcher.assign_for!(object: object, attribute: :handle) }
         .to change { object.new_record? }
         .from(true)
         .to(false)
