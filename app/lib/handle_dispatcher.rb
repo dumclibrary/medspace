@@ -96,6 +96,6 @@ class HandleDispatcher
     # @param [#handle] record
     # @return [Array<String>]
     def handle_values(record:)
-      ["http://hdl.handle.net/#{record.handle}"]
+      "http://hdl.handle.net/#{record.handle}"
     end
 end

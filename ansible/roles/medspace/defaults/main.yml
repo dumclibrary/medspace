@@ -19,11 +19,12 @@ medspace_database_host: 127.0.0.1
 medspace_database_url: mysql2://{{ medspace_database_user }}:{{ medspace_database_password }}@{{ medspace_database_host }}/{{ medspace_database_name }}
 
 medspace_handle_target_hostname: "localhost"
-medspace_handle_email: "rskoonts@duke.edu"
+medspace_handle_email: "russell.koonts@duke.edu"
 medspace_handle_prefix: "2193"
 medspace_handle_admin_prefix: "0.NA/2193"
 medspace_handle_index: "300"
-medspace_handle_pkey_file: "/etc/hsj/medspace/privkey.bin"
+medspace_handle_pkey_file: "/etc/hsj/medspace/admpriv.bin"
+medspace_hdl_home: "/opt/hsj"
 
 medspace_environment:
   PATH: /opt/rh/rh-ruby23/root/usr/local/bin:/opt/rh/rh-ruby23/root/usr/bin:/opt/rh/rh-git29/root/usr/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ffmpeg
