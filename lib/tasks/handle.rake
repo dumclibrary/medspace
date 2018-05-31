@@ -18,7 +18,7 @@ namespace :handle do
     task :register_all => :environment do
       [Image, Document, ExternalObject].each do |model_class|
         model_class.all.each do |work|
-          if work.handle.empty?
+          if work.handle.nil? || work.handle.empty?
             handle = HandleDispatcher.assign_for!(object: work, attribute: :handle)
             puts "Registered a handle #{handle} for #{work}"
           end
