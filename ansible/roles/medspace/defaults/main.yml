@@ -18,7 +18,7 @@ medspace_database_host: 127.0.0.1
 
 medspace_database_url: mysql2://{{ medspace_database_user }}:{{ medspace_database_password }}@{{ medspace_database_host }}/{{ medspace_database_name }}
 
-medspace_handle_target_hostname: "localhost"
+medspace_handle_target_hostname: "medspace.mc.duke.edu"
 medspace_handle_email: "russell.koonts@duke.edu"
 medspace_handle_prefix: "2193"
 medspace_handle_admin_prefix: "0.NA/2193"
