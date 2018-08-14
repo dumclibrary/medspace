@@ -1,7 +1,6 @@
 image: docker:git
 
 stages:
-  - mirror
   - test
   - build
   - deploy
@@ -10,15 +9,6 @@ variables:
   MEDSPACE_IMAGE: $CI_REGISTRY/mclibrary/medspace
   FCREPO_IMAGE: $CI_REGISTRY/mclibrary/medspace/fcrepo
   SOLR_IMAGE: $CI_REGISTRY/mclibrary/medspace/solr
-
-github_mirror:
-  stage: mirror
-  allow_failure: true
-  script:
-    - cd /tmp
-    - git clone --bare $CI_REPOSITORY_URL
-    - cd medspace.git
-    - git push --mirror https://$GITHUB_TOKEN@github.com/dumclibrary/medspace.git
 
 test:
   stage: test
