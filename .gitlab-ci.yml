@@ -87,12 +87,11 @@ medspace_deploy:
     name: staging
     url: https://dev-medspace.mc.duke.edu
 
-deploy_branch:
+review_app:
   stage: deploy
   variables:
     DOCKER_HOST: tcp://swarm.152.3.102.153.xip.io:2376
     DOCKER_TLS_VERIFY: 1
-    SERVICE_NAME: medspace
   image: docker:latest
   script:
     - mkdir -p ~/.docker
@@ -102,9 +101,27 @@ deploy_branch:
     - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
     - docker stack deploy --with-registry-auth --compose-file=docker-stack-compose.yml ${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}-${CI_COMMIT_SHA}
   environment:
-    name: master
-    url: "https://medspace-master.152.3.102.153.xip.io/"
+    name: ${CI_COMMIT_REF_NAME}
+    url: "https://medspace-${CI_COMMIT_SHA}.152.3.102.153.xip.io/"
+    on_stop: stop_review_app
 
+stop_review_app:
+  stage: deploy
+  when: manual
+  variables:
+    DOCKER_HOST: tcp://swarm.152.3.102.153.xip.io:2376
+    DOCKER_TLS_VERIFY: 1
+  image: docker:latest
+  script:
+    - mkdir -p ~/.docker
+    - echo "$TLSCACERT" > ~/.docker/ca.pem
+    - echo "$TLSCERT" > ~/.docker/cert.pem
+    - echo "$TLSKEY" > ~/.docker/key.pem
+    - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
+    - docker stack rm ${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}-${CI_COMMIT_SHA}
+  environment:
+     name: ${CI_COMMIT_REF_NAME}
+     action: stop
 
 medspace_build:
   stage: build
