@@ -1,0 +1,59 @@
+version: '3.7'
+
+services:
+  web:
+    build: .
+    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
+    user: rails
+    command: "bundle exec rails server -p 3000 -b '0.0.0.0'"
+    networks:
+      - net
+      - traefik_net
+    env_file:
+      - ./app.env
+    deploy:
+      labels:
+        - "traefik.port=3000"
+        - "traefik.docker.network=traefik_net"
+        - "traefik.frontend.entryPoints=https"
+        - "traefik.frontend.rule=Host:medspace-master.152.3.102.153.xip.io"
+
+
+  db_migrate:
+    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
+    restart: 'on-failure'
+    networks:
+      - net
+    env_file:
+      - ./app.env
+    command: 'bundle exec rails db:migrate'
+
+  db:
+    image: 'mariadb:10.3.0'
+    networks:
+      - net
+    env_file:
+     - ./app.env
+
+  fcrepo:
+    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/fcrepo'
+    networks:
+      - net
+
+  redis:
+    image: 'redis:3.2.9-alpine'
+    networks:
+      - net
+
+  solr:
+    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/solr'
+    networks:
+      - net
+
+networks:
+  net:
+    driver: overlay
+    driver_opts:
+      encrypted: "true"
+  traefik_net:
+    external: true
