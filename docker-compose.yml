@@ -11,8 +11,13 @@ services:
       - traefik_net
     env_file:
       - ./app.env
-    ports:
-      - "3000:3000"
+    deploy:
+      labels:
+        - "traefik.port=3000"
+        - "traefik.docker.network=traefik_net"
+        - "traefik.frontend.entryPoints=https"
+        - "traefik.frontend.rule=Host:medspace-master.152.3.102.153.xip.io"
+
 
   db_migrate:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
