@@ -16,7 +16,7 @@ services:
         - "traefik.port=3000"
         - "traefik.docker.network=traefik_net"
         - "traefik.frontend.entryPoints=https"
-        - "traefik.frontend.rule=Host:medspace-${CI_COMMIT_SHA}.152.3.102.153.xip.io"
+        - "traefik.frontend.rule=Host:${CI_ENVIRONMENT_SLUG}.152.3.102.153.xip.io"
 
 
   db_migrate:
