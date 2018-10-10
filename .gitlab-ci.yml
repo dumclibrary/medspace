@@ -1,10 +1,5 @@
 image: docker:git
 
-stages:
-  - test
-  - build
-  - deploy
-
 variables:
   MEDSPACE_IMAGE: $CI_REGISTRY/mclibrary/medspace
   FCREPO_IMAGE: $CI_REGISTRY/mclibrary/medspace/fcrepo
@@ -87,6 +82,42 @@ medspace_deploy:
     name: staging
     url: https://dev-medspace.mc.duke.edu
 
+review_app:
+  stage: deploy
+  variables:
+    DOCKER_HOST: tcp://swarm.152.3.102.153.xip.io:2376
+    DOCKER_TLS_VERIFY: 1
+  image: docker:latest
+  script:
+    - mkdir -p ~/.docker
+    - echo "$TLSCACERT" > ~/.docker/ca.pem
+    - echo "$TLSCERT" > ~/.docker/cert.pem
+    - echo "$TLSKEY" > ~/.docker/key.pem
+    - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
+    - docker stack deploy --with-registry-auth --compose-file=docker-stack-compose.yml ${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}-${CI_COMMIT_SHA:0:8}
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    url: https://$CI_ENVIRONMENT_SLUG.152.3.102.153.xip.io/
+    on_stop: stop_review_app
+
+stop_review_app:
+  stage: deploy
+  when: manual
+  variables:
+    DOCKER_HOST: tcp://swarm.152.3.102.153.xip.io:2376
+    DOCKER_TLS_VERIFY: 1
+  image: docker:latest
+  script:
+    - mkdir -p ~/.docker
+    - echo "$TLSCACERT" > ~/.docker/ca.pem
+    - echo "$TLSCERT" > ~/.docker/cert.pem
+    - echo "$TLSKEY" > ~/.docker/key.pem
+    - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
+    - docker stack rm ${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}-${CI_COMMIT_SHA}
+  environment:
+     name: review/$CI_COMMIT_REF_NAME
+     action: stop
+
 medspace_build:
   stage: build
   services:
@@ -98,8 +129,6 @@ medspace_build:
     - docker push $MEDSPACE_IMAGE
   tags:
     - docker
-  only:
-    - schedules
 
 fcrepo_build:
   stage: build
@@ -112,8 +141,6 @@ fcrepo_build:
     - docker push $FCREPO_IMAGE
   tags:
     - docker
-  only:
-    - schedules
 
 solr_build:
   stage: build
@@ -126,5 +153,3 @@ solr_build:
     - docker push $SOLR_IMAGE
   tags:
     - docker
-  only:
-    - schedules
