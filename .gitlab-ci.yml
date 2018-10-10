@@ -113,7 +113,7 @@ stop_review_app:
     - echo "$TLSCERT" > ~/.docker/cert.pem
     - echo "$TLSKEY" > ~/.docker/key.pem
     - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
-    - docker stack rm ${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}-${CI_COMMIT_SHA}
+    - docker stack rm ${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}-${CI_COMMIT_SHA:0:8}
   environment:
      name: review/$CI_COMMIT_REF_NAME
      action: stop
