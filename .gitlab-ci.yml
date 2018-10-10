@@ -84,6 +84,9 @@ medspace_deploy:
 
 review_app:
   stage: deploy
+  variables:
+    DOCKER_HOST: tcp://swarm.10.138.16.38.xip.io:2376
+    DOCKER_TLS_VERIFY: 1
   image: docker:latest
   script:
     - mkdir -p ~/.docker
@@ -100,6 +103,9 @@ review_app:
 stop_review_app:
   stage: deploy
   when: manual
+  variables:
+    DOCKER_HOST: tcp://swarm.10.138.16.38.xip.io:2376
+    DOCKER_TLS_VERIFY: 1
   image: docker:latest
   script:
     - mkdir -p ~/.docker
