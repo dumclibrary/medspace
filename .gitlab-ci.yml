@@ -134,8 +134,6 @@ medspace_build:
     - docker push $MEDSPACE_IMAGE
   tags:
     - docker
-  only:
-    - schedules
 
 fcrepo_build:
   stage: build
@@ -148,8 +146,6 @@ fcrepo_build:
     - docker push $FCREPO_IMAGE
   tags:
     - docker
-  only:
-    - schedules
 
 solr_build:
   stage: build
@@ -162,5 +158,3 @@ solr_build:
     - docker push $SOLR_IMAGE
   tags:
     - docker
-  only:
-    - schedules
