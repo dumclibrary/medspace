@@ -1,10 +1,5 @@
 image: docker:git
 
-stages:
-  - test
-  - build
-  - deploy
-
 variables:
   MEDSPACE_IMAGE: $CI_REGISTRY/mclibrary/medspace
   FCREPO_IMAGE: $CI_REGISTRY/mclibrary/medspace/fcrepo
