@@ -46,6 +46,7 @@ group :development, :test do
   gem 'rspec', "~> 3.5"
   gem 'rspec-rails', "~> 3.5"
   gem 'shoulda-matchers'
+  gem 'xray-rails'
 end
 
 
@@ -61,7 +62,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'hyrax', '>= 2.0'
+gem 'hyrax', '>= 2.1'
 gem 'blacklight_range_limit', '~> 6.3', '>= 6.3.2'
 
 group :development, :test do
@@ -78,7 +79,7 @@ end
 # RK adding below here
 gem 'mods', '~> 2.1'
 gem 'riiif', '~> 1.1'
-gem 'iiif_manifest', '~> 0.2.0'
+gem 'iiif_manifest', '<0.5', '>= 0.3'
 gem 'pdfjs_viewer-rails'
 gem 'hydra-role-management'
 gem 'mysql2'

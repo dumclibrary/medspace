@@ -28,5 +28,8 @@ dump.rdb
 # Ignore fits
 /fits/*
 
+/config/initializers/hyrax.rb
+config/initializers/hyrax.rb
+
 # Ignore ansible vault
 ansible/group_vars/all/vault.yml
