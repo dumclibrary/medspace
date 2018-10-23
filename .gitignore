@@ -30,6 +30,7 @@ dump.rdb
 
 /config/initializers/hyrax.rb
 config/initializers/hyrax.rb
-
+db/migrate/20181023130325_rename_admin_set_id_to_source_id.hyrax.rb.keep
+db/migrate/20181023130325_rename_admin_set_id_to_source_id.hyrax.rb
 # Ignore ansible vault
 ansible/group_vars/all/vault.yml

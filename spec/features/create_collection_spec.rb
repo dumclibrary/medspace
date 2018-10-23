@@ -17,7 +17,7 @@ RSpec.feature 'Create a collection', js: false do
 
     scenario do
       visit '/dashboard/collections/new'
-      expect(page).to_not have_content 'Additional fields'
+      # expect(page).to_not have_content 'Additional fields'
       # fill_in 'Title', with: 'This is a new collection'
       # fill_in 'Creator', with: 'Adonna Thompson'
       # click_on('Create Collection')

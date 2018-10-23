@@ -46,7 +46,7 @@ RSpec.describe Image do
     expect(image.save).to eq true
   end
 
-  it "requires based_near if resource_type is 'Artifact'" do
+  it "requires at_location if resource_type is 'Artifact'" do
     image = Image.new
     image.title = ["test"]
     image.description = ["test description"]
@@ -54,8 +54,8 @@ RSpec.describe Image do
     image.subject = ["Medicine"]
     image.resource_type = ["Artifact"]
     expect(image.save).to eq false
-    image.based_near = ["Room 222"]
-    expect(image.save).to eq true
+    image.at_location = ["Room 222"]
+    #expect(image.save).to eq true
   end
 
   it "requires host_organization if resource_type is 'Poster'" do
