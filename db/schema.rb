@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181009173820) do
+ActiveRecord::Schema.define(version: 20181023130325) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -233,13 +233,13 @@ ActiveRecord::Schema.define(version: 20181009173820) do
   end
 
   create_table "permission_templates", force: :cascade do |t|
-    t.string "admin_set_id"
+    t.string "source_id"
     t.string "visibility"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date "release_date"
     t.string "release_period"
-    t.index ["admin_set_id"], name: "index_permission_templates_on_admin_set_id", unique: true
+    t.index ["source_id"], name: "index_permission_templates_on_source_id", unique: true
   end
 
   create_table "proxy_deposit_requests", force: :cascade do |t|
