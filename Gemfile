@@ -86,3 +86,7 @@ gem 'mysql2'
 gem 'simple_form', '3.5.0'
 gem 'sidekiq'
 gem 'pul_uv_rails'
+gem 'omniauth-shibboleth'
+
+group :development, :test do
+end

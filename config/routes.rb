@@ -1,5 +1,22 @@
 Rails.application.routes.draw do
 
+  
+  root to: "catalog#index"
+  devise_for :users
+  concern :exportable, Blacklight::Routes::Exportable.new
+
+  resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
+    concerns :exportable
+  end
+
+  resources :bookmarks do
+    concerns :exportable
+
+    collection do
+      delete 'clear'
+    end
+  end
+
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   mount Riiif::Engine => '/images', as: 'riiif'
   mount Blacklight::Engine => '/'
@@ -13,7 +30,7 @@ Rails.application.routes.draw do
 
   end
 
-  devise_for :users
+  devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
   mount Hydra::RoleManagement::Engine => '/'
 
   mount Qa::Engine => '/authorities'
