@@ -74,4 +74,4 @@ volumes:
     driver_opts:
       type: nfs
       o: addr=oit-nas-fe11.oit.duke.edu,hard,rw,tcp,nfsvers=4
-      device: ":/ifs/oit-nas-fe11/mcl-nas/volumes/medspace/fcrepo/snapshot
+      device: ":/ifs/oit-nas-fe11/mcl-nas/volumes/medspace/fcrepo/snapshot"
