@@ -90,9 +90,9 @@ review_app:
   image: docker:latest
   script:
     - mkdir -p ~/.docker
-    - echo "$TLSCACERT" > ~/.docker/ca.pem
-    - echo "$TLSCERT" > ~/.docker/cert.pem
-    - echo "$TLSKEY" > ~/.docker/key.pem
+    - echo "$DOCKER_SWARM_TLSCACERT" > ~/.docker/ca.pem
+    - echo "$DOCKER_SWARM_TLSCERT" > ~/.docker/cert.pem
+    - echo "$DOCKER_SWARM_TLSKEY" > ~/.docker/key.pem
     - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
     - docker stack deploy --with-registry-auth --compose-file=docker-stack-compose.yml medspace-${CI_ENVIRONMENT_SLUG}
   environment:
