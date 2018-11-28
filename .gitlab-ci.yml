@@ -86,7 +86,8 @@ review_app:
   stage: deploy
   variables:
     DOCKER_HOST: tcp://swarm.10.138.16.38.xip.io:2376
-    DOCKER_TLS_VERIFY: 1
+    DOCKER_TLS_VERIFY:
+    STORAGE_ENV: dev
   image: docker:latest
   script:
     - mkdir -p ~/.docker
