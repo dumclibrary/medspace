@@ -41,6 +41,7 @@ services:
       - net
     volumes:
       - fcrepo_data:/mnt/fedora-data
+      - fcrepo_snapshot:/snapshot
 
   redis:
     image: 'redis:3.2.9-alpine'
@@ -67,4 +68,10 @@ volumes:
     driver_opts:
       type: nfs
       o: addr=oit-nas-fe11.oit.duke.edu,hard,rw,tcp,nfsvers=4
-      device: ":/ifs/oit-nas-fe11/mcl-nas/volumes/medspace/fcrepo/${STORAGE_ENV}/files"
+      device: ":/ifs/oit-nas-fe11/mcl-nas/volumes/medspace/fcrepo/${STORAGE_ENV}"
+  fcrepo_snapshot:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=oit-nas-fe11.oit.duke.edu,hard,rw,tcp,nfsvers=4
+      device: ":/ifs/oit-nas-fe11/mcl-nas/volumes/medspace/fcrepo/snapshot
