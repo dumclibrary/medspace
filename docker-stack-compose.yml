@@ -10,6 +10,7 @@ services:
       FCREPO_URL: ${FCREPO_URL}
     networks:
       - net
+      - medspace_fcrepo_net
       - traefik_net
     env_file:
       - ./app.env
