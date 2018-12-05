@@ -2,6 +2,7 @@ version: '3.7'
 
 services:
   web:
+    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
     environment:
       FCREPO_URL: ${FCREPO_URL}
     networks:
