@@ -23,12 +23,27 @@ services:
     image: 'mariadb:10.3.0'
     env_file:
      - ./app.env
+    volumes:
+      - mysql_data:/var/lib/mysql
 
   fcrepo:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/fcrepo'
+    volumes:
+      - fcrepo_data:/mnt/fedora-data
 
   redis:
     image: 'redis:3.2.9-alpine'
 
   solr:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/solr'
+    volumes:
+      - solr_data:/opt/solr/server/solr/mycores
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - medspace
+
+volumes:
+  fcrepo_data:
+  mysql_data:
+  solr_data:
