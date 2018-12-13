@@ -30,12 +30,9 @@ services:
       - fcrepo_data:/mnt/fedora-data
 
   solr:
+    build: ./solr
     volumes:
       - solr_data:/opt/solr/server/solr/mycores
-    entrypoint:
-      - docker-entrypoint.sh
-      - solr-precreate
-      - medspace
 
 volumes:
   fcrepo_data:
