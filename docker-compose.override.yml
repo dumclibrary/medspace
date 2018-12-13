@@ -1,0 +1,43 @@
+---
+version: '3.7'
+
+services:
+  remove_pid:
+    image: alpine
+    command: "rm -rf /srv/rails/tmp/pid || true"
+    volumes:
+      - .:/srv/rails
+
+  web:
+    build: .
+    depends_on:
+      - remove_pid
+    ports:
+      - 3000:3000
+    env_file:
+      - ./app.env
+    volumes:
+      - .:/srv/rails
+
+  db:
+    env_file:
+     - ./app.env
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  fcrepo:
+    volumes:
+      - fcrepo_data:/mnt/fedora-data
+
+  solr:
+    volumes:
+      - solr_data:/opt/solr/server/solr/mycores
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - medspace
+
+volumes:
+  fcrepo_data:
+  mysql_data:
+  solr_data:

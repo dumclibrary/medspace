@@ -27,7 +27,7 @@
       - "--exclude=ansible"
       - "--exclude=app.env"
       - "--exclude=db/*.sqlite3"
-      - "--exclude=docker-compose.yml"
+      - "--exclude=docker-compose.override.yml"
       - "--exclude=docker-fcrepo"
       - "--exclude=Dockerfile"
       - "--exclude=fits"
