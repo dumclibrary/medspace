@@ -2,12 +2,22 @@
 version: '3.7'
 
 services:
+  remove_pid:
+    image: alpine
+    command: "rm -rf /srv/rails/tmp/pid || true"
+    volumes:
+      - .:/srv/rails
+
   web:
     build: .
+    depends_on:
+      - remove_pid
     ports:
       - 3000:3000
     env_file:
       - ./app.env
+    volumes:
+      - .:/srv/rails
 
   db:
     env_file:
