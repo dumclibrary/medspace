@@ -123,6 +123,16 @@ stop_review_app:
 
 medspace_build:
   stage: build
+  only:
+    changes:
+      - app/**/*
+      - bin/**/*
+      - config/**/*
+      - lib/**/*
+      - public/**/*
+      - vendor/**/*
+      - Gemfile
+      - Gemfile.lock
   services:
     - docker:dind
   before_script:
@@ -136,6 +146,9 @@ medspace_build:
 
 fcrepo_build:
   stage: build
+  only:
+    changes:
+      - docker-fcrepo/**/*
   services:
     - docker:dind
   before_script:
@@ -148,13 +161,13 @@ fcrepo_build:
 
 solr_build:
   stage: build
+  only:
+    changes:
+      - solr/**/*
   services:
     - docker:dind
   before_script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-  only:
-    changes:
-      - solr/**/*
   script:
     - docker build -t $SOLR_IMAGE solr
     - docker build -t $SOLR_IMAGE:ci -f solr/ci.Dockerfile solr
