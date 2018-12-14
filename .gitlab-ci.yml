@@ -154,7 +154,7 @@ solr_build:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
   script:
     - docker build -t $SOLR_IMAGE solr
-    - docker build -t $SOLR_IMAGE:ci -f solr/ci.Dockerfile solr/ci.Dockerfile
+    - docker build -t $SOLR_IMAGE:ci -f solr/ci.Dockerfile solr
     - docker push $SOLR_IMAGE
     - docker push $SOLR_IMAGE:ci
   tags:
