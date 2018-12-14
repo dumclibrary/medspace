@@ -7,6 +7,10 @@ variables:
 
 dependency_scanning:
   stage: "test"
+  only:
+    changes:
+      - Gemfile
+      - Gemfile.lock
   cache: {}
   image: docker:stable
   tags:
@@ -28,6 +32,12 @@ dependency_scanning:
 
 sast:
   stage: "test"
+  only:
+    changes:
+      - app/**/*
+      - config/**/*
+      - spec/**/*
+      - test/**/*
   cache: {}
   image: docker:stable
   tags:
@@ -49,6 +59,11 @@ sast:
 
 test:
   stage: test
+  only:
+    changes:
+      - app/**/*
+      - spec/**/*
+      - test/**/*
   image: $CI_REGISTRY/mclibrary/medspace
   services:
     - redis:3-alpine
