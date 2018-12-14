@@ -5,6 +5,7 @@ services:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
     environment:
       FCREPO_URL: ${FCREPO_URL}
+      SOLR_URL: ${SOLR_URL}
     networks:
       - net
       - medspace_fcrepo_net

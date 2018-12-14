@@ -104,6 +104,7 @@ review_app:
     DOCKER_TLS_VERIFY: 1
     STORAGE_ENV: dev
     FCREPO_URL: "http://medspace_fcrepo_dev:8080"
+    SOLR_URL: "http://medspace_solr_dev:8983/solr/medspace"
   image: docker:latest
   script:
     - mkdir -p ~/.docker
