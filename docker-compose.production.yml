@@ -9,6 +9,7 @@ services:
     networks:
       - net
       - medspace_fcrepo_net
+      - medspace_solr_net
       - traefik_net
     env_file:
       - ./app.env
