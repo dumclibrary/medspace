@@ -152,6 +152,9 @@ solr_build:
     - docker:dind
   before_script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+  only:
+    changes:
+      - solr/**/*
   script:
     - docker build -t $SOLR_IMAGE solr
     - docker build -t $SOLR_IMAGE:ci -f solr/ci.Dockerfile solr
