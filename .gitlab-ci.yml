@@ -125,6 +125,7 @@ medspace_build:
   stage: build
   only:
     changes:
+      - Dockerfile
       - app/**/*
       - bin/**/*
       - config/**/*
