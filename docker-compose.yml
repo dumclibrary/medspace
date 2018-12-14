@@ -28,3 +28,8 @@ services:
 
   solr:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/solr'
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - medspace
+      - /config

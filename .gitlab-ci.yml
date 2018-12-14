@@ -52,7 +52,7 @@ test:
   image: $CI_REGISTRY/mclibrary/medspace
   services:
     - redis:3-alpine
-    - $CI_REGISTRY/mclibrary/medspace/solr
+    - $CI_REGISTRY/mclibrary/medspace/solr:ci
     - $CI_REGISTRY/mclibrary/medspace/fcrepo
   variables:
     REDIS_HOST: redis
@@ -152,8 +152,13 @@ solr_build:
     - docker:dind
   before_script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+  only:
+    changes:
+      - solr/**/*
   script:
     - docker build -t $SOLR_IMAGE solr
+    - docker build -t $SOLR_IMAGE:ci -f solr/ci.Dockerfile solr
     - docker push $SOLR_IMAGE
+    - docker push $SOLR_IMAGE:ci
   tags:
     - docker
