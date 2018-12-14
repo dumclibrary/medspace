@@ -8,12 +8,22 @@ services:
       - net
     volumes:
       - dev_data:/opt/solr/server/solr/mycores
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - medspace
+      - /config
   prod:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/solr'
     networks:
       - net
     volumes:
       - prod_data:/opt/solr/server/solr/mycores
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - medspace
+      - /config
 
 networks:
   net:
