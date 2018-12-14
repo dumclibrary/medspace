@@ -53,5 +53,7 @@ networks:
       encrypted: "true"
   medspace_fcrepo_net:
     external: true
+  medspace_solr_net:
+    external: true
   traefik_net:
     external: true
