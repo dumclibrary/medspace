@@ -18,6 +18,7 @@ services:
       - ./app.env
     volumes:
       - .:/srv/rails
+      - ./snapshot/derivatives:/srv/rails/tmp/derivatives
 
   db:
     env_file:
