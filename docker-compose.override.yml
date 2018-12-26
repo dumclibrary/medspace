@@ -28,7 +28,7 @@ services:
   fcrepo:
     volumes:
       - fcrepo_data:/mnt/fedora-data
-      - ./snapshot/fcrepo:/snapshot
+      - ./snapshot/fcrepo:/docker-entrypoint-init.d
     ports:
       - 8080:8080
 
@@ -36,6 +36,9 @@ services:
     build: ./solr
     volumes:
       - solr_data:/opt/solr/server/solr/mycores
+      - ./snapshot/solr:/docker-entrypoint-init.d
+    ports:
+      - 8983:8983
 
 volumes:
   fcrepo_data:
