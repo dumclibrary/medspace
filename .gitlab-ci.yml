@@ -104,6 +104,7 @@ review_app:
     DOCKER_TLS_VERIFY: 1
     STORAGE_ENV: dev
     FCREPO_URL: "http://medspace_fcrepo_dev:8080"
+    SOLR_URL: "http://medspace_solr_dev:8983/solr/medspace"
   image: docker:latest
   script:
     - mkdir -p ~/.docker
@@ -112,6 +113,7 @@ review_app:
     - echo "$DOCKER_SWARM_TLSKEY" > ~/.docker/key.pem
     - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
     - docker stack deploy --with-registry-auth --compose-file=docker-compose-fcrepo.yml medspace_fcrepo
+    - docker stack deploy --with-registry-auth --compose-file=docker-compose-solr.yml medspace_solr
     - docker stack deploy --with-registry-auth --compose-file=docker-compose.yml --compose-file=docker-compose.production.yml medspace-${CI_ENVIRONMENT_SLUG}
   environment:
     name: review/$CI_COMMIT_REF_NAME
