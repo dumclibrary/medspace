@@ -18,21 +18,29 @@ services:
       - ./app.env
     volumes:
       - .:/srv/rails
+      - ./snapshot/derivatives:/srv/rails/tmp/derivatives
 
   db:
     env_file:
      - ./app.env
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./snapshot/mariadb:/docker-entrypoint-initdb.d
 
   fcrepo:
     volumes:
       - fcrepo_data:/mnt/fedora-data
+      - ./snapshot/fcrepo:/docker-entrypoint-init.d
+    ports:
+      - 8080:8080
 
   solr:
     build: ./solr
     volumes:
       - solr_data:/opt/solr/server/solr/mycores
+      - ./snapshot/solr:/docker-entrypoint-init.d
+    ports:
+      - 8983:8983
 
 volumes:
   fcrepo_data:

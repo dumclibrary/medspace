@@ -30,3 +30,5 @@ dump.rdb
 
 # Ignore ansible vault
 ansible/group_vars/all/vault.yml
+
+snapshot

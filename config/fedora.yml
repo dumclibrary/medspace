@@ -2,14 +2,14 @@ development:
   user: <%= ENV['FCREPO_USER'] || "fedoraAdmin" %>
   password: <%= ENV['FCREPO_PASSWORD'] || "fedoraAdmin" %>
   url: <%= ENV['FCREPO_URL'] || "http://127.0.0.1:8984" %>/rest
-  base_path: /dev
+  base_path: <%= ENV['FCREPO_BASE_PATH'] || "/dev" %>
 test:
   user: <%= ENV['FCREPO_USER'] || "fedoraAdmin" %>
   password: <%= ENV['FCREPO_PASSWORD'] || "fedoraAdmin" %>
   url: <%= ENV['FCREPO_URL'] || "http://127.0.0.1:8986" %>/rest
-  base_path: /test
+  base_path: <%= ENV['FCREPO_BASE_PATH'] || "/test" %>
 production:
   user: <%= ENV['FCREPO_USER'] || "fedoraAdmin" %>
   password: <%= ENV['FCREPO_PASSWORD'] || "fedoraAdmin" %>
   url: <%= ENV['FCREPO_URL'] || "http://127.0.0.1:8983/fedora/rest" %>
-  base_path: /prod
+  base_path: <%= ENV['FCREPO_BASE_PATH'] || "/prod" %>
