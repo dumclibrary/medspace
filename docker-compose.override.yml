@@ -25,6 +25,7 @@ services:
      - ./app.env
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./snapshot/mariadb:/docker-entrypoint-initdb.d
 
   fcrepo:
     volumes:
