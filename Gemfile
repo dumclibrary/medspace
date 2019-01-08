@@ -46,6 +46,7 @@ group :development, :test do
   gem 'rspec', "~> 3.5"
   gem 'rspec-rails', "~> 3.5"
   gem 'shoulda-matchers'
+  gem 'xray-rails'
 end
 
 
@@ -85,3 +86,4 @@ gem 'mysql2'
 gem 'simple_form', '3.5.0'
 gem 'sidekiq'
 gem 'pul_uv_rails'
+#gem 'omniauth-shibboleth'

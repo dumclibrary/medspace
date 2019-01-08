@@ -55,6 +55,9 @@ en:
         header: "Parent Collection"
       metadata:
         header: Item Description
+    collections:
+      show:
+        works_in_collection: "Total Works"
     file_set:
       show:
         downloadable_content:
