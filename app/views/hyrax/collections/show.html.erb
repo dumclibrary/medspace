@@ -38,8 +38,8 @@
               <%#= 'Item'.pluralize(@presenter.total_viewable_items) %></div>-->
 
 <!--            <%# unless @presenter.creator.blank? %>
-                <div class="hyc-created-by">Created by: <%#= @presenter.creator.first %></div>
-            <%# end %>-->
+                <div class="hyc-created-by">Created by: <%#= @presenter.creator.first %></div>-->
+            <%# end %> 
 
             <% unless @presenter.modified_date.blank? %>
                 <div class="hyc-last-updated">Last Updated: <%= @presenter.modified_date %></div>
@@ -73,8 +73,8 @@
           <h2>Collection Details</h2>
           <%#= render 'show_descriptions' %>
       <%# end %>
-    </div>
-  </div>-->
+    </div>-->
+  </div>
 
   <!-- Search results label -->
   <% if @members_count > 0 || @presenter.subcollection_count > 0 %>

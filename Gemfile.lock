@@ -42,13 +42,8 @@ GEM
       rdf-vocab (>= 2.0, < 4.0)
     active_encode (0.4.1)
       rails
-<<<<<<< HEAD
     activejob (5.1.6.1)
       activesupport (= 5.1.6.1)
-=======
-    activejob (5.1.6)
-      activesupport (= 5.1.6)
->>>>>>> goalMigration
       globalid (>= 0.3.6)
     activemodel (5.1.6.1)
       activesupport (= 5.1.6.1)
@@ -56,11 +51,7 @@ GEM
       activemodel (= 5.1.6.1)
       activesupport (= 5.1.6.1)
       arel (~> 8.0)
-<<<<<<< HEAD
     activerecord-import (0.28.1)
-=======
-    activerecord-import (0.27.0)
->>>>>>> goalMigration
       activerecord (>= 3.2)
     activesupport (5.1.6.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
@@ -72,37 +63,21 @@ GEM
     almond-rails (0.1.0)
       rails (>= 4.2, < 6)
     arel (8.0.0)
-<<<<<<< HEAD
     autoprefixer-rails (9.4.4)
-=======
-    autoprefixer-rails (9.3.1)
->>>>>>> goalMigration
       execjs
     awesome_nested_set (3.1.4)
       activerecord (>= 4.0.0, < 5.3)
     aws-eventstream (1.0.1)
-<<<<<<< HEAD
     aws-partitions (1.129.0)
     aws-sdk-core (3.44.2)
-=======
-    aws-partitions (1.115.0)
-    aws-sdk-core (3.39.0)
->>>>>>> goalMigration
       aws-eventstream (~> 1.0)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-<<<<<<< HEAD
     aws-sdk-kms (1.13.0)
       aws-sdk-core (~> 3, >= 3.39.0)
       aws-sigv4 (~> 1.0)
     aws-sdk-s3 (1.30.0)
-=======
-    aws-sdk-kms (1.12.0)
-      aws-sdk-core (~> 3, >= 3.39.0)
-      aws-sigv4 (~> 1.0)
-    aws-sdk-s3 (1.25.0)
->>>>>>> goalMigration
       aws-sdk-core (~> 3, >= 3.39.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.0)
@@ -115,11 +90,7 @@ GEM
       i18n
     bcrypt (3.1.12)
     bindex (0.5.0)
-<<<<<<< HEAD
     blacklight (6.19.1)
-=======
-    blacklight (6.18.0)
->>>>>>> goalMigration
       bootstrap-sass (~> 3.2)
       deprecation
       globalid
@@ -144,14 +115,9 @@ GEM
       rails (>= 3.0)
     bootstrap-sass (3.4.0)
       autoprefixer-rails (>= 5.2.1)
-<<<<<<< HEAD
       sassc (>= 2.0.0)
-    bootstrap_form (2.7.0)
-=======
-      sass (>= 3.3.4)
     bootstrap_form (4.0.0)
       rails (>= 5.0)
->>>>>>> goalMigration
     breadcrumbs_on_rails (3.0.1)
     browse-everything (0.15.1)
       addressable (~> 2.5)
@@ -169,20 +135,15 @@ GEM
     builder (3.2.3)
     byebug (10.0.2)
     cancancan (1.17.0)
-    capybara (3.11.1)
+    capybara (3.12.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
-<<<<<<< HEAD
-      xpath (~> 3.0)
-    carrierwave (1.3.1)
-=======
       regexp_parser (~> 1.2)
       xpath (~> 3.2)
-    carrierwave (1.2.3)
->>>>>>> goalMigration
+    carrierwave (1.3.1)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
@@ -194,11 +155,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-<<<<<<< HEAD
     concurrent-ruby (1.1.4)
-=======
-    concurrent-ruby (1.1.3)
->>>>>>> goalMigration
     connection_pool (2.2.2)
     crass (1.0.4)
     daemons (1.3.1)
@@ -251,11 +208,7 @@ GEM
       dry-events (>= 0.1.0)
       dry-matcher (>= 0.7.0)
       dry-monads (>= 0.4.0)
-<<<<<<< HEAD
     dry-types (0.13.4)
-=======
-    dry-types (0.13.2)
->>>>>>> goalMigration
       concurrent-ruby (~> 1.0)
       dry-container (~> 0.3)
       dry-core (~> 0.4, >= 0.4.4)
@@ -293,11 +246,7 @@ GEM
       railties (>= 3.2, < 6.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-<<<<<<< HEAD
     google-api-client (0.27.2)
-=======
-    google-api-client (0.25.0)
->>>>>>> goalMigration
       addressable (~> 2.5, >= 2.5.1)
       googleauth (>= 0.5, < 0.10.0)
       httpclient (>= 2.8.1, < 3.0)
@@ -309,11 +258,7 @@ GEM
       google-api-client (>= 0.11.0, < 1.0.0)
       googleauth (>= 0.5.0, < 1.0.0)
       nokogiri (>= 1.5.3, < 2.0.0)
-<<<<<<< HEAD
     googleauth (0.8.0)
-=======
-    googleauth (0.6.7)
->>>>>>> goalMigration
       faraday (~> 0.12)
       jwt (>= 1.4, < 3.0)
       memoist (~> 0.16)
@@ -326,10 +271,6 @@ GEM
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
     handle-system (0.1.1)
-<<<<<<< HEAD
-=======
-    hashie (3.5.7)
->>>>>>> goalMigration
     hiredis (0.6.3)
     htmlentities (4.3.4)
     http_logger (0.5.1)
@@ -382,11 +323,7 @@ GEM
       hydra-file_characterization (~> 0.3, >= 0.3.3)
       hydra-pcdm (>= 0.9)
       om (~> 3.1)
-<<<<<<< HEAD
     hyrax (2.4.1)
-=======
-    hyrax (2.4.0)
->>>>>>> goalMigration
       active-fedora (~> 11.5, >= 11.5.2)
       almond-rails (~> 0.1)
       awesome_nested_set (~> 3.1)
@@ -434,17 +371,10 @@ GEM
       signet
       simple_form (~> 3.2, <= 3.5.0)
       tinymce-rails (~> 4.1)
-<<<<<<< HEAD
     i18n (1.5.1)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     iiif_manifest (0.5.0)
-=======
-    i18n (1.1.1)
-      concurrent-ruby (~> 1.0)
-    ice_nine (0.11.2)
-    iiif_manifest (0.4.0)
->>>>>>> goalMigration
       activesupport (>= 4)
     iso-639 (0.2.8)
     jbuilder (2.8.0)
@@ -466,11 +396,7 @@ GEM
     json-ld (3.0.2)
       multi_json (~> 1.12)
       rdf (>= 2.2.8, < 4.0)
-<<<<<<< HEAD
     json-ld-preloaded (3.0.2)
-=======
-    json-ld-preloaded (3.0.1)
->>>>>>> goalMigration
       json-ld (~> 3.0)
       multi_json (~> 1.12)
       rdf (~> 3.0)
@@ -555,26 +481,21 @@ GEM
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
-    mods (2.4.0)
+    mods (2.4.1)
       edtf
       iso-639
-      nokogiri
+      nokogiri (>= 1.6.6)
       nom-xml (~> 1.0)
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
-<<<<<<< HEAD
-    mysql2 (0.5.1)
-=======
     mysql2 (0.5.2)
->>>>>>> goalMigration
     nest (3.1.1)
       redic
     net-http-persistent (3.0.0)
       connection_pool (~> 2.2)
     nio4r (2.3.1)
     noid (0.9.0)
-<<<<<<< HEAD
     noid-rails (3.0.1)
       actionpack (>= 5.0.0, < 6)
       noid (~> 0.9)
@@ -582,17 +503,7 @@ GEM
       mini_portile2 (~> 2.4.0)
     nokogumbo (1.5.0)
       nokogiri
-    nom-xml (0.6.0)
-=======
-    noid-rails (3.0.0)
-      actionpack (>= 5.0.0, < 6)
-      noid (~> 0.9)
-    nokogiri (1.8.5)
-      mini_portile2 (~> 2.3.0)
-    nokogumbo (1.5.0)
-      nokogiri
-    nom-xml (1.0.0)
->>>>>>> goalMigration
+    nom-xml (1.1.0)
       activesupport (>= 3.2.18)
       i18n
       nokogiri
@@ -608,14 +519,6 @@ GEM
       activesupport
       nokogiri (>= 1.4.2)
       solrizer (~> 3.3)
-<<<<<<< HEAD
-=======
-    omniauth (1.8.1)
-      hashie (>= 3.4.6, < 3.6.0)
-      rack (>= 1.6.2, < 3)
-    omniauth-shibboleth (1.3.0)
-      omniauth (>= 1.0.0)
->>>>>>> goalMigration
     openseadragon (0.5.0)
       rails (> 3.2.0)
     orm_adapter (0.5.0)
@@ -628,11 +531,7 @@ GEM
     power_converter (0.1.2)
     public_suffix (3.0.3)
     pul_uv_rails (2.0.1)
-<<<<<<< HEAD
-    puma (3.11.4)
-=======
     puma (3.12.0)
->>>>>>> goalMigration
     qa (2.2.0)
       activerecord-import
       deprecation
@@ -641,11 +540,7 @@ GEM
       rails (~> 5.0)
       rdf
     rack (2.0.6)
-<<<<<<< HEAD
-    rack-protection (2.0.1)
-=======
-    rack-protection (2.0.4)
->>>>>>> goalMigration
+    rack-protection (2.0.5)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -677,15 +572,9 @@ GEM
     rainbow (3.0.0)
     rake (12.3.2)
     rb-fsevent (0.10.3)
-<<<<<<< HEAD
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     rdf (3.0.9)
-=======
-    rb-inotify (0.9.10)
-      ffi (>= 0.5.0, < 2)
-    rdf (3.0.6)
->>>>>>> goalMigration
       hamster (~> 3.0)
       link_header (~> 0.0, >= 0.0.8)
     rdf-aggregate-repo (2.2.1)
@@ -734,7 +623,6 @@ GEM
     rdf-turtle (3.0.3)
       ebnf (~> 1.1)
       rdf (~> 3.0)
-<<<<<<< HEAD
     rdf-vocab (3.0.4)
       rdf (~> 3.0)
     rdf-xsd (3.0.1)
@@ -742,15 +630,6 @@ GEM
     redic (1.5.1)
       hiredis
     redis (4.1.0)
-=======
-    rdf-vocab (3.0.3)
-      rdf (~> 3.0)
-    rdf-xsd (3.0.1)
-      rdf (~> 3.0)
-    redic (1.5.0)
-      hiredis
-    redis (4.0.3)
->>>>>>> goalMigration
     redis-namespace (1.6.0)
       redis (>= 3.0.4)
     redlock (1.0.0)
@@ -797,17 +676,10 @@ GEM
       multipart-post
       oauth2
     ruby-progressbar (1.10.0)
-<<<<<<< HEAD
-    rubyzip (1.2.1)
-    samvera-nesting_indexer (2.0.0)
-      dry-equalizer
-    sass (3.7.3)
-=======
     rubyzip (1.2.2)
     samvera-nesting_indexer (2.0.0)
       dry-equalizer
-    sass (3.7.2)
->>>>>>> goalMigration
+    sass (3.7.3)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -833,8 +705,9 @@ GEM
       sxp (~> 1.0)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
-    sidekiq (5.2.3)
+    sidekiq (5.2.4)
       connection_pool (~> 2.2, >= 2.2.2)
+      rack (>= 1.5.0)
       rack-protection (>= 1.5.0)
       redis (>= 3.3.5, < 5)
     signet (0.11.0)
@@ -846,7 +719,7 @@ GEM
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
     slop (4.6.2)
-    solr_wrapper (2.0.0)
+    solr_wrapper (2.1.0)
       faraday
       retriable
       ruby-progressbar
@@ -865,11 +738,7 @@ GEM
       rdf-xsd (~> 3.0)
       sparql-client (~> 3.0)
       sxp (~> 1.0)
-<<<<<<< HEAD
     sparql-client (3.0.1)
-=======
-    sparql-client (3.0.0)
->>>>>>> goalMigration
       net-http-persistent (>= 2.9, < 4)
       rdf (~> 3.0)
     spring (2.0.2)
@@ -889,23 +758,14 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.13)
-<<<<<<< HEAD
     stomp (1.4.8)
-=======
-    stomp (1.4.6)
->>>>>>> goalMigration
     sxp (1.0.1)
       rdf (>= 2.2, < 4.0)
     temple (0.8.0)
     thor (0.20.3)
     thread_safe (0.3.6)
-<<<<<<< HEAD
     tilt (2.0.9)
     tinymce-rails (4.9.2)
-=======
-    tilt (2.0.8)
-    tinymce-rails (4.8.4)
->>>>>>> goalMigration
       railties (>= 3.1.1)
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
@@ -949,19 +809,13 @@ DEPENDENCIES
   fcrepo_wrapper
   handle-system (= 0.1.1)
   hydra-role-management
-<<<<<<< HEAD
   hyrax (>= 2.4)
   iiif_manifest (>= 0.3, < 0.6)
-=======
-  hyrax (= 2.4.0)
-  iiif_manifest (>= 0.3, < 0.5)
->>>>>>> goalMigration
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
   mods (~> 2.1)
   mysql2
-  omniauth-shibboleth
   pdfjs_viewer-rails
   pul_uv_rails
   puma (~> 3.0)
