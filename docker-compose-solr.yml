@@ -16,7 +16,7 @@ services:
       - /config
     deploy:
       labels:
-        - "traefik.port=8080"
+        - "traefik.port=8983"
         - "traefik.docker.network=traefik_net"
         - "traefik.frontend.entryPoints=https"
         - "traefik.frontend.rule=Host:medspace-solr-dev.10.138.16.38.xip.io"
@@ -35,7 +35,7 @@ services:
       - /config
     deploy:
       labels:
-        - "traefik.port=8080"
+        - "traefik.port=8983"
         - "traefik.docker.network=traefik_net"
         - "traefik.frontend.entryPoints=https"
         - "traefik.frontend.rule=Host:medspace-solr-prod.10.138.16.38.xip.io"
