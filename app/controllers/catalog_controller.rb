@@ -55,7 +55,7 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
     config.add_facet_field solr_name("creator", :facetable), limit: 5
     # config.add_facet_field solr_name("contributor", :facetable), label: "Contributor", limit: 5
-    # config.add_facet_field solr_name("keyword", :facetable), limit: 5
+    config.add_facet_field solr_name("keyword", :facetable), limit: 5
     config.add_facet_field solr_name("subject", :facetable), limit: 5
     # config.add_facet_field solr_name("language", :facetable), limit: 5
     # config.add_facet_field solr_name("based_near_label", :facetable), limit: 5
@@ -69,7 +69,7 @@ class CatalogController < ApplicationController
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile
     config.add_facet_field solr_name("generic_type", :facetable), if: false
-    config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", if: false
+    #config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", if: false
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
     # handler defaults, or have no facets.

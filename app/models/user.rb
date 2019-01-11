@@ -9,61 +9,23 @@ class User < ApplicationRecord
   include Hyrax::User
   include Hyrax::UserUsageStats
 
-  INSTITUTION_PRINCIPAL_NAME_SCOPE = 'duke.edu'
+
 
   if Blacklight::Utils.needs_attr_accessible?
     attr_accessible :email, :password, :password_confirmation
   end
   # Connects this user object to Blacklights Bookmarks.
   include Blacklight::User
-  include Hydra::RoleManagement::UserRoles
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable,
-         :omniauthable,
-         :rememberable,
-         :trackable,
-         :validatable,
-         omniauth_providers: [:shibboleth]
+  #devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
-  validates :uid, presence: true, uniqueness: true
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
-  class << self
-    # @param auth [OmniAuth::AuthHash] authenticated user information.
-    # @return [User] the authenticated user, possibly a newly created record.
-    def from_omniauth(auth)
-      find_or_initialize_by(uid: auth.uid).tap do |user|
-        # set a random (unusable) password for a new user
-        user.password = Devise.friendly_token if user.new_record?
-
-        # set/update attributes based on our omniauth-shibboleth authentication mapping
-        # see https://github.com/omniauth/omniauth/wiki/Auth-Hash-Schema
-        user.update!(email: auth.info.email, display_name: auth.info.name)
-      end
-    end
-
-    def find_or_create_system_user(user_key)
-      User.find_by_user_key(user_key) ||
-          User.create!(Hydra.config.user_key_field => user_key,
-                       email: user_key,
-                       password: Devise.friendly_token[0, 20])
-    end
-  end
   # Method added by Blacklight; Blacklight uses #to_s on your
   # user class to get a user-displayable login/identifier for
   # the account.
   def to_s
-    email || uid
-  end
-
-  def user_key
-    uid
-  end
-
-  # For Duke users, returns the (unscoped) NetID
-  # For non-Duke users, returns nil
-  def netid
-    username, scope = user_key.split('@')
-    username if scope == INSTITUTION_PRINCIPAL_NAME_SCOPE
+    email
   end
 end

@@ -6,7 +6,7 @@ services:
   web:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
     user: rails
-    command: "bundle exec rails server -p 3000 -b '0.0.0.0'"
+    command: "bundle binstubs bundler --force && bundle exec rails server -p 3000 -b '0.0.0.0'"
     env_file:
       - ./app.env
 
@@ -15,7 +15,7 @@ services:
     restart: 'on-failure'
     env_file:
       - ./app.env
-    command: 'bundle exec rails db:migrate'
+    command: bash -c 'bundle binstubs bundler --force && bundle exec rails db:migrate'
 
   db:
     image: 'mariadb:10.3.0'
