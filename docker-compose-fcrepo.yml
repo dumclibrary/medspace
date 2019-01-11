@@ -6,21 +6,39 @@ services:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/fcrepo'
     networks:
       - net
+      - traefik_net
     volumes:
       - dev_data:/mnt/fedora-data
+    deploy:
+      labels:
+        - "traefik.port=8080"
+        - "traefik.docker.network=traefik_net"
+        - "traefik.frontend.entryPoints=https"
+        - "traefik.frontend.rule=Host:medspace-fcrepo-dev.10.138.16.38.xip.io"
+        - "traefik.frontend.auth.basic.users=${UTILITY_WEB_UI_USERS}"
   prod:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/fcrepo'
     networks:
       - net
+      - traefik_net
     volumes:
       - prod_data:/mnt/fedora-data
       - snapshot:/snapshot
+    deploy:
+      labels:
+        - "traefik.port=8080"
+        - "traefik.docker.network=traefik_net"
+        - "traefik.frontend.entryPoints=https"
+        - "traefik.frontend.rule=Host:medspace-fcrepo-prod.10.138.16.38.xip.io"
+        - "traefik.frontend.auth.basic.users=${UTILITY_WEB_UI_USERS}"
 
 networks:
   net:
     driver: overlay
     driver_opts:
       encrypted: "true"
+  traefik_net:
+    external: true
 
 volumes:
   dev_data:
