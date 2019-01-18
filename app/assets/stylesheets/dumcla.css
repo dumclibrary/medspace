@@ -95,8 +95,8 @@
   }
 
   .homepage-content .home-button {
-    margin: 20px;
-    padding: 24px;
+    margin: 10px;
+    padding: 20px;
     text-align: center;
     background: rgba(7,54,164,.85);
     border-radius: 8px;
@@ -202,16 +202,25 @@
 
   /* Testing below here */
 
-  .mine {
+  .mine  div.lstop { 
     position: relative;
-    height: 600px;
     /*  */
     color: #999;
+    
   }
 
-  .lstop {
+  .lstop1 {
     width: 48%;
     float: left;
+    margin: auto;
+    height: 480px;
+  }
+
+  .lstop2 {
+    width: 48%;
+    float: left;
+    margin: auto;
+    height: 300px;
   }
 
   .rstop {
@@ -232,7 +241,7 @@
     border-radius: 8px;
   }
   .rs1 {
-    height: 45%;
+    
     width: 45%;
     float: left;
     padding-left: .25em;
@@ -242,13 +251,11 @@
   }
 
   .rs2 {
-    height: 45%;
+    
     width: 45%;
-    background: rgba(7,54,164,.85);
     position: relative;
     float: right;
     padding-left: .25em;
     padding-right: .25em;
     border-radius: 8px;
-    margin-bottom: 2em;
   }
