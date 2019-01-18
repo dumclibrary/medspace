@@ -1,0 +1,88 @@
+<div class="container-fluid homepage-wrapper homepage-full">
+
+  <!-- intro -->
+  <div class="row">
+
+    <div class="homepage-intro" id="content">
+
+      <h1>Welcome to MEDSpace</h1>
+
+    </div>
+
+    <div class="homepage-feature">
+
+    </div>
+
+  </div>
+
+
+  <!-- Content -->
+
+
+
+  <div class="row">
+
+    <div class="col col-md-12">
+
+      <p class="lead">MEDSpace Digital collections are grouped into five categories.  Select the links below to view the collections, or you can choose to <%= link_to t('hyrax.homepage.admin_ssets.link'), main_app.search_catalog_path(f: { human_readable_type_sim: ["Collection"]}) %></p>
+    </div>
+
+  </div>
+
+  <div class="row row-flex row-flex-wrap homepage-content">
+
+    <div class="col col-md-6">
+      <a href="catalog?f[human_readable_type_sim][]=Collection&f[keyword_sim][]=Image+Collection&locale=en">
+        <div class="home-button">
+          <h2>Image Collections</h2>
+          <p>Selected images documenting the history of medicine through time and at the Duke Medical Center from its founding in 1930</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="col col-md-6">
+      <a href="catalog?f[human_readable_type_sim][]=Collection&f[keyword_sim][]=Duke+Publication&locale=en">
+        <div class="home-button">
+          <h2>Duke Medical Center Publications</h2>
+          <p>Departmental and program-wide newsletters and reports</p>
+        </div>
+      </a>
+    </div>
+
+  </div>
+
+   <div class="row row-flex row-flex-wrap homepage-content">
+
+
+    <div class="col col-md-4">
+      <a href="catalog?f[human_readable_type_sim][]=Collection&f[keyword_sim][]=Historical+Collection&locale=en">
+        <div class="home-button">
+          <h2>Duke Health Historical Collections</h2>
+          <p>Digitized items documenting the foundation and growth of Duke Health</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="col col-md-4">
+      <a href="catalog?f[human_readable_type_sim][]=Collection&f[keyword_sim][]=Artwork+Artifacts&locale=en">
+        <div class="home-button">
+          <h2>Artworks & Artifacts</h2>
+          <p>Browse Library & Archives' collection of historical objects</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="col col-md-4">
+      <a href="catalog?f[human_readable_type_sim][]=Collection&f[keyword_sim][]=Scholarly+Work&locale=en">
+        <div class="home-button">
+          <h2>Scholarly Work</h2>
+          <p>Posters, presentations, and projects created by Duke Health employees and students</p>
+        </div>
+      </a>
+    </div>
+
+
+  </div>
+ 
+  </div>
+</div>
