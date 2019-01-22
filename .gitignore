@@ -49,3 +49,4 @@ app/lib/medspace/record.rb
 app/lib/medspace/importer.rb
 app/views/devise/*
 >>>>>>> goalMigration
+app/assets/.DS_Store
