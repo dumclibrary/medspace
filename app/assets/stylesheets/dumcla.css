@@ -23,12 +23,12 @@
   }
 
   .homepage-intro {
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(72,101,210, 0.65);
     color: white;
     padding: 30px !important;
     position: absolute;
     border-radius: 8px;
-    top: 120px;
+    top: 220px;
     right: 20px;
     margin-left: 20px;
   }
@@ -68,10 +68,16 @@
     margin-bottom: 10px;
   }
 
-  .homepage-full .lead {
+  .homepage-full p.lead {
     text-align: center;
     border-bottom: 1px dotted #e3e3e3;
     padding-bottom: 1em;
+  }
+  .homepage-full h2.lead {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 1px dotted #e3e3e3;
     padding-top: .5em;
   }
 
@@ -88,7 +94,6 @@
   }
 
   .homepage-content {
-    margin-top: 21px;
     padding: 0 10px 0 10px;
     margin-bottom: -20px;
   }

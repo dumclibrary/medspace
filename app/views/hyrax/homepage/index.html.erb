@@ -3,11 +3,11 @@
   <!-- intro -->
   <div class="row">
 
-    <div class="homepage-intro" id="content">
+<%#     <div class="homepage-intro" id="content">
 
       <h1>Welcome to MEDSpace</h1>
 
-    </div>
+    </div> %>
 
     <div class="homepage-feature">
 
@@ -23,9 +23,8 @@
   <div class="row">
 
     <div class="col col-md-12">
-
-      <p class="lead">MEDSpace Digital collections are grouped into five categories.  Select the links below to view the collections, or you can choose to <%= link_to t('hyrax.homepage.admin_ssets.link'), main_app.search_catalog_path(f: { human_readable_type_sim: ["Collection"]}) %></p>
-    </div>
+    <h2 class="lead">Welcome to the MEDSpace Digital Repository</h2>
+     </div>
 
   </div>
 
@@ -69,7 +68,7 @@
         <div class="lsl">
         <a href="catalog?f[human_readable_type_sim][]=Collection&f[keyword_sim][]=Historical+Collection&locale=en">
             <h2>Duke Health Historical Collections</h2>
-            <p>Digitized items documenting the foundation and growth of Duke Health</p>
+            <p>Digitized items documenting the foundation and growth of Duke Health and its programs</p>
         </a>
         </div>
         <div class="lsr">
@@ -89,4 +88,11 @@
         </div>
     </div>
 </div>
+  <div class="row">
+
+    <div class="col col-md-12">
+      <p class="lead">MEDSpace Digital Collections provide online access to historical images and documents reflecting the history of medicine and health care at Duke University. Browse collections by category below or <%= link_to t('hyrax.homepage.admin_ssets.link'), main_app.search_catalog_path(f: { human_readable_type_sim: ["Collection"]}) %></p>
+    </div>
+
+  </div>
 </div>
