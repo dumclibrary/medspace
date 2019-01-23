@@ -46,6 +46,7 @@ services:
 networks:
   net:
     driver: overlay
+    attachable: true
     driver_opts:
       encrypted: "true"
   traefik_net:
