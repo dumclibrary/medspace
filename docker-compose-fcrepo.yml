@@ -9,6 +9,7 @@ services:
       - traefik_net
     volumes:
       - dev_data:/mnt/fedora-data
+      - snapshot:/snapshot
     deploy:
       labels:
         - "traefik.port=8080"
