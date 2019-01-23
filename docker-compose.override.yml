@@ -32,6 +32,7 @@ services:
     volumes:
       - solr_data:/opt/solr/server/solr/mycores
       - ./snapshot/solr:/docker-entrypoint-init.d
+      - ./solr:/config
     ports:
       - 8983:8983
 
