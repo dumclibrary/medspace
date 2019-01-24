@@ -61,6 +61,8 @@ networks:
     external: true
   medspace_solr_net:
     external: true
+  medspace_redis_net:
+    external: true
   traefik_net:
     external: true
 
