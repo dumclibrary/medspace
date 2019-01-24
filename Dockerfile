@@ -29,4 +29,6 @@ ADD . /srv/rails
 
 WORKDIR /srv/rails
 
+RUN bin/rails assets:precompile RAILS_ENV=production DEVISE_SECRET_KEY=secret
+
 RUN useradd -m rails && chown -R rails:rails /srv/rails && su rails -c "bundle install"
