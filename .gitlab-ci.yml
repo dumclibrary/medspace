@@ -103,7 +103,7 @@ review_app:
     DOCKER_HOST: tcp://swarm.10.138.16.38.xip.io:2376
     DOCKER_TLS_VERIFY: 1
     STORAGE_ENV: dev
-    FCREPO_URL: "http://medspace_fcrepo_dev:8080"
+    FCREPO_URL: "http://medspace_fcrepo_dev:8080/rest"
     SOLR_URL: "http://medspace_solr_dev:8983/solr/medspace"
   image: docker:latest
   script:
