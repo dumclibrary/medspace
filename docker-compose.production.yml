@@ -13,6 +13,7 @@ services:
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
     networks:
       - net
+      - mariadb_net
       - medspace_fcrepo_net
       - medspace_solr_net
       - traefik_net
@@ -31,10 +32,9 @@ services:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
     restart: 'on-failure'
     networks:
+      - mariadb_net
       - net
     environment:
-      FCREPO_URL: ${FCREPO_URL}
-      SOLR_URL: ${SOLR_URL}
       DATABASE_URL: ${DATABASE_URL}
       RAILS_ENV: production
       RAILS_LOG_TO_STDOUT: "true"
@@ -59,6 +59,8 @@ networks:
     driver: overlay
     driver_opts:
       encrypted: "true"
+  mariadb_net:
+    external: true
   medspace_fcrepo_net:
     external: true
   medspace_solr_net:
