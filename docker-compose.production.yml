@@ -5,7 +5,9 @@ services:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
     environment:
       FCREPO_URL: ${FCREPO_URL}
+      FCREPO_BASE_PATH: /prod
       SOLR_URL: ${SOLR_URL}
+      REDIS_HOST: redis
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
@@ -22,8 +24,6 @@ services:
       - traefik_net
     volumes:
       - data:/var/lib/medspace/derivatives
-    env_file:
-      - ./app.env
     deploy:
       labels:
         - "traefik.port=3000"
