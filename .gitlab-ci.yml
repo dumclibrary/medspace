@@ -105,6 +105,7 @@ review_app:
     STORAGE_ENV: dev
     FCREPO_URL: "http://medspace_fcrepo_dev:8080/rest"
     SOLR_URL: "http://medspace_solr_dev:8983/solr/medspace"
+    DATABASE_NAME: medspace_dev
   image: docker:latest
   script:
     - mkdir -p ~/.docker
