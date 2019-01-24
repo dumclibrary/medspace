@@ -48,13 +48,6 @@ services:
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
     command: 'bundle exec rails db:migrate'
 
-  db:
-    image: 'mariadb:10.3.0'
-    networks:
-      - net
-    env_file:
-      - ./app.env
-
   redis:
     image: 'redis:3.2.9-alpine'
     networks:
