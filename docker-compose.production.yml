@@ -11,6 +11,8 @@ services:
       - medspace_fcrepo_net
       - medspace_solr_net
       - traefik_net
+    volumes:
+      - data:/var/lib/medspace/derivatives
     env_file:
       - ./app.env
     deploy:
@@ -52,3 +54,13 @@ networks:
     external: true
   traefik_net:
     external: true
+
+volumes:
+  data:
+    name: "medspace_${STORAGE_ENV}_data"
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=oit-nas-fe11.oit.duke.edu,hard,rw,tcp,nfsvers=4
+      device: ":/ifs/oit-nas-fe11/mcl-nas/volumes/medspace/derivatives/${STORAGE_ENV}"
+
