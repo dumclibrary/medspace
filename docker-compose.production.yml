@@ -41,11 +41,6 @@ services:
     networks:
       - net
 
-  solr:
-    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/solr'
-    networks:
-      - net
-
 networks:
   net:
     driver: overlay
