@@ -6,6 +6,7 @@ services:
     environment:
       FCREPO_URL: ${FCREPO_URL}
       SOLR_URL: ${SOLR_URL}
+      DATABASE_URL: ${DATABASE_URL}
       RAILS_ENV: production
       RAILS_LOG_TO_STDOUT: "true"
       RAILS_SERVE_STATIC_FILES: "true"
@@ -31,8 +32,14 @@ services:
     restart: 'on-failure'
     networks:
       - net
-    env_file:
-      - ./app.env
+    environment:
+      FCREPO_URL: ${FCREPO_URL}
+      SOLR_URL: ${SOLR_URL}
+      DATABASE_URL: ${DATABASE_URL}
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: "true"
+      RAILS_SERVE_STATIC_FILES: "true"
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
     command: 'bundle exec rails db:migrate'
 
   db:
