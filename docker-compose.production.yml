@@ -7,7 +7,7 @@ services:
       FCREPO_URL: ${FCREPO_URL}
       FCREPO_BASE_PATH: /prod
       SOLR_URL: ${SOLR_URL}
-      REDIS_HOST: redis
+      REDIS_HOST: medspace_redis_prod
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
@@ -22,6 +22,7 @@ services:
       - mariadb_net
       - medspace_fcrepo_net
       - medspace_solr_net
+      - medspace_redis_net
       - traefik_net
     volumes:
       - data:/var/lib/medspace/derivatives
@@ -49,11 +50,6 @@ services:
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
     command: 'bundle exec rails db:migrate'
 
-  redis:
-    image: 'redis:3.2.9-alpine'
-    networks:
-      - net
-
 networks:
   net:
     driver: overlay
@@ -64,6 +60,8 @@ networks:
   medspace_fcrepo_net:
     external: true
   medspace_solr_net:
+    external: true
+  medspace_redis_net:
     external: true
   traefik_net:
     external: true

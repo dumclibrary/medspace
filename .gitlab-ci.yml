@@ -115,6 +115,7 @@ review_app:
     - docker login -u "$DEPLOY_TOKEN_NAME" -p "$DEPLOY_TOKEN" "$CI_REGISTRY"
     - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.fcrepo.yml medspace_fcrepo
     - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.solr.yml medspace_solr
+    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.redis.yml medspace_redis
     - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.yml --compose-file=docker-compose.production.yml medspace-${CI_ENVIRONMENT_SLUG}
   environment:
     name: review/$CI_COMMIT_REF_NAME
@@ -155,7 +156,7 @@ medspace_build:
   services:
     - docker:dind
   before_script:
-    - docker login -u "$DEPLOY_TOKEN_NAME" -p "$DEPLOY_TOKEN" "$CI_REGISTRY"
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
   script:
     - docker pull $MEDSPACE_IMAGE:latest || true
     - docker build --cache-from $MEDSPACE_IMAGE:latest -t $MEDSPACE_IMAGE .
@@ -171,7 +172,7 @@ fcrepo_build:
   services:
     - docker:dind
   before_script:
-    - docker login -u "$DEPLOY_TOKEN_NAME" -p "$DEPLOY_TOKEN" "$CI_REGISTRY"
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
   script:
     - docker build -t $FCREPO_IMAGE docker-fcrepo
     - docker push $FCREPO_IMAGE
@@ -186,7 +187,7 @@ solr_build:
   services:
     - docker:dind
   before_script:
-    - docker login -u "$DEPLOY_TOKEN_NAME" -p "$DEPLOY_TOKEN" "$CI_REGISTRY"
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
   script:
     - docker build -t $SOLR_IMAGE solr
     - docker build -t $SOLR_IMAGE:ci -f solr/ci.Dockerfile solr

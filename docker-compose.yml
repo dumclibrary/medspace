@@ -12,6 +12,3 @@ services:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
     restart: 'on-failure'
     command: 'bundle exec rails db:migrate'
-
-  redis:
-    image: 'redis:3.2.9-alpine'
