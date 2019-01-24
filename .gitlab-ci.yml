@@ -150,6 +150,7 @@ medspace_build:
       - vendor/**/*
       - Gemfile
       - Gemfile.lock
+      - Dockerfile
   services:
     - docker:dind
   before_script:

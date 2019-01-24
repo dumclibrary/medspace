@@ -29,4 +29,7 @@ ADD . /srv/rails
 
 WORKDIR /srv/rails
 
-RUN useradd -m rails && chown -R rails:rails /srv/rails && su rails -c "bundle install"
+RUN useradd -m rails \
+    && chown -R rails:rails /srv/rails \
+    && su rails -c "bundle install" \
+    && su rails -c "bin/rails assets:precompile RAILS_ENV=production SECRET_KEY_BASE=secret"
