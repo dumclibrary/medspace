@@ -22,6 +22,7 @@ services:
       - mariadb_net
       - medspace_fcrepo_net
       - medspace_solr_net
+      - medspace_redis_net
       - traefik_net
     volumes:
       - data:/var/lib/medspace/derivatives
@@ -48,11 +49,6 @@ services:
       RAILS_SERVE_STATIC_FILES: "true"
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
     command: 'bundle exec rails db:migrate'
-
-  redis:
-    image: 'redis:3.2.9-alpine'
-    networks:
-      - net
 
 networks:
   net:
