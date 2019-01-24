@@ -1,0 +1,26 @@
+---
+version: '3.7'
+
+services:
+  redis:
+    image: 'redis:3.2.9-alpine'
+    command: "redis-server --appendonly yes"
+    networks:
+      - net
+    volumes:
+      - data:/data
+
+networks:
+  net:
+    driver: overlay
+    attachable: true
+    driver_opts:
+      encrypted: "true"
+
+volumes:
+  data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=oit-nas-fe11.oit.duke.edu,hard,rw,tcp,nfsvers=4
+      device: ":/ifs/oit-nas-fe11/mcl-nas/volumes/medspace/redis"
