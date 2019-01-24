@@ -79,7 +79,7 @@ Hyrax.config do |config|
   # config.minter_statefile = '/tmp/minter-state'
 
   # Prefix for Redis keys
-  # config.redis_namespace = "hyrax"
+  config.redis_namespace = ENV['REDIS_NAMESPACE'] || "hyrax"
 
   # Path to the file characterization tool
   # config.fits_path = "fits/fits.sh"
