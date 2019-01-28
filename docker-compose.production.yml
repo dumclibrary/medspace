@@ -27,7 +27,7 @@ services:
       - traefik_net
     volumes:
       - data:/var/lib/medspace/derivatives
-      - uploads:/var/tmp/medspace/uploads
+      - uploads:/srv/rails/tmp/uploads
     deploy:
       labels:
         - "traefik.port=3000"
@@ -61,7 +61,7 @@ services:
       - medspace_redis_net
     volumes:
       - data:/var/lib/medspace/derivatives
-      - uploads:/var/tmp/medspace/uploads
+      - uploads:/srv/rails/tmp/uploads
 
   db_migrate:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
