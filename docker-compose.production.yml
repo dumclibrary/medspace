@@ -8,6 +8,7 @@ services:
       FCREPO_BASE_PATH: /prod
       SOLR_URL: ${SOLR_URL}
       REDIS_HOST: medspace_redis_prod
+      REDIS_URL: redis://medspace_redis_prod:6379
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
@@ -41,6 +42,7 @@ services:
       FCREPO_BASE_PATH: /prod
       SOLR_URL: ${SOLR_URL}
       REDIS_HOST: medspace_redis_prod
+      REDIS_URL: redis://medspace_redis_prod:6379
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
