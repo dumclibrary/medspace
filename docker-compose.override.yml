@@ -11,7 +11,7 @@ services:
       - ./app.env
     volumes:
       - .:/srv/rails
-      - ./snapshot/derivatives:/srv/rails/tmp/derivatives
+      - ./snapshot/derivatives:/var/lib/medspace/derivatives
 
   db_migrate:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
@@ -41,9 +41,14 @@ services:
     volumes:
       - solr_data:/opt/solr/server/solr/mycores
       - ./snapshot/solr:/docker-entrypoint-init.d
-      - ./solr:/config
+      - ./solr/config:/config
     ports:
       - 8983:8983
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - medspace
+      - /config
 
 volumes:
   fcrepo_data:
