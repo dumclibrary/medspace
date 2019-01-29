@@ -21,6 +21,7 @@ services:
     command: 'bundle exec rails db:migrate'
 
   db:
+    image: mariadb
     env_file:
      - ./app.env
     volumes:
@@ -28,6 +29,7 @@ services:
       - ./snapshot/mariadb:/docker-entrypoint-initdb.d
 
   fcrepo:
+    build: ./docker-fcrepo
     volumes:
       - fcrepo_data:/mnt/fedora-data
       - ./snapshot/fcrepo:/docker-entrypoint-init.d
