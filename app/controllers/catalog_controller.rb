@@ -69,7 +69,7 @@ class CatalogController < ApplicationController
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile
     config.add_facet_field solr_name("generic_type", :facetable), if: false
-    #config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", if: false
+    config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", if: false
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
     # handler defaults, or have no facets.
