@@ -79,7 +79,7 @@ Hyrax.config do |config|
   # config.minter_statefile = '/tmp/minter-state'
 
   # Prefix for Redis keys
-  # config.redis_namespace = "hyrax"
+  config.redis_namespace = ENV['REDIS_NAMESPACE'] || "hyrax"
 
   # Path to the file characterization tool
   # config.fits_path = "fits/fits.sh"
@@ -131,7 +131,7 @@ Hyrax.config do |config|
 
   # Location on local file system where derivatives will be stored
   # If you use a multi-server architecture, this MUST be a shared volume
-  # config.derivatives_path = Rails.root.join('tmp', 'derivatives')
+  config.derivatives_path = Rails.root.join('/var/lib/medspace', 'derivatives')
 
   # Should schema.org microdata be displayed?
   # config.display_microdata = true
@@ -143,7 +143,7 @@ Hyrax.config do |config|
   # Location on local file system where uploaded files will be staged
   # prior to being ingested into the repository or having derivatives generated.
   # If you use a multi-server architecture, this MUST be a shared volume.
-  # config.working_path = Rails.root.join( 'tmp', 'uploads')
+  #config.working_path = Rails.root.join( '/var/tmp/medspace', 'uploads')
 
   # Should the media display partial render a download link?
   # config.display_media_download_link = true

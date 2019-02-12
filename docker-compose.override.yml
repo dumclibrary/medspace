@@ -11,9 +11,17 @@ services:
       - ./app.env
     volumes:
       - .:/srv/rails
-      - ./snapshot/derivatives:/srv/rails/tmp/derivatives
+      - ./snapshot/derivatives:/var/lib/medspace/derivatives
+
+  db_migrate:
+    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
+    restart: 'on-failure'
+    env_file:
+      - ./app.env
+    command: 'bundle exec rails db:migrate'
 
   db:
+    image: mariadb
     env_file:
      - ./app.env
     volumes:
@@ -21,6 +29,8 @@ services:
       - ./snapshot/mariadb:/docker-entrypoint-initdb.d
 
   fcrepo:
+    build: ./docker-fcrepo
+    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/fcrepo'
     volumes:
       - fcrepo_data:/mnt/fedora-data
       - ./snapshot/fcrepo:/docker-entrypoint-init.d
@@ -29,11 +39,18 @@ services:
 
   solr:
     build: ./solr
+    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/solr'
     volumes:
       - solr_data:/opt/solr/server/solr/mycores
       - ./snapshot/solr:/docker-entrypoint-init.d
+#      - ./solr/config:/config
     ports:
       - 8983:8983
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - medspace
+      - /config
 
 volumes:
   fcrepo_data:

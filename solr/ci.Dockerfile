@@ -1,4 +1,4 @@
-FROM solr:6.6.0-alpine
+FROM solr:6.6.5-alpine
 
 COPY config /config
 COPY solr-create /opt/docker-solr/scripts

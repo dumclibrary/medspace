@@ -11,5 +11,5 @@ test:
 production:
   user: <%= ENV['FCREPO_USER'] || "fedoraAdmin" %>
   password: <%= ENV['FCREPO_PASSWORD'] || "fedoraAdmin" %>
-  url: <%= ENV['FCREPO_URL'] || "http://127.0.0.1:8983/fedora/rest" %>
+  url: <%= ENV['FCREPO_URL'] || "http://127.0.0.1:8080" %>/rest
   base_path: <%= ENV['FCREPO_BASE_PATH'] || "/prod" %>

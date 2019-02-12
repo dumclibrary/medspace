@@ -1,0 +1,73 @@
+---
+version: '3.7'
+
+services:
+  dev:
+    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/solr'
+    networks:
+      - net
+      - traefik_net
+    volumes:
+      - dev_data:/opt/solr/server/solr/mycores
+      - snapshot:/snapshot
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - medspace
+      - /config
+    deploy:
+      labels:
+        - "traefik.port=8983"
+        - "traefik.docker.network=traefik_net"
+        - "traefik.frontend.entryPoints=https"
+        - "traefik.frontend.rule=Host:medspace-solr-dev.10.138.16.38.xip.io"
+        - "traefik.frontend.auth.basic.users=${UTILITY_WEB_UI_USERS}"
+  prod:
+    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/solr'
+    networks:
+      - net
+      - traefik_net
+    volumes:
+      - prod_data:/opt/solr/server/solr/mycores
+      - snapshot:/snapshot
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - medspace
+      - /config
+    deploy:
+      labels:
+        - "traefik.port=8983"
+        - "traefik.docker.network=traefik_net"
+        - "traefik.frontend.entryPoints=https"
+        - "traefik.frontend.rule=Host:medspace-solr-prod.10.138.16.38.xip.io"
+        - "traefik.frontend.auth.basic.users=${UTILITY_WEB_UI_USERS}"
+
+networks:
+  net:
+    driver: overlay
+    attachable: true
+    driver_opts:
+      encrypted: "true"
+  traefik_net:
+    external: true
+
+volumes:
+  dev_data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=oit-nas-fe11.oit.duke.edu,hard,rw,tcp,nfsvers=4
+      device: ":/ifs/oit-nas-fe11/mcl-nas/volumes/medspace/solr/dev"
+  prod_data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=oit-nas-fe11.oit.duke.edu,hard,rw,tcp,nfsvers=4
+      device: ":/ifs/oit-nas-fe11/mcl-nas/volumes/medspace/solr/prod"
+  snapshot:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=oit-nas-fe11.oit.duke.edu,hard,rw,tcp,nfsvers=4
+      device: ":/ifs/oit-nas-fe11/mcl-nas/volumes/medspace/solr/snapshot"

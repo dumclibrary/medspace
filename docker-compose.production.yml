@@ -5,14 +5,29 @@ services:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
     environment:
       FCREPO_URL: ${FCREPO_URL}
+      FCREPO_BASE_PATH: /prod
       SOLR_URL: ${SOLR_URL}
+      REDIS_HOST: medspace_redis_prod
+      REDIS_URL: redis://medspace_redis_prod:6379
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: "true"
+      RAILS_SERVE_STATIC_FILES: "true"
+      REDIS_NAMESPACE: medspace_dev
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
     networks:
       - net
+      - mariadb_net
       - medspace_fcrepo_net
       - medspace_solr_net
+      - medspace_redis_net
       - traefik_net
-    env_file:
-      - ./app.env
+    volumes:
+      - data:/var/lib/medspace/derivatives
+      - uploads:/srv/rails/tmp/uploads
     deploy:
       labels:
         - "traefik.port=3000"
@@ -20,40 +35,80 @@ services:
         - "traefik.frontend.entryPoints=https"
         - "traefik.frontend.rule=Host:${CI_ENVIRONMENT_SLUG}.152.3.102.153.xip.io"
 
+  sidekiq:
+    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
+    command: 'bin/bundle exec sidekiq'
+    environment:
+      FCREPO_URL: ${FCREPO_URL}
+      FCREPO_BASE_PATH: /prod
+      SOLR_URL: ${SOLR_URL}
+      REDIS_HOST: medspace_redis_prod
+      REDIS_URL: redis://medspace_redis_prod:6379
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: "true"
+      RAILS_SERVE_STATIC_FILES: "true"
+      REDIS_NAMESPACE: medspace_dev
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+    networks:
+      - net
+      - mariadb_net
+      - medspace_fcrepo_net
+      - medspace_solr_net
+      - medspace_redis_net
+    volumes:
+      - data:/var/lib/medspace/derivatives
+      - uploads:/srv/rails/tmp/uploads
+
   db_migrate:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
     restart: 'on-failure'
     networks:
+      - mariadb_net
       - net
-    env_file:
-      - ./app.env
-    command: 'bundle exec rails db:migrate'
-
-  db:
-    image: 'mariadb:10.3.0'
-    networks:
-      - net
-    env_file:
-      - ./app.env
-
-  redis:
-    image: 'redis:3.2.9-alpine'
-    networks:
-      - net
-
-  solr:
-    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/solr'
-    networks:
-      - net
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: "true"
+      RAILS_SERVE_STATIC_FILES: "true"
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+    command: 'bin/rails db:migrate'
 
 networks:
   net:
     driver: overlay
     driver_opts:
       encrypted: "true"
+  mariadb_net:
+    external: true
   medspace_fcrepo_net:
     external: true
   medspace_solr_net:
     external: true
+  medspace_redis_net:
+    external: true
   traefik_net:
     external: true
+
+volumes:
+  data:
+    name: "medspace_${STORAGE_ENV}_data"
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=oit-nas-fe11.oit.duke.edu,hard,rw,tcp,nfsvers=4
+      device: ":/ifs/oit-nas-fe11/mcl-nas/volumes/medspace/derivatives/${STORAGE_ENV}"
+  uploads:
+    name: "medspace_${STORAGE_ENV}_uploads"
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=oit-nas-fe11.oit.duke.edu,hard,rw,tcp,nfsvers=4
+      device: ":/ifs/oit-nas-fe11/mcl-nas/volumes/medspace/uploads/${STORAGE_ENV}"
+
