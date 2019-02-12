@@ -30,6 +30,7 @@ services:
 
   fcrepo:
     build: ./docker-fcrepo
+    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/fcrepo'
     volumes:
       - fcrepo_data:/mnt/fedora-data
       - ./snapshot/fcrepo:/docker-entrypoint-init.d
@@ -38,10 +39,11 @@ services:
 
   solr:
     build: ./solr
+    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace/solr'
     volumes:
       - solr_data:/opt/solr/server/solr/mycores
       - ./snapshot/solr:/docker-entrypoint-init.d
-      - ./solr/config:/config
+#      - ./solr/config:/config
     ports:
       - 8983:8983
     entrypoint:
