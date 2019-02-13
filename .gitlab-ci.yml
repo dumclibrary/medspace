@@ -59,11 +59,11 @@ sast:
 
 test:
   stage: test
-#  only:
-#    changes:
-#      - app/**/*
-#      - spec/**/*
-#      - test/**/*
+  only:
+    changes:
+      - app/**/*
+      - spec/**/*
+      - test/**/*
   image: $CI_REGISTRY/mclibrary/medspace
   services:
     - redis:3-alpine
