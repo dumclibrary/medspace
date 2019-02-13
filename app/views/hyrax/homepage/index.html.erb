@@ -1,6 +1,98 @@
-<% provide :page_title, application_name %>
-<div class="my-bg">
-<div class="row home-content">
-  <%= render 'home_content' %>
+<div class="container-fluid homepage-wrapper homepage-full">
+
+  <!-- intro -->
+  <div class="row">
+
+<%#     <div class="homepage-intro" id="content">
+
+      <h1>Welcome to MEDSpace</h1>
+
+    </div> %>
+
+    <div class="homepage-feature" style="background-image: url('bld00027.png')">
+
+    </div>
+
+  </div>
+
+
+  <!-- Content -->
+
+
+
+  <div class="row">
+
+    <div class="col col-md-12">
+    <h2 class="lead">Welcome to the MEDSpace Digital Repository</h2>
+     </div>
+
+  </div>
+
+<div class="row row-flex row-flex-wrap  mine homepage-content">
+    <div class="lstop1 home-button">
+        <div class="lsl">
+             <a href="catalog?f[human_readable_type_sim][]=Collection&f[keyword_sim][]=Image+Collection&locale=en">
+                <h2>Image Collections</h2>
+                <p>Selected images documenting the history of medicine through time and at the Duke Medical Center from its founding in 1930</p>
+            </a>
+        </div>
+        <div class="lsr">
+            <img src="00837.png"/>
+        </div>
+    </div>
+    <div class="rstop home-button">
+        <div class="rs1">
+            <a href="catalog?f[human_readable_type_sim][]=Collection&f[keyword_sim][]=Duke+Publication&locale=en">
+            <h2>Duke Medical Center Publications</h2>
+            <p>Departmental and program-wide newsletters and reports</p>
+        </a>
+        </div>
+        <div class="rs2">
+          <img src="publication.jpg"/>
+        </div>
+    </div>
+        <div class="rstop home-button">
+        <div class="rs1">  
+        <a href="catalog?f[human_readable_type_sim][]=Collection&f[keyword_sim][]=Scholarly+Work&locale=en">
+          <h2>Scholarly Works</h2>
+          <p>Posters, presentations, and projects created by Duke Health employees and students</p>
+        </a>
+        </div>
+        <div class="rs2">
+          <img src="sch_wrks.jpg"/>
+        </div>
+    </div>
 </div>
+<div class="row row-flex row-flex-wrap  mine homepage-content">
+    <div class="lstop2 home-button">
+        <div class="lsl">
+        <a href="catalog?f[human_readable_type_sim][]=Collection&f[keyword_sim][]=Historical+Collection&locale=en">
+            <h2>Duke Health Historical Collections</h2>
+            <p>Digitized items documenting the foundation and growth of Duke Health and its programs</p>
+        </a>
+        </div>
+        <div class="lsr">
+            <img src="his_col.jpg"/>
+        </div>
+    </div>
+
+    <div class="rstop home-button">
+        <div class="rs1"> 
+            <a href="catalog?f[human_readable_type_sim][]=Collection&f[keyword_sim][]=Artwork+Artifacts&locale=en">
+                <h2>Artworks & Artifacts</h2>
+                <p>Browse Library & Archives' collection of historical objects</p>
+            </a>
+        </div>
+        <div class="rs2">
+          <img src="art.png"/>
+        </div>
+    </div>
+</div>
+  <div class="row">
+
+    <div class="col col-md-12">
+      <p class="lead">MEDSpace Digital Collections provide online access to historical images and documents reflecting the history of medicine and health care at Duke University. Browse collections by category below or <%= link_to t('hyrax.homepage.admin_ssets.link'), main_app.search_catalog_path(f: { human_readable_type_sim: ["Collection"]}) %></p>
+    </div>
+
+  </div>
 </div>

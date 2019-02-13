@@ -10,7 +10,7 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
-
+/db/migrate/*
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
@@ -18,7 +18,15 @@
 !/tmp/.keep
 *.log
 *.tmp
-/testfiles/*
+/ingest/*
+<<<<<<< HEAD
+=======
+/.idea/*
+.idea/*
+/public/branding
+/public/branding/*
+
+>>>>>>> goalMigration
 # Ignore Byebug command history file.
 .byebug_history
 
@@ -31,4 +39,14 @@ dump.rdb
 # Ignore ansible vault
 ansible/group_vars/all/vault.yml
 
+<<<<<<< HEAD
 snapshot
+=======
+app/views/hyrax/dashboard/collections/_form.html.erb.2.0
+
+db/migrate/20181123192561_rename_admin_set_id_to_source_id.hyrax.rb.keep
+app/lib/medspace/record.rb
+app/lib/medspace/importer.rb
+app/views/devise/*
+>>>>>>> goalMigration
+app/assets/.DS_Store

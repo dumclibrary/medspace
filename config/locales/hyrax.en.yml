@@ -49,12 +49,15 @@ en:
     product_name:           "MEDSpace"
     homepage:
       admin_ssets:
-        link: "View All Collections"
+        link: "View all of our Collections"
     base:
       relationships:
         header: "Parent Collection"
       metadata:
         header: Item Description
+    collections:
+      show:
+        works_in_collection: "Total Works"
     file_set:
       show:
         downloadable_content:

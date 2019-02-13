@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   mount Riiif::Engine => '/images', as: 'riiif'
   mount Blacklight::Engine => '/'
-  mount PdfjsViewer::Rails::Engine => '/pdfjs', as: 'pdfjs'
+  #mount PdfjsViewer::Rails::Engine => '/pdfjs', as: 'pdfjs'
 
     concern :searchable, Blacklight::Routes::Searchable.new
 
@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
   end
 
+  #devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
   devise_for :users
+  
   mount Hydra::RoleManagement::Engine => '/'
 
   mount Qa::Engine => '/authorities'

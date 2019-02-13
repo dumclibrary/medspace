@@ -52,7 +52,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     # config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
     # config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5
-    config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
+    # config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
     config.add_facet_field solr_name("creator", :facetable), limit: 5
     # config.add_facet_field solr_name("contributor", :facetable), label: "Contributor", limit: 5
     # config.add_facet_field solr_name("keyword", :facetable), limit: 5
