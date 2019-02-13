@@ -107,6 +107,7 @@ review_app:
     FCREPO_URL: "http://medspace_fcrepo_dev:8080"
     SOLR_URL: "http://medspace_solr_dev:8983/solr/medspace"
     DATABASE_NAME: medspace_dev
+    HOST_URL: "${CI_ENVIRONMENT_SLUG}.dev.mclibrary.duke.edu"
   image: docker:latest
   script:
     - mkdir -p ~/.docker
@@ -120,7 +121,7 @@ review_app:
     - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.yml --compose-file=docker-compose.production.yml medspace-${CI_ENVIRONMENT_SLUG}
   environment:
     name: review/$CI_COMMIT_REF_NAME
-    url: https://$CI_ENVIRONMENT_SLUG.152.3.102.153.xip.io/
+    url: https://${CI_ENVIRONMENT_SLUG}.dev.mclibrary.duke.edu/
     on_stop: stop_review_app
 
 stop_review_app:
