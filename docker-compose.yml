@@ -6,7 +6,7 @@ services:
   web:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
     user: rails
-    command: "bundle exec rails server -p 3000 -b '0.0.0.0'"
+    command: supervisord
 
   db_migrate:
     image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
