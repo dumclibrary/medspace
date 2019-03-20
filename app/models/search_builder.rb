@@ -1,8 +1,9 @@
 # frozen_string_literal: true
-class SearchBuilder < Hyrax::CatalogSearchBuilder
+class SearchBuilder < Blacklight::SearchBuilder
   include Blacklight::Solr::SearchBuilderBehavior
   include BlacklightRangeLimit::RangeLimitBuilder
-
+  include Hydra::AccessControlsEnforcement
+  include Hyrax::SearchFilters
   # Add a filter query to restrict the search to documents the current user has access to
   # NOTE: these are already included in Hyrax::CatalogSearchBuilder
   # include Hydra::AccessControlsEnforcement
