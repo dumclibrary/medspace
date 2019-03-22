@@ -4,10 +4,11 @@
     <header>
       <%= render 'work_title', presenter: @presenter %>
     </header>
-
+    <%= render 'workflow_actions_widget', presenter: @presenter %>
     <!-- span class="state state-<%= @presenter.workflow.state %>"><%= @presenter.workflow.state_label %></span -->
   </div>
   <div class="col-xs-12">
+
     <%= render 'representative_media', presenter: @presenter %>
   </div>
   <div class="col-sm-8">
@@ -36,7 +37,6 @@
 <div class="row">
   <div class="col-sm-12">
     <%= render 'items', presenter: @presenter  unless current_user.nil? %>
-    <%= render 'workflow_actions_widget', presenter: @presenter %>
     <%# TODO: we may consider adding these partials in the future %>
     <%#= render 'sharing_with', presenter: @presenter %>
     <%#= render 'user_activity', presenter: @presenter %>
