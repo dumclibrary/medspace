@@ -4,7 +4,7 @@
     <header>
       <%= render 'work_title', presenter: @presenter %>
     </header>
-
+ <%= render 'workflow_actions_widget', presenter: @presenter %>
     <!-- span class="state state-<%= @presenter.workflow.state %>"><%= @presenter.workflow.state_label %></span -->
   </div>
   <div class="col-xs-12">
