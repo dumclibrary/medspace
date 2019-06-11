@@ -103,7 +103,7 @@ review_app:
   except:
     - master
   variables:
-    DOCKER_HOST: tcp://swarm.10.138.16.38.xip.io:2376
+    DOCKER_HOST: tcp://mcl-linville.vm.duke.edu:2376
     DOCKER_TLS_VERIFY: 1
     STORAGE_ENV: dev
     FCREPO_URL: "http://medspace_fcrepo_dev:8080"
@@ -131,7 +131,7 @@ review_master:
   only:
     - master
   variables:
-    DOCKER_HOST: tcp://swarm.10.138.16.38.xip.io:2376
+    DOCKER_HOST: tcp://mcl-linville.vm.duke.edu:2376
     DOCKER_TLS_VERIFY: 1
     STORAGE_ENV: dev
     FCREPO_URL: "http://medspace_fcrepo_dev:8080"
@@ -157,7 +157,7 @@ stop_review_app:
   stage: deploy
   when: manual
   variables:
-    DOCKER_HOST: tcp://swarm.10.138.16.38.xip.io:2376
+    DOCKER_HOST: tcp://mcl-linville.vm.duke.edu:2376
     DOCKER_TLS_VERIFY: 1
   image: docker:latest
   script:
