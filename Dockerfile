@@ -4,16 +4,17 @@ ENV FITS_VERSION 1.0.5
 
 ENV BUILD_PACKAGES curl unzip
 
-ENV RUNTIME_PACKAGES ansible \
-                     ghostscript \
+ENV RUNTIME_PACKAGES ghostscript \
                      imagemagick \
                      libreoffice \
                      nodejs \
                      openssh-client \
-                     rsync
+                     rsync \
+                     supervisor
 
-RUN echo deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main >> /etc/apt/sources.list \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+RUN echo "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
+
+RUN cat /etc/apt/sources.list
 
 RUN apt-get update && apt-get install -y $BUILD_PACKAGES $RUNTIME_PACKAGES
 
