@@ -1,4 +1,4 @@
-FROM ruby:2.3.4
+FROM ruby:2.6.3
 
 ENV FITS_VERSION 1.0.5
 
@@ -11,10 +11,6 @@ ENV RUNTIME_PACKAGES ghostscript \
                      openssh-client \
                      rsync \
                      supervisor
-
-RUN echo "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
-
-RUN cat /etc/apt/sources.list
 
 RUN apt-get update && apt-get install -y $BUILD_PACKAGES $RUNTIME_PACKAGES
 
