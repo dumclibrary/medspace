@@ -60,7 +60,6 @@ sast:
 build-dependencies-image:
   stage: "build"
   only:
-    - "master"
     - "schedules"
   services:
     - "docker:dind"
