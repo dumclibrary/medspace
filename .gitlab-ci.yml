@@ -57,6 +57,22 @@ sast:
   artifacts:
     paths: [gl-sast-report.json]
 
+build-dependencies-image:
+  stage: "build"
+  only:
+    - "master"
+    - "schedules"
+  services:
+    - "docker:dind"
+  before_script:
+    - "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY"
+  script:
+    - "docker pull $MEDSPACE_IMAGE:latest || true"
+    - "docker build --cache-from $MEDSPACE_IMAGE:dependencies -t $MEDSPACE_IMAGE:dependencies -f Dockerfile-dependencies ."
+    - "docker push $MEDSPACE_IMAGE:dependencies"
+  tags:
+    - "docker"
+
 test:
   stage: test
   only:
