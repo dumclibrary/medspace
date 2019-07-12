@@ -1,3 +1,10 @@
+FROM golang:alpine as builder
+
+RUN apk --no-cache add git
+
+RUN CGO_ENABLED=0 GOOS=linux go get -a -installsuffix cgo -ldflags '-extldflags "-static"' \
+    gitlab.oit.duke.edu/mclibrary/healthcheck
+
 FROM jetty:9.4.6-alpine
 
 ENV FCREPO_VERSION 4.7.3
@@ -10,5 +17,10 @@ RUN apk add --no-cache curl \
     && mkdir /mnt/fedora-data \
     && chown -R jetty:jetty /mnt/fedora-data
 
+COPY --from=builder /go/bin/healthcheck /usr/local/bin/healthcheck
+
+ENV HEALTHCHECK_URL "http://127.0.0.1:8080/rest"
+
 VOLUME /mnt/fedora-data
+
 EXPOSE 8080
