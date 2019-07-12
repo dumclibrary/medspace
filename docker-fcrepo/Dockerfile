@@ -21,6 +21,8 @@ COPY --from=builder /go/bin/healthcheck /usr/local/bin/healthcheck
 
 ENV HEALTHCHECK_URL "http://127.0.0.1:8080/rest"
 
+HEALTHCHECK CMD ["/usr/local/bin/healthcheck"]
+
 VOLUME /mnt/fedora-data
 
 EXPOSE 8080
