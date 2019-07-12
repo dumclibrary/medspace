@@ -5,6 +5,11 @@ services:
   prod:
     image: 'redis:3.2.9-alpine'
     command: "redis-server --appendonly yes"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: "30s"
+      timeout: "10s"
+      retries: 3
     networks:
       - net
     volumes:
