@@ -60,7 +60,8 @@ sast:
 build-dependencies-image:
   stage: "build"
   only:
-    - "schedules"
+    refs:
+      - "schedules"
     changes:
       - "Dockerfile-dependencies"
   services:
