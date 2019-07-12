@@ -61,6 +61,8 @@ build-dependencies-image:
   stage: "build"
   only:
     - "schedules"
+    changes:
+      - "Dockerfile-dependencies"
   services:
     - "docker:dind"
   before_script:
