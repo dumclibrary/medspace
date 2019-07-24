@@ -67,6 +67,7 @@ sast:
     paths: [gl-sast-report.json]
 
 build-dependencies-image:
+  stage: "pre-publish"
   variables:
     DOCKERFILE: "Dockerfile-dependencies"
     TAG: "${CI_REGISTRY_IMAGE}:dependencies"
