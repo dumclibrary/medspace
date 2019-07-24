@@ -1,5 +1,13 @@
 image: docker:git
 
+include:
+  - project: "mclibrary/gitlab-ci"
+    file: "templates/Stages.yml"
+  - project: "mclibrary/gitlab-ci"
+    file: "templates/Docker.inc.yml"
+  - project: "mclibrary/gitlab-ci"
+    file: "templates/SwarmReviewApp.inc.yml"
+
 variables:
   MEDSPACE_IMAGE: $CI_REGISTRY/mclibrary/medspace
   FCREPO_IMAGE: $CI_REGISTRY/mclibrary/medspace/fcrepo
