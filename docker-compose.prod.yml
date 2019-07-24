@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   web:
-    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
+    image: "${APP_IMAGE}"
     environment:
       FCREPO_URL: ${FCREPO_URL}
       FCREPO_BASE_PATH: /prod
@@ -35,7 +35,7 @@ services:
         - "traefik.frontend.rule=Host:${HOST_URL}"
 
   db_migrate:
-    image: 'gitlab-registry.oit.duke.edu/mclibrary/medspace'
+    image: "${APP_IMAGE}"
     restart: 'on-failure'
     networks:
       - mariadb_net

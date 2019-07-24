@@ -147,7 +147,7 @@ test:
 #    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.fcrepo.yml medspace_fcrepo
 #    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.solr.yml medspace_solr
 #    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.redis.yml medspace_redis
-#    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.yml --compose-file=docker-compose.production.yml medspace-${CI_ENVIRONMENT_SLUG}
+#    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.yml --compose-file=docker-compose.prod.yml medspace-${CI_ENVIRONMENT_SLUG}
 #  environment:
 #    name: review/$CI_COMMIT_REF_NAME
 #    url: https://${CI_ENVIRONMENT_SLUG}.dev.mclibrary.duke.edu/
@@ -175,7 +175,7 @@ test:
 #    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.fcrepo.yml medspace_fcrepo
 #    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.solr.yml medspace_solr
 #    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.redis.yml medspace_redis
-#    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.yml --compose-file=docker-compose.production.yml medspace-${CI_ENVIRONMENT_SLUG}
+#    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.yml --compose-file=docker-compose.prod.yml medspace-${CI_ENVIRONMENT_SLUG}
 #  environment:
 #    name: review-$CI_COMMIT_REF_NAME
 #    url: https://medspace.dev.mclibrary.duke.edu/
