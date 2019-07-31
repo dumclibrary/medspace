@@ -76,7 +76,49 @@ build-dependencies-image:
   extends: ".docker-publish"
 
 publish-review-image:
+  only:
+    changes:
+      - "app/**/*"
+      - "bin/**/*"
+      - "config/**/*"
+      - "lib/**/*"
+      - "public/**/*"
+      - "vendor/**/*"
+      - "Gemfile"
+      - "Gemfile.lock"
+      - "Dockerfile"
   extends: ".publish-review-image"
+
+publish-solr-image:
+  only:
+    changes:
+      - "solr/**/*"
+  variables:
+    CONTEXT: "solr"
+    DOCKERFILE: "solr/Dockerfile"
+    TAG: "${CI_REGISTRY_IMAGE}/solr:latest"
+  extends: ".docker-publish"
+
+publish-fcrepo-image:
+  only:
+    changes:
+      - "docker-fcrepo/**/*"
+  variables:
+    CONTEXT: "solr"
+    DOCKERFILE: "docker-fcrepo/Dockerfile"
+    TAG: "${CI_REGISTRY_IMAGE}/fcrepo:latest"
+  extends: ".docker-publish"
+
+publish-solr-ci-image:
+  stage: "pre-build"
+  only:
+    changes:
+      - "solr/**/*"
+  variables:
+    CONTEXT: "solr"
+    DOCKERFILE: "solr/Dockerfile-ci"
+    TAG: "${CI_REGISTRY_IMAGE}/solr:ci"
+  extends: ".docker-publish"
 
 review-app:
   variables:
@@ -94,24 +136,6 @@ review-app-master:
     SOLR_URL: "http://medspace_solr_dev:8983/solr/medspace"
     DATABASE_NAME: "medspace_dev"
   extends: ".review-app-master"
-
-#build-dependencies-image:
-#  stage: "build"
-#  only:
-#    refs:
-#      - "schedules"
-#    changes:
-#      - "Dockerfile-dependencies"
-#  services:
-#    - "docker:dind"
-#  before_script:
-#    - "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY"
-#  script:
-#    - "docker pull $MEDSPACE_IMAGE:latest || true"
-#    - "docker build --cache-from $MEDSPACE_IMAGE:dependencies -t $MEDSPACE_IMAGE:dependencies -f Dockerfile-dependencies ."
-#    - "docker push $MEDSPACE_IMAGE:dependencies"
-#  tags:
-#    - "docker"
 
 test:
   stage: test
@@ -189,37 +213,10 @@ test:
 #    name: review-$CI_COMMIT_REF_NAME
 #    url: https://medspace.dev.mclibrary.duke.edu/
 #
-#stop_review_app:
-#  stage: deploy
-#  when: manual
-#  variables:
-#    DOCKER_HOST: tcp://mcl-linville.vm.duke.edu:2376
-#    DOCKER_TLS_VERIFY: 1
-#  image: docker:latest
-#  script:
-#    - mkdir -p ~/.docker
-#    - echo "$DOCKER_SWARM_TLSCACERT" > ~/.docker/ca.pem
-#    - echo "$DOCKER_SWARM_TLSCERT" > ~/.docker/cert.pem
-#    - echo "$DOCKER_SWARM_TLSKEY" > ~/.docker/key.pem
-#    - docker login -u "$DEPLOY_TOKEN_NAME" -p "$DEPLOY_TOKEN" "$CI_REGISTRY"
-#    - docker stack rm medspace-${CI_ENVIRONMENT_SLUG}
-#  environment:
-#     name: review/$CI_COMMIT_REF_NAME
-#     action: stop
 #
 #medspace_build:
 #  stage: build
-#  only:
-#    changes:
-#      - app/**/*
-#      - bin/**/*
-#      - config/**/*
-#      - lib/**/*
-#      - public/**/*
-#      - vendor/**/*
-#      - Gemfile
-#      - Gemfile.lock
-#      - Dockerfile
+
 #  services:
 #    - docker:dind
 #  before_script:
@@ -246,39 +243,3 @@ test:
 #  tags:
 #    - docker
 #
-#solr_build:
-#  stage: build
-#  only:
-#    changes:
-#      - solr/**/*
-#  services:
-#    - docker:dind
-#  before_script:
-#    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-#  script:
-#    - docker build -t $SOLR_IMAGE solr
-#    - docker build -t $SOLR_IMAGE:ci -f solr/ci.Dockerfile solr
-#    - docker push $SOLR_IMAGE
-#    - docker push $SOLR_IMAGE:ci
-#  tags:
-#    - docker
-#
-#medspace_deploy:
-#  image: $CI_REGISTRY/mclibrary/medspace
-#  stage: deploy
-#  before_script:
-#    - echo "$ANSIBLE_VAULT_FILE" > ansible/group_vars/all/vault.yml
-#  script:
-#    - bin/bundle install
-#    - bin/rails assets:precompile RAILS_ENV=production DEVISE_SECRET_KEY=secret
-#    - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
-#  tags:
-#    - deploy
-#  only:
-#    - master
-#  except:
-#    - schedules
-#  when: manual
-#  environment:
-#    name: staging
-#    url: https://dev-medspace.mc.duke.edu
