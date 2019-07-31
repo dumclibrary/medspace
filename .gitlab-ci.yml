@@ -68,6 +68,8 @@ sast:
 
 build-dependencies-image:
   stage: "pre-publish"
+  only:
+    - "schedules"
   variables:
     DOCKERFILE: "Dockerfile-dependencies"
     TAG: "${CI_REGISTRY_IMAGE}:dependencies"
