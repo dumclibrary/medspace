@@ -4,29 +4,29 @@ services:
   web:
     image: "${APP_IMAGE}"
     environment:
-      FCREPO_URL: ${FCREPO_URL}
-      FCREPO_BASE_PATH: /prod
-      SOLR_URL: ${SOLR_URL}
-      REDIS_HOST: medspace_redis_prod
-      REDIS_URL: redis://medspace_redis_prod:6379
-      DATABASE_HOST: ${DATABASE_HOST}
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_USERNAME: ${DATABASE_USERNAME}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-      RAILS_ENV: development
+      FCREPO_URL: "${FCREPO_URL}"
+      FCREPO_BASE_PATH: "/prod"
+      SOLR_URL: "${SOLR_URL}"
+      REDIS_HOST: "medspace_redis_prod"
+      REDIS_URL: "redis://medspace_redis_prod:6379"
+      DATABASE_HOST: "${DATABASE_HOST}"
+      DATABASE_NAME: "${DATABASE_NAME}"
+      DATABASE_USERNAME: "${DATABASE_USERNAME}"
+      DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
+      RAILS_ENV: "${ENV}"
       RAILS_LOG_TO_STDOUT: "true"
       RAILS_SERVE_STATIC_FILES: "true"
-      REDIS_NAMESPACE: medspace_dev
-      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      REDIS_NAMESPACE: "medspace_dev"
+      SECRET_KEY_BASE: "${SECRET_KEY_BASE}"
     networks:
-      - net
-      - mariadb_net
-      - medspace_fcrepo_net
-      - medspace_solr_net
-      - medspace_redis_net
-      - traefik_net
+      - "net"
+      - "mariadb_net"
+      - "medspace_fcrepo_net"
+      - "medspace_solr_net"
+      - "medspace_redis_net"
+      - "traefik_net"
     volumes:
-      - data:/var/lib/medspace/derivatives
+      - "data:/var/lib/medspace/derivatives"
     deploy:
       labels:
         - "traefik.port=3000"

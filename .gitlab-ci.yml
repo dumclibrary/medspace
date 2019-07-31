@@ -86,6 +86,15 @@ review-app:
     DATABASE_NAME: "medspace_dev"
   extends: ".review-app"
 
+review-app-master:
+  variables:
+    STORAGE_ENV: "dev"
+    ENV: "production"
+    FCREPO_URL: "http://medspace_fcrepo_dev:8080"
+    SOLR_URL: "http://medspace_solr_dev:8983/solr/medspace"
+    DATABASE_NAME: "medspace_dev"
+  extends: ".review-app-master"
+
 #build-dependencies-image:
 #  stage: "build"
 #  only:
