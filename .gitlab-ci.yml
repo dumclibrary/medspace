@@ -80,10 +80,10 @@ publish-review-image:
 
 review-app:
   variables:
-    STORAGE_ENV: dev
+    STORAGE_ENV: "dev"
     FCREPO_URL: "http://medspace_fcrepo_dev:8080"
     SOLR_URL: "http://medspace_solr_dev:8983/solr/medspace"
-    DATABASE_NAME: medspace_dev
+    DATABASE_NAME: "medspace_dev"
   extends: ".review-app"
 
 #build-dependencies-image:
