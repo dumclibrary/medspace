@@ -1,4 +1,13 @@
+---
 image: docker:git
+
+include:
+  - project: "mclibrary/gitlab-ci"
+    file: "templates/Stages.yml"
+  - project: "mclibrary/gitlab-ci"
+    file: "templates/Docker.inc.yml"
+  - project: "mclibrary/gitlab-ci"
+    file: "templates/SwarmReviewApp.inc.yml"
 
 variables:
   MEDSPACE_IMAGE: $CI_REGISTRY/mclibrary/medspace
@@ -57,23 +66,97 @@ sast:
   artifacts:
     paths: [gl-sast-report.json]
 
-build-dependencies-image:
-  stage: "build"
+publish-dependencies-image:
+  stage: "pre-publish"
   only:
-    refs:
-      - "schedules"
+    - "schedules"
+  variables:
+    DOCKERFILE: "Dockerfile-dependencies"
+    TAG: "${CI_REGISTRY_IMAGE}:dependencies"
+  extends: ".docker-publish"
+
+publish-review-image:
+  only:
     changes:
-      - "Dockerfile-dependencies"
-  services:
-    - "docker:dind"
-  before_script:
-    - "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY"
+      - "app/**/*"
+      - "bin/**/*"
+      - "config/**/*"
+      - "lib/**/*"
+      - "public/**/*"
+      - "vendor/**/*"
+      - "Gemfile"
+      - "Gemfile.lock"
+      - "Dockerfile"
+  extends: ".publish-review-image"
+
+publish-solr-image:
+  only:
+    changes:
+      - "solr/**/*"
+  variables:
+    CONTEXT: "solr"
+    DOCKERFILE: "solr/Dockerfile"
+    TAG: "${CI_REGISTRY_IMAGE}/solr:latest"
+  extends: ".docker-publish"
+
+publish-fcrepo-image:
+  only:
+    changes:
+      - "docker-fcrepo/**/*"
+  variables:
+    CONTEXT: "solr"
+    DOCKERFILE: "docker-fcrepo/Dockerfile"
+    TAG: "${CI_REGISTRY_IMAGE}/fcrepo:latest"
+  extends: ".docker-publish"
+
+publish-solr-ci-image:
+  stage: "pre-build"
+  only:
+    changes:
+      - "solr/**/*"
+  variables:
+    CONTEXT: "solr"
+    DOCKERFILE: "solr/Dockerfile-ci"
+    TAG: "${CI_REGISTRY_IMAGE}/solr:ci"
+  extends: ".docker-publish"
+
+review-app:
+  variables:
+    STORAGE_ENV: "dev"
+    FCREPO_URL: "http://medspace_fcrepo_dev:8080"
+    SOLR_URL: "http://medspace_solr_dev:8983/solr/medspace"
+    DATABASE_NAME: "medspace_dev"
+  extends: ".review-app"
+
+review-app-master:
+  variables:
+    STORAGE_ENV: "dev"
+    ENV: "production"
+    FCREPO_URL: "http://medspace_fcrepo_dev:8080"
+    SOLR_URL: "http://medspace_solr_dev:8983/solr/medspace"
+    DATABASE_NAME: "medspace_dev"
+  extends: ".review-app-master"
+
+deploy-solr:
+  stage: "deploy"
   script:
-    - "docker pull $MEDSPACE_IMAGE:latest || true"
-    - "docker build --cache-from $MEDSPACE_IMAGE:dependencies -t $MEDSPACE_IMAGE:dependencies -f Dockerfile-dependencies ."
-    - "docker push $MEDSPACE_IMAGE:dependencies"
-  tags:
-    - "docker"
+    - "docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.solr.yml medspace_solr"
+  extends: ".swarm-login"
+  when: "manual"
+
+deploy-redis:
+  stage: "deploy"
+  script:
+    - "- docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.redis.yml medspace_redis"
+  when: "manual"
+  extends: ".swarm-login"
+
+deploy-fcrepo:
+  stage: "deploy"
+  script:
+    - "docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.fcrepo.yml medspace_fcrepo"
+  when: "manual"
+  extends: ".swarm-login"
 
 test:
   stage: test
@@ -95,152 +178,3 @@ test:
     - bundle install
     - bin/rails db:migrate RAILS_ENV=test
     - bundle exec rspec
-
-medspace_deploy:
-  image: $CI_REGISTRY/mclibrary/medspace
-  stage: deploy
-  before_script:
-    - echo "$ANSIBLE_VAULT_FILE" > ansible/group_vars/all/vault.yml
-  script:
-   - bin/bundle install
-   - bin/rails assets:precompile RAILS_ENV=production DEVISE_SECRET_KEY=secret
-   - cd ansible && ansible-playbook -i inventory deploy_medspace.yml
-  tags:
-    - deploy
-  only:
-    - master
-  except:
-    - schedules
-  when: manual
-  environment:
-    name: staging
-    url: https://dev-medspace.mc.duke.edu
-
-review_app:
-  stage: deploy
-  except:
-    - master
-  variables:
-    DOCKER_HOST: tcp://mcl-linville.vm.duke.edu:2376
-    DOCKER_TLS_VERIFY: 1
-    STORAGE_ENV: dev
-    FCREPO_URL: "http://medspace_fcrepo_dev:8080"
-    SOLR_URL: "http://medspace_solr_dev:8983/solr/medspace"
-    DATABASE_NAME: medspace_dev
-    HOST_URL: "${CI_ENVIRONMENT_SLUG}.dev.mclibrary.duke.edu"
-  image: docker:latest
-  script:
-    - mkdir -p ~/.docker
-    - echo "$DOCKER_SWARM_TLSCACERT" > ~/.docker/ca.pem
-    - echo "$DOCKER_SWARM_TLSCERT" > ~/.docker/cert.pem
-    - echo "$DOCKER_SWARM_TLSKEY" > ~/.docker/key.pem
-    - docker login -u "$DEPLOY_TOKEN_NAME" -p "$DEPLOY_TOKEN" "$CI_REGISTRY"
-    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.fcrepo.yml medspace_fcrepo
-    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.solr.yml medspace_solr
-    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.redis.yml medspace_redis
-    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.yml --compose-file=docker-compose.production.yml medspace-${CI_ENVIRONMENT_SLUG}
-  environment:
-    name: review/$CI_COMMIT_REF_NAME
-    url: https://${CI_ENVIRONMENT_SLUG}.dev.mclibrary.duke.edu/
-    on_stop: stop_review_app
-
-review_master:
-  stage: deploy
-  only:
-    - master
-  variables:
-    DOCKER_HOST: tcp://mcl-linville.vm.duke.edu:2376
-    DOCKER_TLS_VERIFY: 1
-    STORAGE_ENV: dev
-    FCREPO_URL: "http://medspace_fcrepo_dev:8080"
-    SOLR_URL: "http://medspace_solr_dev:8983/solr/medspace"
-    DATABASE_NAME: medspace_dev
-    HOST_URL: "medspace.dev.mclibrary.duke.edu"
-  image: docker:latest
-  script:
-    - mkdir -p ~/.docker
-    - echo "$DOCKER_SWARM_TLSCACERT" > ~/.docker/ca.pem
-    - echo "$DOCKER_SWARM_TLSCERT" > ~/.docker/cert.pem
-    - echo "$DOCKER_SWARM_TLSKEY" > ~/.docker/key.pem
-    - docker login -u "$DEPLOY_TOKEN_NAME" -p "$DEPLOY_TOKEN" "$CI_REGISTRY"
-    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.fcrepo.yml medspace_fcrepo
-    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.solr.yml medspace_solr
-    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.redis.yml medspace_redis
-    - docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.yml --compose-file=docker-compose.production.yml medspace-${CI_ENVIRONMENT_SLUG}
-  environment:
-    name: review-$CI_COMMIT_REF_NAME
-    url: https://medspace.dev.mclibrary.duke.edu/
-
-stop_review_app:
-  stage: deploy
-  when: manual
-  variables:
-    DOCKER_HOST: tcp://mcl-linville.vm.duke.edu:2376
-    DOCKER_TLS_VERIFY: 1
-  image: docker:latest
-  script:
-    - mkdir -p ~/.docker
-    - echo "$DOCKER_SWARM_TLSCACERT" > ~/.docker/ca.pem
-    - echo "$DOCKER_SWARM_TLSCERT" > ~/.docker/cert.pem
-    - echo "$DOCKER_SWARM_TLSKEY" > ~/.docker/key.pem
-    - docker login -u "$DEPLOY_TOKEN_NAME" -p "$DEPLOY_TOKEN" "$CI_REGISTRY"
-    - docker stack rm medspace-${CI_ENVIRONMENT_SLUG}
-  environment:
-     name: review/$CI_COMMIT_REF_NAME
-     action: stop
-
-medspace_build:
-  stage: build
-  only:
-    changes:
-      - app/**/*
-      - bin/**/*
-      - config/**/*
-      - lib/**/*
-      - public/**/*
-      - vendor/**/*
-      - Gemfile
-      - Gemfile.lock
-      - Dockerfile
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-  script:
-    - docker pull $MEDSPACE_IMAGE:latest || true
-    - docker build --cache-from $MEDSPACE_IMAGE:latest -t $MEDSPACE_IMAGE .
-    - docker push $MEDSPACE_IMAGE
-  tags:
-    - docker
-
-fcrepo_build:
-  stage: build
-  only:
-    changes:
-      - docker-fcrepo/**/*
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-  script:
-    - docker build -t $FCREPO_IMAGE docker-fcrepo
-    - docker push $FCREPO_IMAGE
-  tags:
-    - docker
-
-solr_build:
-  stage: build
-  only:
-    changes:
-      - solr/**/*
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-  script:
-    - docker build -t $SOLR_IMAGE solr
-    - docker build -t $SOLR_IMAGE:ci -f solr/ci.Dockerfile solr
-    - docker push $SOLR_IMAGE
-    - docker push $SOLR_IMAGE:ci
-  tags:
-    - docker
