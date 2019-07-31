@@ -138,21 +138,21 @@ review-app-master:
   extends: ".review-app-master"
 
 deploy-solr:
-  stage: "publish"
+  stage: "deploy"
   script:
     - "docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.solr.yml medspace_solr"
   extends: ".swarm-login"
   when: "manual"
 
 deploy-redis:
-  stage: "publish"
+  stage: "deploy"
   script:
     - "- docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.redis.yml medspace_redis"
   when: "manual"
   extends: ".swarm-login"
 
 deploy-fcrepo:
-  stage: "publish"
+  stage: "deploy"
   script:
     - "docker stack deploy --prune --with-registry-auth --compose-file=docker-compose.fcrepo.yml medspace_fcrepo"
   when: "manual"
