@@ -98,6 +98,7 @@ publish-solr-image:
   only:
     changes:
       - "solr/**/*"
+      - ".gitlab-ci.yml"
   variables:
     CONTEXT: "solr"
     DOCKERFILE: "solr/Dockerfile"
