@@ -69,7 +69,11 @@ sast:
 publish-dependencies-image:
   stage: "pre-publish"
   only:
-    - "schedules"
+    changes:
+      - "Gemfile"
+      - "Gemfile.lock"
+      - "Dockerfile-dependencies"
+      - ".gitlab-ci.yml"
   variables:
     DOCKERFILE: "Dockerfile-dependencies"
     TAG: "${CI_REGISTRY_IMAGE}:dependencies"
@@ -87,6 +91,7 @@ publish-review-image:
       - "Gemfile"
       - "Gemfile.lock"
       - "Dockerfile"
+      - ".gitlab-ci.yml"
   extends: ".publish-review-image"
 
 publish-solr-image:
@@ -103,6 +108,7 @@ publish-fcrepo-image:
   only:
     changes:
       - "docker-fcrepo/**/*"
+      - ".gitlab-ci.yml"
   variables:
     CONTEXT: "solr"
     DOCKERFILE: "docker-fcrepo/Dockerfile"
@@ -114,6 +120,7 @@ publish-solr-ci-image:
   only:
     changes:
       - "solr/**/*"
+      - ".gitlab-ci.yml"
   variables:
     CONTEXT: "solr"
     DOCKERFILE: "solr/Dockerfile-ci"
