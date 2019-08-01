@@ -41,6 +41,6 @@ COPY --from=builder /go/bin/healthcheck /usr/local/bin/healthcheck
 
 ENV HEALTHCHECK_URL "http://127.0.0.1:3000"
 
-HEALTHCHECK CMD ["/usr/local/bin/healthcheck"]
+HEALTHCHECK --start-period=2m CMD ["/usr/local/bin/healthcheck"]
 
 CMD ["supervisord"]
