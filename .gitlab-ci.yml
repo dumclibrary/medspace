@@ -76,7 +76,7 @@ publish-dependencies-image:
       - ".gitlab-ci.yml"
   variables:
     DOCKERFILE: "Dockerfile-dependencies"
-    TAG: "${CI_REGISTRY_IMAGE}:dependencies"
+    TAG: "dependencies"
   extends: ".docker-publish"
 
 publish-review-image:
@@ -102,7 +102,8 @@ publish-solr-image:
   variables:
     CONTEXT: "solr"
     DOCKERFILE: "solr/Dockerfile"
-    TAG: "${CI_REGISTRY_IMAGE}/solr:latest"
+    REGISTRY_IMAGE: "${CI_REGISTRY_IMAGE}/solr"
+    TAG: "latest"
   extends: ".docker-publish"
 
 publish-fcrepo-image:
@@ -113,7 +114,8 @@ publish-fcrepo-image:
   variables:
     CONTEXT: "solr"
     DOCKERFILE: "docker-fcrepo/Dockerfile"
-    TAG: "${CI_REGISTRY_IMAGE}/fcrepo:latest"
+    REGISTRY_IMAGE: "${CI_REGISTRY_IMAGE}/fcrepo"
+    TAG: "latest"
   extends: ".docker-publish"
 
 publish-solr-ci-image:
@@ -125,7 +127,8 @@ publish-solr-ci-image:
   variables:
     CONTEXT: "solr"
     DOCKERFILE: "solr/Dockerfile-ci"
-    TAG: "${CI_REGISTRY_IMAGE}/solr:ci"
+    REGISTRY_IMAGE: "${CI_REGISTRY_IMAGE}/solr"
+    TAG: "ci"
   extends: ".docker-publish"
 
 review-app:
