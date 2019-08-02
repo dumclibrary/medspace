@@ -10,6 +10,8 @@ FROM ruby:2.6.3
 
 ENV FITS_VERSION 1.0.5
 
+ENV HANDLE_SERVER_VERSION 9.2.0
+
 ENV BUILD_PACKAGES curl unzip
 
 ENV RUNTIME_PACKAGES ghostscript \
@@ -26,6 +28,10 @@ RUN curl -o /tmp/fits.zip http://projects.iq.harvard.edu/files/fits/files/fits-$
     && cp -r fits-$FITS_VERSION/* /usr/local/bin/ \
     && ln -s /usr/local/bin/fits.sh /usr/local/bin/fits \
     && rm /tmp/fits.zip && rm -rf /tmp/fits-$FITS_VERSION \
+    && curl -L -o /tmp/handle.tar.gz https://duke.box.com/shared/static/4ddfss9f5ec8unuloxsgimznfe5w5uk1.gz \
+    && tar -C /opt -xf /tmp/handle.tar.gz \
+    && mv /opt/handle-${HANDLE_SERVER_VERSION} /opt/handle \
+    && rm /tmp/handle.tar.gz \
     && apt-get purge -y --auto-remove $BUILD_PACKAGES
 
 ADD . /srv/rails
