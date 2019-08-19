@@ -33,7 +33,8 @@ RUN curl -o /tmp/fits.zip http://projects.iq.harvard.edu/files/fits/files/fits-$
     && mv /opt/handle-${HANDLE_SERVER_VERSION} /opt/handle \
     && rm /tmp/handle.tar.gz \
     && apt-get purge -y --auto-remove $BUILD_PACKAGES \
-    && rm -rf /var/apt/lists/*
+    && rm -rf /var/apt/lists/* \
+    && apt-get clean
 
 ADD . /srv/rails
 
