@@ -94,6 +94,9 @@ publish-review-image:
       - ".gitlab-ci.yml"
   extends: ".publish-review-image"
 
+publish-stable-image:
+  extends: ".publish-stable-image"
+
 publish-solr-image:
   only:
     changes:
