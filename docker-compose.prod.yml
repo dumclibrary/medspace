@@ -33,6 +33,9 @@ services:
       - "medspace_solr_net"
       - "medspace_redis_net"
       - "traefik_net"
+    secrets:
+      - source: "handle_adminpriv"
+        target: "/etc/handle/medspace/admpriv.bin"
     volumes:
       - "data:/var/lib/medspace/derivatives"
     deploy:
@@ -73,6 +76,10 @@ networks:
   medspace_redis_net:
     external: true
   traefik_net:
+    external: true
+
+secrets:
+  handle_adminpriv:
     external: true
 
 volumes:
