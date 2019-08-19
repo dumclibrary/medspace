@@ -158,7 +158,7 @@ deploy:
     ENV: "production"
     FCREPO_URL: "http://medspace_fcrepo_prod:8080"
     SOLR_URL: "http://medspace_solr_prod:8983/solr/medspace"
-    DATABASE_NAME: "medspace_prod"
+    DATABASE_NAME: "medspace"
     HANDLE_TARGET_HOSTNAME: "medspace.mc.duke.edu"
     HANDLE_EMAIL: "russell.koonts@duke.edu"
     HANDLE_PREFIX: "2193"
