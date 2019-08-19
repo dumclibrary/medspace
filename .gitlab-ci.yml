@@ -146,7 +146,27 @@ review-app-master:
     FCREPO_URL: "http://medspace_fcrepo_dev:8080"
     SOLR_URL: "http://medspace_solr_dev:8983/solr/medspace"
     DATABASE_NAME: "medspace_dev"
+    REDIS_NAMESPACE: "medspace_dev"
   extends: ".review-app-master"
+
+deploy:
+  variables:
+    STORAGE_ENV: "dev"
+    ENV: "production"
+    FCREPO_URL: "http://medspace_fcrepo_prod:8080"
+    SOLR_URL: "http://medspace_solr_prod:8983/solr/medspace"
+    DATABASE_NAME: "medspace_prod"
+    HANDLE_TARGET_HOSTNAME: "medspace.mc.duke.edu"
+    HANDLE_EMAIL: "russell.koonts@duke.edu"
+    HANDLE_PREFIX: "2193"
+    HANDLE_ADMIN_PREFIX: "0.NA/2193"
+    HANDLE_INDEX: "300"
+    HANDLE_PKEY_FILE: "/etc/handle/medspace/admpriv.bin"
+    HANDLE_PKEY_PASSPHRASE: ""
+    HDL_HOME: "/opt/handle"
+    HOST_NAME: "medspace.mc.duke.edu,medspace-stable.dev.mclibrary.duke.edu"
+    REDIS_NAMESPACE: "medspace_prod"
+  extends: ".deploy"
 
 deploy-solr:
   stage: "deploy"
