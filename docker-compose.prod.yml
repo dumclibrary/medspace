@@ -34,7 +34,7 @@ services:
       - "medspace_redis_net"
       - "traefik_net"
     secrets:
-      - source: "handle_adminpriv"
+      - source: "handle_admpriv"
         target: "/etc/handle/medspace/admpriv.bin"
     volumes:
       - "data:/var/lib/medspace/derivatives"
@@ -79,7 +79,7 @@ networks:
     external: true
 
 secrets:
-  handle_adminpriv:
+  handle_admpriv:
     external: true
 
 volumes:
