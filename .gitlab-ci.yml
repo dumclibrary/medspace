@@ -154,7 +154,7 @@ review-app-master:
 
 deploy:
   variables:
-    STORAGE_ENV: "dev"
+    STORAGE_ENV: "prod"
     ENV: "production"
     FCREPO_URL: "http://medspace_fcrepo_prod:8080"
     SOLR_URL: "http://medspace_solr_prod:8983/solr/medspace"
