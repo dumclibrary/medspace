@@ -32,6 +32,7 @@ module Hyrax
       #
       # @return [Boolean] true
       def self.ensure_handle(object:)
+        raise(object)
         if object.handle.empty?
           HandleRegisterJob.perform_later(object)
         else
