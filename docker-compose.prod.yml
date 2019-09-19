@@ -38,6 +38,8 @@ services:
         target: "/etc/handle/medspace/admpriv.bin"
     volumes:
       - "data:/var/lib/medspace/derivatives"
+      - "/mnt/gvol0/tmp/medspace/${STORAGE_ENV}/network_files:/srv/rails/tmp/network_files"
+      - "/mnt/gvol0/tmp/medspace/${STORAGE_ENV}/uploads:/srv/rails/tmp/uploads"
     deploy:
       labels:
         - "traefik.port=3000"
