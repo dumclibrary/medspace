@@ -19,7 +19,9 @@
         </h4>
         <% if !document.at_location.nil? %>
         <%= document.at_location.first unless current_user.nil?  %>
+        <% if !current_user.nil? %>
         <br/>
+        <% end %>
         <% end %>
           <%= document.date_created.first %>
 
