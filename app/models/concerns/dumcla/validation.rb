@@ -11,11 +11,11 @@ module Dumcla
 
       validates :subject, presence: { message: 'Your work must have a subject.' }
 
-      validates :based_near, presence: { message: 'Your work must have a based_near property.' }, if: :based_near?
+      validates :at_location, presence: { message: 'Your work must have a at_location property.' }, if: :at_location?
 
       validates :host_organization, presence: { message: 'Your work must have a host_organization property.' }, if: :host_organization?
 
-      def based_near?
+      def at_location?
         resource_type == ['Artifact']
       end
 

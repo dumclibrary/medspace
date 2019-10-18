@@ -42,7 +42,7 @@ module Medspace
 
     # Returns a boolean for validation result
     def required_nodes?
-      subject? && description? && date_created? && based_near? && host_organization?
+      subject? && description? && date_created? && at_location? && host_organization?
       @errors.empty?
     end
 
@@ -101,9 +101,9 @@ module Medspace
         true
       end
 
-      def based_near?
-        if @doc.xpath('object//resource_type').text == 'Artifact' && @doc.xpath('object//based_near').empty?
-          @errors << "Missing based_near"
+      def at_location?
+        if @doc.xpath('object//resource_type').text == 'Artifact' && @doc.xpath('object//at_location').empty?
+          @errors << "Missing at_location"
           return false
         end
         true
