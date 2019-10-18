@@ -17,7 +17,10 @@
           <a href="#" class="small" title="Click for more details"><i id="expand_<%= id %>" class="glyphicon glyphicon-chevron-right"></i></a>
           <% end %>
         </h4>
-        <%= document.at_location.first  unless current_user.nil?  %>
+        <% if !document.at_location.nil? %>
+        <%= document.at_location.first unless current_user.nil?  %>
+        <br/>
+        <% end %>
           <%= document.date_created.first %>
 
           <br/>
