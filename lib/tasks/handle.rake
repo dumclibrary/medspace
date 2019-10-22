@@ -30,7 +30,8 @@ namespace :handle do
     task :register, [:id] => :environment do |_, args|
       object = find_or_warn(args[:id]) || next
 
-      if object.handle.empty?
+      if object.handle.nil?
+      #if object.handle.empty?
         handle = HandleDispatcher.assign_for!(object: object)
         puts "Registered a handle #{handle} for #{args[:id]}"
       else
@@ -42,7 +43,8 @@ namespace :handle do
     task :update, [:id] => :environment do |_, args|
       object = find_or_warn(args[:id]) || next
 
-      if object.handle.empty?
+      if object.handle.nil?
+      #if object.handle.empty?
         $stderr.puts "No handle is registered for the object: #{object.uri}"
         next
       else

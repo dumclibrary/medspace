@@ -36,6 +36,9 @@ dump.rdb
 # Ignore fits
 /fits/*
 
+# Ignore dockerignore
+.dockerignore
+
 # Ignore ansible vault
 ansible/group_vars/all/vault.yml
 
