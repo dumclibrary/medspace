@@ -38,7 +38,7 @@ class HandleDispatcher
     #
     # @return [AciveFedora::Base] the object
     def assign_for(object:,
-                   attribute: :identifier,
+                   attribute: :handle,
                    registrar: HandleRegistrar.new)
       new(registrar: registrar)
         .assign_for(object: object, attribute: attribute)
@@ -52,7 +52,7 @@ class HandleDispatcher
     #
     # @return [AciveFedora::Base] the object
     def assign_for!(object:,
-                    attribute: :identifier,
+                    attribute: :handle,
                     registrar: HandleRegistrar.new)
       new(registrar: registrar)
         .assign_for!(object: object, attribute: attribute)
@@ -74,7 +74,7 @@ class HandleDispatcher
   # @param object    [AciveFedora::Base] the object to assign a handle.
   #
   # @return [AciveFedora::Base] the object
-  def assign_for(object:, attribute: :identifier)
+  def assign_for(object:, attribute: :handle)
     record = registrar.register!(object: object)
     object.public_send("#{attribute}=".to_sym, handle_values(record: record))
     object
@@ -84,7 +84,7 @@ class HandleDispatcher
   # Assigns a handle and saves the object.
   #
   # @see #assign_for
-  def assign_for!(object:, attribute: :identifier)
+  def assign_for!(object:, attribute: :handle)
     assign_for(object: object, attribute: attribute).save!
     object
   end
