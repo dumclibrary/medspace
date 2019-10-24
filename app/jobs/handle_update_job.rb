@@ -20,6 +20,6 @@ class HandleUpdateJob < ApplicationJob
   ##
   # @param object [ActiveFedora::Base]
   def perform(object)
-    HandleRegistrar.new.update!(handle: object.handle.first, object: object)
+    HandleRegistrar.new.update!(handle: object.handle, object: object)
   end
 end
