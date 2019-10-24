@@ -6,21 +6,19 @@
 #   HandleRegisterJob.perform_later(object)
 #
 # @see ActiveJob::Base, HandleDispatcher.assign_for!
-require 'handle'
-
 class HandleRegisterJob < ApplicationJob
-  queue_as :handle
-
-  rescue_from(Handle::HandleError) do
-    HandleRegistrar::LOGGER
-      .log(nil, object.id, "Retrying Handle registration for #{object.id}")
-    retry_job wait: 30.seconds, queue: :handle
-  end
-
-  ##
-  # @param object [ActiveFedora::Base]
-  def perform(object)
-    HandleDispatcher.assign_for!(object: object, attribute: :handle)
-    object.save!
-  end
-end
+    queue_as :handle
+  
+    rescue_from(Handle::HandleError) do
+      HandleRegistrar::LOGGER
+        .log(nil, object.id, "Retrying Handle registration for #{object.id}")
+      retry_job wait: 30.seconds, queue: :handle
+    end
+  
+    ##
+    # @param object [ActiveFedora::Base]
+    def perform(object)
+      HandleDispatcher.assign_for!(object: object)
+      object.save!
+    end
+  end  
