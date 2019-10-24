@@ -46,7 +46,7 @@ namespace :handle do
         $stderr.puts "No handle is registered for the object: #{object.uri}"
         next
       else
-        HandleRegistrar.new.update!(handle: object.handle.first,
+        HandleRegistrar.new.update!(handle: object.handle,
                                     object: object)
       end
     end
