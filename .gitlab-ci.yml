@@ -153,7 +153,7 @@ deploy:
     FCREPO_URL: "http://medspace_fcrepo_prod:8080"
     SOLR_URL: "http://medspace_solr_prod:8983/solr/medspace"
     DATABASE_NAME: "medspace"
-    HANDLE_TARGET_HOSTNAME: "osler.duhs.duke.edu"
+    HANDLE_TARGET_HOSTNAME: "medspace.mc.duke.edu"
     HANDLE_EMAIL: "russell.koonts@duke.edu"
     HANDLE_PREFIX: "2193"
     HANDLE_ADMIN_PREFIX: "0.NA/2193"
