@@ -32,7 +32,11 @@ module Hyrax
       #
       # @return [Boolean] true
       def self.ensure_handle(object:)
-        if object.handle
+        return true unless
+          object.displays_in.include?('dl') &&
+          object.to_sipity_entity.try(:workflow_state_name) == 'published'
+
+        if object.identifier.empty?
           HandleRegisterJob.perform_later(object)
         else
           HandleUpdateJob.perform_later(object)
