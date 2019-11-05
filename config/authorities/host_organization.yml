@@ -1,8 +1,14 @@
 terms:
+  - id: Association of American Medical Colleges (AAMC) Learn Serve Lead
+    term:  Association of American Medical Colleges (AAMC) Learn Serve Lead
+  - id: Association of College and Research Libraries (ACRL)
+    term: Association of College and Research Libraries (ACRL)
   - id: Association of North Carolina Health and Science Libraries (ANCHASL)
     term: Association of North Carolina Health and Science Libraries (ANCHASL)
   - id: Charleston Conference, Charleston, SC
     term: Charleston Conference, Charleston, SC
+  - id: Duke AHEAD Education Day
+    term: Duke AHEAD Education Day
   - id: Duke/UNC Joint Health Informatics Seminar
     term: Duke/UNC Joint Health Informatics Seminar
   - id: Evidence-Based Librarianship Conference
@@ -11,5 +17,11 @@ terms:
     term: Medical Library Association (MLA)
   - id: MLA/Mid-Atlantic Chapter (MAC)
     term: MLA/Mid-Atlantic Chapter (MAC)
+  - id: North Carolina Preservation Consortium (NCPC)
+    term: North Carolina Preservation Consortium (NCPC)
+  - id: Society of American Archivists (SAA)
+    term: Society of American Archivists (SAA)
+  - id: Society of North Carolina Archivists (SNCA)
+    term: Society of North Carolina Archivists (SNCA)
   - id: Transformational Change in Health Sciences Libraries Conference
     term: Transformational Change in Health Sciences Libraries Conference
