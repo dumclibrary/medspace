@@ -1,4 +1,4 @@
-<% if params[:f].present? %>
+<% if params[:f].present? and params[:f].has_key?("keyword_sim") %>
 <div id="content" class="col-md-12">
     <%= render 'search_results' %>
 </div>
