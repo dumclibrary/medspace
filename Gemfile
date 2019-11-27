@@ -62,7 +62,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'hyrax', '>= 2.5.1'
+gem 'hyrax', '2.5.1'
 gem 'blacklight_range_limit', '~> 6.3', '>= 6.3.2'
 
 group :development, :test do
@@ -86,3 +86,5 @@ gem 'mysql2'
 gem 'simple_form', '3.5.0'
 gem 'sidekiq'
 gem 'pul_uv_rails'
+gem 'rqrcode'
+gem 'barby'
