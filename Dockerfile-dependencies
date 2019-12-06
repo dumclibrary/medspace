@@ -51,4 +51,4 @@ ENV HEALTHCHECK_URL "http://127.0.0.1:3000"
 
 HEALTHCHECK --start-period=2m CMD ["/usr/local/bin/healthcheck"]
 
-CMD ["supervisord"]
+CMD ["bin/bundle exec rails server -p 3000 -b '0.0.0.0' --pid /tmp/medspace.pid"]
