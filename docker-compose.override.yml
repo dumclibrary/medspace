@@ -55,9 +55,6 @@ services:
       - medspace
       - /config
 
-  redis:
-    image: redis
-
 volumes:
   fcrepo_data:
   mysql_data:
