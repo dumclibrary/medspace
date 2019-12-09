@@ -3,6 +3,7 @@ version: '3.7'
 services:
   web:
     image: "${APP_IMAGE}"
+    command: "bin/bundle exec rails server -p 3000 -b '0.0.0.0' --pid /tmp/medspace.pid"
     environment:
       FCREPO_URL: "${FCREPO_URL}"
       FCREPO_BASE_PATH: "/prod"
