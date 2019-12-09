@@ -1,9 +1,11 @@
-<% presenter.handle.each_with_index do |handle, index| %>
+<% unless presenter.handle.nil? %>
+<%  presenter.handle.each_with_index do |handle, index|  %>
 
 <div class="qr_code">
-<p>
-<% qr=generate_qr(handle) %>
-<img src="<%= qr %>" alt="QR Code" style="width:100px;height:100px;"/>
-</p>
+  <p>
+    <% qr = generate_qr(handle) %>
+    <img src="<%=  qr  %>" alt="QR Code" style="width:100px;height:100px;"/>
+  </p>
 </div>
+<% end %>
 <% end %>
