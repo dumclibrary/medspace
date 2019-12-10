@@ -130,6 +130,7 @@ publish-solr-ci-image:
 
 review-app:
   variables:
+    REPLICAS: 1
     STORAGE_ENV: "dev"
     FCREPO_URL: "http://medspace_fcrepo_dev:8080"
     SOLR_URL: "http://medspace_solr_dev:8983/solr/medspace"
@@ -138,6 +139,7 @@ review-app:
 
 review-app-master:
   variables:
+    REPLICAS: 1
     STORAGE_ENV: "dev"
     ENV: "production"
     FCREPO_URL: "http://medspace_fcrepo_dev:8080"
@@ -148,6 +150,7 @@ review-app-master:
 
 deploy:
   variables:
+    REPLICAS: 2
     STORAGE_ENV: "prod"
     ENV: "production"
     FCREPO_URL: "http://medspace_fcrepo_prod:8080"
