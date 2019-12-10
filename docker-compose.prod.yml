@@ -42,6 +42,7 @@ services:
       - "/mnt/gvol0/tmp/medspace/${STORAGE_ENV}/network_files:/srv/rails/tmp/network_files"
       - "/mnt/gvol0/tmp/medspace/${STORAGE_ENV}/uploads:/srv/rails/tmp/uploads"
     deploy:
+      replicas: "${REPLICAS}"
       resources:
         limits:
           memory: "2G"
