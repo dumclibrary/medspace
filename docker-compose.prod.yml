@@ -3,6 +3,7 @@ version: '3.7'
 services:
   web:
     image: "${APP_IMAGE}"
+    command: "bin/bundle exec rails server -p 3000 -b '0.0.0.0' --pid /tmp/medspace.pid"
     environment:
       FCREPO_URL: "${FCREPO_URL}"
       FCREPO_BASE_PATH: "/prod"
@@ -52,6 +53,54 @@ services:
         - "traefik.docker.network=traefik_net"
         - "traefik.frontend.entryPoints=https"
         - "traefik.frontend.rule=Host:${HOST_NAME}"
+
+  sidekiq:
+    image: "${APP_IMAGE}"
+    command: "bin/bundle exec sidekiq"
+    environment:
+      FCREPO_URL: "${FCREPO_URL}"
+      FCREPO_BASE_PATH: "/prod"
+      SOLR_URL: "${SOLR_URL}"
+      REDIS_HOST: "medspace_redis_prod"
+      REDIS_URL: "redis://medspace_redis_prod:6379"
+      DATABASE_HOST: "${DATABASE_HOST}"
+      DATABASE_NAME: "${DATABASE_NAME}"
+      DATABASE_USERNAME: "${DATABASE_USERNAME}"
+      DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
+      HANDLE_TARGET_HOSTNAME: "${HANDLE_TARGET_HOSTNAME}"
+      HANDLE_EMAIL: "${HANDLE_EMAIL}"
+      HANDLE_PREFIX: "${HANDLE_PREFIX}"
+      HANDLE_ADMIN_PREFIX: "${HANDLE_ADMIN_PREFIX}"
+      HANDLE_INDEX: "${HANDLE_INDEX}"
+      HANDLE_PKEY_FILE: "${HANDLE_PKEY_FILE}"
+      HANDLE_PKEY_PASSPHRASE: "${HANDLE_PKEY_PASSPHRASE}"
+      HDL_HOME: "${HDL_HOME}"
+      RAILS_ENV: "${ENV}"
+      RAILS_LOG_TO_STDOUT: "true"
+      REDIS_NAMESPACE: "${REDIS_NAMESPACE}"
+      SECRET_KEY_BASE: "${SECRET_KEY_BASE}"
+    healthcheck:
+      disable: true
+    networks:
+      - "net"
+      - "mariadb_net"
+      - "medspace_fcrepo_net"
+      - "medspace_solr_net"
+      - "medspace_redis_net"
+    secrets:
+      - source: "handle_admpriv"
+        target: "/etc/handle/medspace/admpriv.bin"
+    volumes:
+      - "data:/var/lib/medspace/derivatives"
+      - "/mnt/gvol0/tmp/medspace/${STORAGE_ENV}/network_files:/srv/rails/tmp/network_files"
+      - "/mnt/gvol0/tmp/medspace/${STORAGE_ENV}/uploads:/srv/rails/tmp/uploads"
+    deploy:
+      resources:
+        limits:
+          memory: "2G"
+      placement:
+        constraints:
+          - "node.labels.data != true"
 
   db_migrate:
     image: "${APP_IMAGE}"
