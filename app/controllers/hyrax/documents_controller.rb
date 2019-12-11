@@ -11,6 +11,7 @@ module Hyrax
     delegate :archival_collection, to: :solr_document
     delegate :host_organization, to: :solr_document
     delegate :holding_entity, to: :solr_document
+    delegate :work_unit, to: :solr_document
 
     # Use this line if you want to use a custom presenter
     self.show_presenter = Hyrax::DocumentPresenter

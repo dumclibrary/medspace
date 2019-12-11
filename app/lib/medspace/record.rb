@@ -152,6 +152,13 @@ module Medspace
     end
 
     ##
+    # @return [Array<String>]
+    # returns the work_unit
+    def work_unit
+      get_values(@record_hash["work_unit"])
+    end
+
+    ##
     # @return [String]
     # returns the type of work that will determine the model
     def work_type

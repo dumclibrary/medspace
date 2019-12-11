@@ -63,6 +63,7 @@ class CatalogController < ApplicationController
     # config.add_facet_field solr_name("file_format", :facetable), limit: 5
     config.add_facet_field solr_name("holding_entity", :facetable), limit: 3, label: "Location"
     config.add_facet_field solr_name("host_organization", :facetable), limit: 5, label: 'Organization'
+    config.add_facet_field solr_name("work_unit", :facetable), limit: 5, label: 'Duke Health Unit'
     #config.add_facet_field solr_name("date", :facetable), limit: 5, label: "Date"
     config.add_facet_field 'year_iim', label: 'Year', range: true
 

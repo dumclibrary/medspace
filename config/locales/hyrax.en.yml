@@ -103,6 +103,7 @@ en:
         provenance: "(Artwork and Artifacts only) The history of the object."
         at_location: "(Artwork and Artifacts only) Room number where the object is displayed or stored."
         host_organization: "(Posters and Presentations only) The hosting organization where the object was presented (ex. Medical Library Association)."
+        work_unit: "Hospital or unit within Duke Health where the individual works"
     labels:
       defaults:
         description: "Description"

@@ -33,8 +33,12 @@ module Dumcla
           index.as :stored_searchable
         end
 
-        # document specific metadata
+        # posters specific metadata
         property :host_organization, predicate: ::RDF::Vocab::MARCRelators.his do |index|
+          index.as :stored_searchable, :facetable
+        end
+
+        property :work_unit, predicate: ::RDF::Vocab::MARCRelators.sht do |index|
           index.as :stored_searchable, :facetable
         end
       end

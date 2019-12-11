@@ -50,6 +50,9 @@ class SolrDocument
   def host_organization
     self[Solrizer.solr_name('host_organization')]
   end
+  def work_unit
+    self[Solrizer.solr_name('work_unit')]
+  end
   def at_location
     self[Solrizer.solr_name('at_location')]
   end
