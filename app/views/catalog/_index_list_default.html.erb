@@ -6,7 +6,7 @@
         <tr>
           <th><span class="attribute-label h4"><%= render_index_field_label document, field: field_name %></span></th>
           <% info = doc_presenter.field_value field_name %>
-          <td><%= truncate(info, length: 255, separator: ' ')  %></td>
+          <td><%= truncate(info, length: 250, separator: ' ')  %></td>
         </tr>
       <% end %>
     <% end %>
