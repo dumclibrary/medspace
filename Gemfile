@@ -84,7 +84,7 @@ gem 'pdfjs_viewer-rails'
 gem 'hydra-role-management'
 gem 'mysql2'
 gem 'simple_form', '3.5.0'
-gem 'sidekiq', "<6", ">=5"
+gem 'sidekiq', ">=5", "<7"
 gem 'pul_uv_rails'
 gem 'rqrcode'
 gem 'barby'
